@@ -14,7 +14,163 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      businesses: {
+        Row: {
+          created_at: string
+          gbp_account_id: string | null
+          google_review_url: string | null
+          id: string
+          location_area: string | null
+          location_id: string | null
+          name: string
+          owner_id: string
+          place_id: string | null
+          qr_code_url: string | null
+          service_type: string | null
+          updated_at: string
+          whatsapp_number: string | null
+        }
+        Insert: {
+          created_at?: string
+          gbp_account_id?: string | null
+          google_review_url?: string | null
+          id?: string
+          location_area?: string | null
+          location_id?: string | null
+          name?: string
+          owner_id: string
+          place_id?: string | null
+          qr_code_url?: string | null
+          service_type?: string | null
+          updated_at?: string
+          whatsapp_number?: string | null
+        }
+        Update: {
+          created_at?: string
+          gbp_account_id?: string | null
+          google_review_url?: string | null
+          id?: string
+          location_area?: string | null
+          location_id?: string | null
+          name?: string
+          owner_id?: string
+          place_id?: string | null
+          qr_code_url?: string | null
+          service_type?: string | null
+          updated_at?: string
+          whatsapp_number?: string | null
+        }
+        Relationships: []
+      }
+      feedback: {
+        Row: {
+          business_id: string
+          created_at: string
+          customer_contact: string | null
+          id: string
+          message: string
+          rating: number
+        }
+        Insert: {
+          business_id: string
+          created_at?: string
+          customer_contact?: string | null
+          id?: string
+          message: string
+          rating: number
+        }
+        Update: {
+          business_id?: string
+          created_at?: string
+          customer_contact?: string | null
+          id?: string
+          message?: string
+          rating?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "feedback_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      reviews: {
+        Row: {
+          ai_response: string | null
+          business_id: string
+          created_at: string
+          google_review_id: string | null
+          id: string
+          rating: number
+          review_text: string
+          reviewer_name: string
+          status: Database["public"]["Enums"]["review_status"]
+          updated_at: string
+        }
+        Insert: {
+          ai_response?: string | null
+          business_id: string
+          created_at?: string
+          google_review_id?: string | null
+          id?: string
+          rating?: number
+          review_text?: string
+          reviewer_name?: string
+          status?: Database["public"]["Enums"]["review_status"]
+          updated_at?: string
+        }
+        Update: {
+          ai_response?: string | null
+          business_id?: string
+          created_at?: string
+          google_review_id?: string | null
+          id?: string
+          rating?: number
+          review_text?: string
+          reviewer_name?: string
+          status?: Database["public"]["Enums"]["review_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +179,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      review_status: "pending" | "publishing" | "published" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +306,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      review_status: ["pending", "publishing", "published", "rejected"],
+    },
   },
 } as const
