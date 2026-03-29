@@ -50,7 +50,7 @@ const Dashboard = () => {
     setLoading(false);
   };
 
-  const updateReviewStatus = async (id: string, status: string) => {
+  const updateReviewStatus = async (id: string, status: "pending" | "publishing" | "published" | "rejected") => {
     const { error } = await supabase
       .from("reviews")
       .update({ status })
