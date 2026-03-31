@@ -45,8 +45,8 @@ const Auth = () => {
         if (error) throw error;
         navigate("/dashboard");
       }
-    } catch (error: any) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+    } catch (error: unknown) {
+      toast({ title: "Error", description: (error as Error).message, variant: "destructive" });
     } finally {
       setLoading(false);
     }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import Navbar from "@/components/Navbar";
@@ -8,6 +8,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Clock, Upload, CheckCircle2, XCircle, RefreshCw } from "lucide-react";
+import GBPConnectBanner from "@/components/GBPConnectBanner";
+import { buildGBPAuthUrl } from "@/lib/googleAuth";
 
 interface Review {
   id: string;
@@ -26,20 +28,20 @@ const Dashboard = () => {
   const [businessId, setBusinessId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
+  const [isGoogleConnected, setIsGoogleConnected] = useState(false);
 
-  useEffect(() => {
-    if (user) fetchData();
-  }, [user]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const { data: biz } = await supabase
       .from("businesses")
-      .select("id")
+      .select("id, google_access_token")
       .eq("owner_id", user!.id)
       .maybeSingle();
 
     if (biz) {
       setBusinessId(biz.id);
+      if (biz.google_access_token) {
+        setIsGoogleConnected(true);
+      }
       const { data: revs } = await supabase
         .from("reviews")
         .select("*")
@@ -48,7 +50,11 @@ const Dashboard = () => {
       setReviews(revs || []);
     }
     setLoading(false);
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) fetchData();
+  }, [user, fetchData]);
 
   const updateReviewStatus = async (id: string, status: "pending" | "publishing" | "published" | "rejected") => {
     const { error } = await supabase
@@ -143,6 +149,11 @@ const Dashboard = () => {
           </div>
         ) : (
           <>
+            {!isGoogleConnected && (
+              <div className="mb-8">
+                <GBPConnectBanner onConnect={() => window.location.href = buildGBPAuthUrl()} />
+              </div>
+            )}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {metrics.map((m) => (
                 <MetricCard key={m.title} title={m.title} count={m.count} icon={m.icon} accentColor={m.accent} />

@@ -76,7 +76,8 @@ const ReviewGateway = () => {
       }
 
       setStep("thankyou");
-    } catch (error: any) {
+    } catch (error: unknown) {
+      console.error(error);
       toast({ title: "Error", description: "Failed to submit feedback.", variant: "destructive" });
     } finally {
       setSubmitting(false);

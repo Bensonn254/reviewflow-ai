@@ -17,9 +17,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 glass-strong">
       <div className="container flex h-16 items-center justify-between">
         <Link to="/dashboard" className="flex items-center gap-2 font-bold text-lg">
-          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-            <Zap className="h-4 w-4 text-primary-foreground" />
-          </div>
+          <img src="/favicon.svg" alt="ReviewFlow AI" className="h-8 w-8" />
           ReviewFlow AI
         </Link>
 

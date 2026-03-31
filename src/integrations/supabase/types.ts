@@ -18,6 +18,8 @@ export type Database = {
         Row: {
           created_at: string
           gbp_account_id: string | null
+          google_access_token: string | null
+          google_refresh_token: string | null
           google_review_url: string | null
           id: string
           location_area: string | null
@@ -27,12 +29,15 @@ export type Database = {
           place_id: string | null
           qr_code_url: string | null
           service_type: string | null
+          token_expires_at: string | null
           updated_at: string
           whatsapp_number: string | null
         }
         Insert: {
           created_at?: string
           gbp_account_id?: string | null
+          google_access_token?: string | null
+          google_refresh_token?: string | null
           google_review_url?: string | null
           id?: string
           location_area?: string | null
@@ -42,12 +47,15 @@ export type Database = {
           place_id?: string | null
           qr_code_url?: string | null
           service_type?: string | null
+          token_expires_at?: string | null
           updated_at?: string
           whatsapp_number?: string | null
         }
         Update: {
           created_at?: string
           gbp_account_id?: string | null
+          google_access_token?: string | null
+          google_refresh_token?: string | null
           google_review_url?: string | null
           id?: string
           location_area?: string | null
@@ -57,6 +65,7 @@ export type Database = {
           place_id?: string | null
           qr_code_url?: string | null
           service_type?: string | null
+          token_expires_at?: string | null
           updated_at?: string
           whatsapp_number?: string | null
         }
