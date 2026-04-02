@@ -1,0 +1,10 @@
+feat: ReviewFlow AI - AI-powered GBP review management
+
+- Smart review gateway with QR code generation and intelligent routing
+- AI-powered review response generation via Supabase Edge Functions
+- Google Business Profile OAuth integration with token exchange
+- Review management dashboard with pipeline tracking
+- WhatsApp integration for private negative feedback routing
+- Supabase auth, database, and edge functions backend
+- Professional README with full documentation
+- Removed .env from tracking and added comprehensive .gitignore

@@ -63,6 +63,24 @@
 }
 
 @layer utilities {
+  @keyframes rf-wave {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  @keyframes rf-underline {
+    0% {
+      transform: translateX(-40%);
+    }
+    100% {
+      transform: translateX(140%);
+    }
+  }
+
   .glass {
     @apply bg-card/60 backdrop-blur-xl border border-border/50;
   }

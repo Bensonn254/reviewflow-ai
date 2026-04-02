@@ -76,14 +76,30 @@ serve(async (req) => {
     // ── 4. Save tokens to the businesses table ───────────────────────
     const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey);
 
+    const { data: businesses, error: fetchBizError } = await supabaseAdmin
+      .from("businesses")
+      .select("id")
+      .eq("owner_id", user.id)
+      .limit(1);
+
+    if (fetchBizError) {
+      console.warn("Business lookup warning:", fetchBizError.message);
+    }
+
+    const businessId = businesses?.[0]?.id;
+    // Use upsert so tokens are saved even if a business row doesn't exist yet
     const { error: upsertError } = await supabaseAdmin
       .from("businesses")
-      .update({
-        google_access_token: accessToken,
-        google_refresh_token: refreshToken,
-        token_expires_at: new Date(expiresAt).toISOString(),
-      })
-      .eq("owner_id", user.id);
+      .upsert(
+        {
+          owner_id: user.id,
+          name: "",
+          google_access_token: accessToken,
+          google_refresh_token: refreshToken,
+          token_expires_at: new Date(expiresAt).toISOString(),
+        },
+        { onConflict: "owner_id" }
+      );
 
     if (upsertError) {
       console.warn("Token save warning:", upsertError.message);

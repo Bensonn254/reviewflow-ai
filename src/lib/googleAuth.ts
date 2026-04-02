@@ -43,13 +43,53 @@ export async function exchangeCodeForTokens(code: string) {
   });
 
   if (error) {
-    console.error("DEBUG: exchange-token returned error:", error);
-    // Supposed to be FunctionsHttpError:
-    if (error.context) {
-      console.error("DEBUG: error context:", await error.context.text());
-    }
-    throw new Error(error.message || "Token exchange failed");
+    const friendlyMessage = await buildExchangeTokenErrorMessage(error);
+    console.error("DEBUG: exchange-token returned error:", {
+      message: error.message,
+      friendlyMessage,
+    });
+    throw new Error(friendlyMessage);
   }
 
   return data; // { accessToken, refreshToken, expiresAt }
+}
+
+async function buildExchangeTokenErrorMessage(error: unknown) {
+  const fallback = "Token exchange failed. Please try again.";
+  if (!error || typeof error !== "object") return fallback;
+
+  const err = error as { message?: string; context?: Response };
+  let rawMessage = err.message || "";
+
+  if (err.context && typeof err.context.text === "function") {
+    try {
+      const raw = await err.context.text();
+      if (raw) {
+        try {
+          const parsed = JSON.parse(raw) as { error?: string; message?: string };
+          rawMessage = parsed.error || parsed.message || rawMessage;
+        } catch {
+          rawMessage = raw;
+        }
+      }
+    } catch {
+      // Ignore context parsing issues and fall back to existing message
+    }
+  }
+
+  const normalized = (rawMessage || "").toLowerCase();
+
+  if (normalized.includes("client secret is invalid") || normalized.includes("invalid_client")) {
+    return "Google OAuth failed: invalid client secret. Update GOOGLE_CLIENT_SECRET in Supabase Edge Function secrets to match GOOGLE_CLIENT_ID.";
+  }
+
+  if (normalized.includes("redirect_uri_mismatch")) {
+    return "Google OAuth failed: redirect URI mismatch. Ensure VITE_OAUTH_REDIRECT_URI matches the Authorized redirect URI in Google Cloud Console.";
+  }
+
+  if (normalized.includes("invalid_grant")) {
+    return "Google OAuth failed: the authorization code expired or was already used. Please try connecting again.";
+  }
+
+  return rawMessage || fallback;
 }

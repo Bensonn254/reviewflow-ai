@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import Preloader from "@/components/Preloader";
 
 const Index = () => {
   const { user, loading } = useAuth();
@@ -8,14 +9,12 @@ const Index = () => {
 
   useEffect(() => {
     if (!loading) {
-      navigate(user ? "/dashboard" : "/auth", { replace: true });
+      navigate(user ? "/dashboard" : "/login", { replace: true });
     }
   }, [user, loading, navigate]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-    </div>
+    <Preloader label="Preparing your experience..." />
   );
 };
 

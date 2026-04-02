@@ -137,7 +137,7 @@ cp .env.example .env
 npm run dev
 ```
 
-The app will be available at `http://localhost:8080`.
+The app will be available at `http://localhost:8080` (or the port Vite prints in your terminal).
 
 ---
 
@@ -227,6 +227,22 @@ src/
 
 ---
 
+## Routes
+
+Primary routes:
+- `/` — Landing page
+- `/login` — Auth (sign in / sign up)
+- `/login/reset` — Password reset
+- `/dashboard` — Protected dashboard
+- `/settings` — Protected business settings
+- `/review/:businessId` — Public review gateway
+
+Legacy aliases (kept for compatibility):
+- `/auth` → `/login`
+- `/auth/reset` → `/login/reset`
+
+---
+
 ## Deployment
 
 Build the production bundle:
@@ -236,6 +252,21 @@ npm run build
 ```
 
 The output will be in the `dist/` directory, ready to deploy to any static hosting provider (Vercel, Netlify, Cloudflare Pages, etc.).
+
+---
+
+## Screenshot Pipeline
+
+The landing page preview image lives at:
+
+- `public/dashboard-preview.png`
+
+Quick update flow:
+
+1. Open the app dashboard locally.
+2. Take a clean screenshot (hide personal data).
+3. Save/replace the file as `public/dashboard-preview.png`.
+4. Refresh the landing page to verify the image.
 
 ---
 

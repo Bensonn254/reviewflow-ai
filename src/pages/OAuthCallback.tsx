@@ -3,6 +3,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { exchangeCodeForTokens } from "@/lib/googleAuth";
 import { Loader2, CheckCircle2, XCircle } from "lucide-react";
+import { RFLogo } from "@/components/ui/rf-logo";
+import { Button } from "@/components/ui/button";
 
 const STATUS = {
   EXCHANGING: "exchanging",
@@ -29,9 +31,10 @@ export default function OAuthCallback() {
       await exchangeCodeForTokens(authCode);
 
       setStatus(STATUS.SUCCESS);
-      setMessage("Google Business Profile connected!");
+      setMessage("Google Business Profile connected! Visit Settings to complete your profile.");
 
-      setTimeout(() => navigate("/dashboard"), 1800);
+      // Redirect after showing success
+      setTimeout(() => navigate("/dashboard"), 2000);
     } catch (err: unknown) {
       console.error("OAuth exchange error:", err);
 
@@ -39,7 +42,7 @@ export default function OAuthCallback() {
 
       // Session missing — send them to login then back here
       if (errorMessage.includes("No active Supabase session")) {
-        navigate("/auth?redirect=/oauth/callback");
+        navigate("/login?redirect=/oauth/callback");
         return;
       }
 
@@ -76,37 +79,39 @@ export default function OAuthCallback() {
   }, [loading, user, code, oauthError, handleExchange]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-background">
-      <div className="w-full max-w-sm rounded-3xl border border-border bg-card p-8 text-center shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-info to-primary"></div>
+    <div className="min-h-screen bg-gradient-to-br from-[#042f2e] to-[#012423] text-[#F0FFF9]">
+      <div className="flex items-center justify-center py-28 px-4">
+        <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-[#072726] p-8 text-center shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#06b6a4] via-[#c4f59e] to-[#06b6a4]"></div>
+
+        <div className="flex justify-center mb-5">
+          <RFLogo className="scale-90" />
+        </div>
         
         {status === STATUS.EXCHANGING && (
-          <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto mb-5" />
+          <Loader2 className="w-12 h-12 text-[#06b6a4] animate-spin mx-auto mb-5" />
         )}
         {status === STATUS.SUCCESS && (
-          <CheckCircle2 className="w-12 h-12 text-success mx-auto mb-5" />
+          <CheckCircle2 className="w-12 h-12 text-[#06b6a4] mx-auto mb-5" />
         )}
         {status === STATUS.ERROR && (
-          <XCircle className="w-12 h-12 text-destructive mx-auto mb-5" />
+          <XCircle className="w-12 h-12 text-rose-400 mx-auto mb-5" />
         )}
 
-        <h2 className="text-lg font-semibold text-foreground mb-2">
+        <h2 className="text-lg font-semibold text-[#F0FFF9] mb-2">
           {status === STATUS.EXCHANGING && "Connecting"}
           {status === STATUS.SUCCESS && "Connected"}
           {status === STATUS.ERROR && "Connection Failed"}
         </h2>
 
-        <p className="text-sm leading-relaxed mb-6 text-muted-foreground">{message}</p>
+        <p className="text-sm leading-relaxed mb-6 text-emerald-100/70">{message}</p>
 
         {status === STATUS.ERROR && (
-          <button
-            onClick={() => navigate("/dashboard")}
-            className="h-12 w-full rounded-xl border border-input bg-background text-sm font-semibold hover:bg-muted transition-all duration-200 hover:shadow-md"
-            type="button"
-          >
+          <Button onClick={() => navigate("/dashboard")} className="w-full border-white/10 text-[#F0FFF9] hover:bg-white/5" variant="outline">
             Back to Dashboard
-          </button>
+          </Button>
         )}
+        </div>
       </div>
     </div>
   );

@@ -8,6 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Zap, Send, CheckCircle2, ExternalLink } from "lucide-react";
+import { RFLogo } from "@/components/ui/rf-logo";
+import Preloader from "@/components/Preloader";
 
 interface Business {
   id: string;
@@ -85,16 +87,12 @@ const ReviewGateway = () => {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-      </div>
-    );
+    return <Preloader label="Loading review flow..." />;
   }
 
   if (!business) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background p-6">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#071913] via-[#072219] to-[#03120e] p-6">
         <div className="glass-strong rounded-2xl p-8 text-center max-w-sm">
           <p className="text-lg font-semibold">Business not found</p>
           <p className="text-sm text-muted-foreground mt-2">This review link is invalid.</p>
@@ -104,90 +102,84 @@ const ReviewGateway = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-6">
-      <div className="w-full max-w-sm space-y-6 animate-fade-in">
-        <div className="flex items-center gap-2 justify-center">
-          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-            <Zap className="h-4 w-4 text-primary-foreground" />
+    <div className="min-h-screen bg-gradient-to-br from-[#071913] via-[#072219] to-[#03120e] text-[#F0FFF9]">
+        <div className="flex items-center justify-center p-6">
+          <div className="w-full max-w-sm sm:max-w-md space-y-6 animate-fade-in">
+          <div className="flex items-center justify-center">
+            <RFLogo className="scale-90" />
           </div>
-          <span className="font-bold">{business.name}</span>
-        </div>
+          <div className="text-center text-sm text-emerald-100/70">
+            {business.name}
+          </div>
 
-        <div className="glass-strong rounded-2xl p-8 text-center space-y-6">
-          {step === "rate" && (
-            <>
-              <h2 className="text-xl font-bold">How was your experience?</h2>
-              <p className="text-sm text-muted-foreground">Tap a star to rate us</p>
-              <div className="flex justify-center py-4">
-                <StarRating rating={rating} onRate={handleRate} size="lg" interactive />
+          <div className="glass-strong rounded-2xl p-6 sm:p-8 text-center space-y-6">
+            {step === "rate" && (
+              <div>
+                <h2 className="text-xl font-bold">How was your experience?</h2>
+                <p className="text-sm text-muted-foreground">Tap a star to rate us</p>
+                <div className="flex justify-center py-4">
+                  <StarRating rating={rating} onRate={handleRate} size="lg" interactive />
+                </div>
               </div>
-            </>
-          )}
+            )}
 
-          {step === "redirect" && (
-            <div className="space-y-4 py-4">
-              <CheckCircle2 className="h-12 w-12 text-success mx-auto" />
-              <h2 className="text-xl font-bold">Thank you! 🎉</h2>
-              <p className="text-sm text-muted-foreground">
-                We're redirecting you to leave your review on Google...
-              </p>
-              {business.google_review_url && (
-                <Button asChild variant="outline" className="gap-2">
-                  <a href={business.google_review_url} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-4 w-4" /> Go to Google Reviews
-                  </a>
+            {step === "redirect" && (
+              <div className="space-y-4 py-4">
+                <CheckCircle2 className="h-12 w-12 text-success mx-auto" />
+                <h2 className="text-xl font-bold">Thank you! 🎉</h2>
+                <p className="text-sm text-muted-foreground">We're redirecting you to leave your review on Google...</p>
+                {business.google_review_url && (
+                  <Button asChild variant="outline" className="gap-2">
+                    <a href={business.google_review_url} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="h-4 w-4" /> Go to Google Reviews
+                    </a>
+                  </Button>
+                )}
+              </div>
+            )}
+
+            {step === "feedback" && (
+              <div className="space-y-4 text-left">
+                <div className="text-center">
+                  <h2 className="text-xl font-bold">We'd love to hear more</h2>
+                  <p className="text-sm text-muted-foreground mt-1">Your feedback helps us improve</p>
+                </div>
+                <div className="space-y-2">
+                  <Label>What could we do better?</Label>
+                  <Textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Tell us about your experience..."
+                    className="bg-secondary/50 border-border/50 min-h-[100px]"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Contact (optional)</Label>
+                  <Input
+                    value={contact}
+                    onChange={(e) => setContact(e.target.value)}
+                    placeholder="Phone or email so we can follow up"
+                    className="bg-secondary/50 border-border/50"
+                  />
+                </div>
+                <Button onClick={handleSubmitFeedback} disabled={submitting} className="w-full gap-2">
+                  <Send className="h-4 w-4" />
+                  {submitting ? "Sending..." : "Send Feedback"}
                 </Button>
-              )}
-            </div>
-          )}
+              </div>
+            )}
 
-          {step === "feedback" && (
-            <div className="space-y-4 text-left">
-              <div className="text-center">
-                <h2 className="text-xl font-bold">We'd love to hear more</h2>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Your feedback helps us improve
-                </p>
+            {step === "thankyou" && (
+              <div className="space-y-4 py-4">
+                <CheckCircle2 className="h-12 w-12 text-success mx-auto" />
+                <h2 className="text-xl font-bold">Thank you!</h2>
+                <p className="text-sm text-muted-foreground">We appreciate your feedback and will work to improve.</p>
               </div>
-              <div className="space-y-2">
-                <Label>What could we do better?</Label>
-                <Textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Tell us about your experience..."
-                  className="bg-secondary/50 border-border/50 min-h-[100px]"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Contact (optional)</Label>
-                <Input
-                  value={contact}
-                  onChange={(e) => setContact(e.target.value)}
-                  placeholder="Phone or email so we can follow up"
-                  className="bg-secondary/50 border-border/50"
-                />
-              </div>
-              <Button onClick={handleSubmitFeedback} disabled={submitting} className="w-full gap-2">
-                <Send className="h-4 w-4" />
-                {submitting ? "Sending..." : "Send Feedback"}
-              </Button>
-            </div>
-          )}
+            )}
+          </div>
 
-          {step === "thankyou" && (
-            <div className="space-y-4 py-4">
-              <CheckCircle2 className="h-12 w-12 text-success mx-auto" />
-              <h2 className="text-xl font-bold">Thank you!</h2>
-              <p className="text-sm text-muted-foreground">
-                We appreciate your feedback and will work to improve.
-              </p>
-            </div>
-          )}
+          <p className="text-center text-xs text-muted-foreground/50">Powered by ReviewFlow AI</p>
         </div>
-
-        <p className="text-center text-xs text-muted-foreground/50">
-          Powered by ReviewFlow AI
-        </p>
       </div>
     </div>
   );

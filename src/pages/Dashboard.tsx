@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
-import Navbar from "@/components/Navbar";
 import MetricCard from "@/components/MetricCard";
 import ReviewCard from "@/components/ReviewCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -10,6 +9,10 @@ import { useToast } from "@/hooks/use-toast";
 import { Clock, Upload, CheckCircle2, XCircle, RefreshCw } from "lucide-react";
 import GBPConnectBanner from "@/components/GBPConnectBanner";
 import { buildGBPAuthUrl } from "@/lib/googleAuth";
+import AppSidebar from "@/components/AppSidebar";
+import AppMobileNav from "@/components/AppMobileNav";
+import { getTimeGreeting, getUserFirstName, getUserAvatarUrl, getUserDisplayName, getUserInitials } from "@/lib/userProfile";
+import Preloader from "@/components/Preloader";
 
 interface Review {
   id: string;
@@ -29,6 +32,11 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [isGoogleConnected, setIsGoogleConnected] = useState(false);
+  const greeting = getTimeGreeting();
+  const displayName = getUserDisplayName(user);
+  const firstName = getUserFirstName(user);
+  const avatarUrl = getUserAvatarUrl(user) || null;
+  const initials = getUserInitials(displayName);
 
   const fetchData = useCallback(async () => {
     const { data: biz } = await supabase
@@ -112,92 +120,125 @@ const Dashboard = () => {
   ];
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Navbar />
-        <div className="flex items-center justify-center py-32">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-        </div>
-      </div>
-    );
+    return <Preloader label="Loading dashboard..." />;
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <main className="container py-8 space-y-8">
-        {/* Metrics */}
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Dashboard</h1>
-          {businessId && (
-            <Button variant="outline" size="sm" onClick={handleSync} disabled={syncing} className="gap-2">
-              <RefreshCw className={`h-4 w-4 ${syncing ? "animate-spin" : ""}`} />
-              Sync Reviews
-            </Button>
-          )}
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-[#042f2e] to-[#012423] text-[#F0FFF9]">
+      <div className="flex">
+        <AppSidebar />
 
-        {!businessId ? (
-          <div className="glass-strong rounded-2xl p-12 text-center space-y-4">
-            <h2 className="text-xl font-semibold">Welcome to ReviewFlow AI!</h2>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              Get started by configuring your business in Settings. Add your Google Business Profile details, WhatsApp number, and generate your review QR code.
-            </p>
-            <Button asChild>
-              <a href="/settings">Go to Settings</a>
-            </Button>
-          </div>
-        ) : (
-          <>
-            {!isGoogleConnected && (
-              <div className="mb-8">
-                <GBPConnectBanner onConnect={() => window.location.href = buildGBPAuthUrl()} />
+        {/* Main content */}
+        <div className="flex-1 p-6 lg:p-8">
+          <AppMobileNav />
+          {/* Topbar */}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-4">
+              <h1 className="text-2xl font-bold">{greeting}, {firstName}</h1>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="hidden md:flex bg-[#072726] p-2 rounded-md items-center gap-2">
+                <input placeholder="Search reviews" className="bg-transparent outline-none text-sm text-[#F0FFF9]" />
               </div>
-            )}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {metrics.map((m) => (
-                <MetricCard key={m.title} title={m.title} count={m.count} icon={m.icon} accentColor={m.accent} />
-              ))}
+              <div className="hidden md:flex bg-[#072726] p-2 rounded-md">🔔</div>
+              <div className="hidden md:flex items-center gap-2 bg-[#072726] p-1 rounded-full px-3">
+                {avatarUrl ? (
+                  <img src={avatarUrl} alt={displayName} className="w-8 h-8 rounded-full object-cover" />
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-[#06b6a4] text-black flex items-center justify-center text-xs font-semibold">
+                    {initials}
+                  </div>
+                )}
+                <div className="hidden md:block">{firstName}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* If no business configured show CTA */}
+          {!businessId && (
+            <div className="bg-[#072726] border border-white/10 rounded-2xl p-6 text-center text-emerald-100/80 mb-6">
+              <div className="mb-4">Save your business settings first before connecting Google Business Profile.</div>
+              <Button asChild className="bg-[#06b6a4] text-black hover:bg-[#0ea5b7]">
+                <a href="/settings">Add Business</a>
+              </Button>
+            </div>
+          )}
+
+          {/* Show connect banner when business exists but not connected */}
+          {businessId && !isGoogleConnected && (
+            <div className="mb-6">
+              <GBPConnectBanner onConnect={() => window.location.href = buildGBPAuthUrl()} />
+            </div>
+          )}
+
+          {/* KPI cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            {metrics.map((m) => (
+              <div key={m.title} className="bg-[#072726] p-4 rounded-xl border border-white/6">
+                <div className="text-sm text-emerald-100/80">{m.title}</div>
+                <div className="text-2xl font-bold mt-2">{m.count}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 space-y-4">
+              <div className="bg-[#072726] p-4 rounded-xl">
+                <div className="flex items-center justify-between">
+                  <div className="font-semibold">Recent Reviews</div>
+                  <div className="text-sm text-emerald-100/70">Showing {reviews.length > 0 ? Math.min(3, reviews.length) : 0}</div>
+                </div>
+                <div className="mt-4 space-y-3">
+                  {reviews.slice(0,3).map((r) => (
+                    <div key={r.id} className="p-3 bg-[rgba(255,255,255,0.02)] rounded-lg">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded bg-white/5"></div>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between"><div className="font-semibold">{r.reviewer_name}</div><div className="text-sm text-emerald-100/70">{new Date(r.created_at).toLocaleDateString()}</div></div>
+                          <p className="text-sm mt-1">{r.review_text}</p>
+                          <div className="mt-2 flex gap-2"><button onClick={() => updateReviewStatus(r.id, 'publishing')} className="bg-[#06b6a4] text-black px-3 py-1 rounded">Reply</button><button onClick={() => updateReviewStatus(r.id, 'rejected')} className="border border-white/6 px-3 py-1 rounded">Archive</button></div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  {reviews.length === 0 && <div className="text-emerald-100/70">No reviews yet.</div>}
+                </div>
+              </div>
+
+              <div className="bg-[#072726] p-4 rounded-xl">
+                <div className="flex items-center justify-between"><div className="font-semibold">AI Suggestions</div><div className="text-sm text-emerald-100/70">Auto-generated replies</div></div>
+                <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="p-3 bg-[rgba(255,255,255,0.02)] rounded-lg">"Thanks for your feedback — we'll make it right."</div>
+                  <div className="p-3 bg-[rgba(255,255,255,0.02)] rounded-lg">"We're glad you loved it — hope to see you again."</div>
+                </div>
+              </div>
             </div>
 
-            {/* Review tabs */}
-            <Tabs defaultValue="pending" className="space-y-4">
-              <TabsList className="bg-secondary/50">
-                <TabsTrigger value="pending">Needs Review ({byStatus("pending").length})</TabsTrigger>
-                <TabsTrigger value="publishing">Publishing ({byStatus("publishing").length})</TabsTrigger>
-                <TabsTrigger value="published">Published ({byStatus("published").length})</TabsTrigger>
-                <TabsTrigger value="rejected">Rejected ({byStatus("rejected").length})</TabsTrigger>
-              </TabsList>
+            <div className="space-y-4">
+              <div className="bg-[#072726] p-4 rounded-xl">
+                <div className="font-semibold">AI Insights</div>
+                <div className="mt-3">
+                  <div className="w-full h-32 bg-[linear-gradient(90deg,#042f2e,#012423)] rounded-md flex items-end gap-2 px-2 py-2">
+                    {[5,8,6,9,7,10,12].map((v,i)=> (
+                      <div key={i} style={{height: `${v*6}px`}} className="bg-[#06b6a4] w-6 rounded" title={`${v} reviews`} />
+                    ))}
+                  </div>
+                </div>
+              </div>
 
-              {["pending", "publishing", "published", "rejected"].map((status) => (
-                <TabsContent key={status} value={status} className="space-y-4">
-                  {byStatus(status).length === 0 ? (
-                    <div className="glass rounded-xl p-8 text-center text-muted-foreground">
-                      No {status} reviews.
-                    </div>
-                  ) : (
-                    byStatus(status).map((review) => (
-                      <ReviewCard
-                        key={review.id}
-                        id={review.id}
-                        reviewerName={review.reviewer_name}
-                        rating={review.rating}
-                        reviewText={review.review_text}
-                        aiResponse={review.ai_response}
-                        status={review.status}
-                        createdAt={review.created_at}
-                        onApprove={(id) => updateReviewStatus(id, "publishing")}
-                        onReject={(id) => updateReviewStatus(id, "rejected")}
-                        onEditResponse={updateReviewResponse}
-                      />
-                    ))
-                  )}
-                </TabsContent>
-              ))}
-            </Tabs>
-          </>
-        )}
-      </main>
+              <div className="bg-[#072726] p-4 rounded-xl">
+                <div className="font-semibold">Quick Actions</div>
+                <div className="mt-3 flex flex-col gap-2">
+                  <button onClick={handleSync} className="bg-[#06b6a4] text-black px-3 py-2 rounded">Sync Reviews</button>
+                  <button className="border border-white/6 px-3 py-2 rounded">Generate Report</button>
+                  <button className="border border-white/6 px-3 py-2 rounded">Download QR</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
   );
 };
