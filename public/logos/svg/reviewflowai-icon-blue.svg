@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="ReviewFlow icon blue">
+  <rect x="0" y="0" width="256" height="256" rx="48" ry="48" fill="hsl(220 69% 40%)"/>
+  <g transform="translate(68, 70) scale(1.15)">
+    <polygon points="68,18 108,8 108,24 68,32" fill="hsl(45 100% 64.5%)"/>
+    <polygon points="68,38 98,30 98,44 68,50" fill="hsl(45 100% 64.5%)"/>
+    <path fill-rule="evenodd" d="M 18,4 H 54 Q 72,4 72,20 V 58 Q 72,74 54,74 H 32 L 16,94 L 22,74 H 18 Q 4,74 4,58 V 20 Q 4,4 18,4 Z M 18,16 H 48 Q 60,16 60,28 Q 60,40 48,40 H 40 L 58,64 H 44 L 30,42 V 64 H 18 Z M 30,24 V 34 H 44 Q 50,34 50,29 Q 50,24 44,24 Z" fill="hsl(0 0% 100%)"/>
+  </g>
+</svg>

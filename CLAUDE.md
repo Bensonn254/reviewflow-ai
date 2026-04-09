@@ -166,6 +166,12 @@ Each Edge Function lives in its own folder under `supabase/functions/`:
 - Model: `google/gemini-3-flash-preview`
 - If `review_id` is provided, updates `reviews.ai_response` server-side
 
+### `support-chat/`
+- Operational FlowBot powered by **Groq** (`llama-3.3-70b-versatile`)
+- Uses `GROQ_API_KEY`
+- Provides contextual help about ReviewFlow features and pricing
+- Deployed with `--no-verify-jwt` to allow public lead generation
+
 ---
 
 ## Google OAuth Flow
@@ -221,6 +227,7 @@ VITE_OAUTH_REDIRECT_URI=
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 LOVABLE_API_KEY=
+GROQ_API_KEY=
 ```
 
 `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are provided by the Supabase runtime for Edge Functions.
@@ -270,6 +277,23 @@ npx playwright test
 
 ---
 
+## UI Revamp Plan (Living Checklist)
+
+1. System Baseline: Lock tokens, type scale, spacing rhythm, and 4-5 reusable primitives (nav, section header, card, CTA, form field).
+2. Landing Page: Refine hero value prop, add social proof strip, and structure sections in a clear narrative.
+3. Auth Pages: Unify layout, tighten microcopy, and ensure a visible "Back to site" link.
+4. App Shell: [Done] Standardized sidebar and topbar styles, fixed horizontal overflows, and refined icons.
+5. Dashboard: [Done] Rebalanced layout for clarity (KPIs → reviews → actions); implemented reactive Chat Widget.
+6. My GBPs: Add branded empty state, business cards, and a single dominant "Add Business" CTA.
+7. Reviews: Align filters and cards to the new card system; rank actions by importance.
+8. AI Insights: Standardize chart cards, add clear legends, and highlight one key takeaway per panel.
+9. Settings: Group fields into short sections; use clear status chips and a single primary action cluster.
+10. Review Gateway: Keep the QR flow minimal, fast, and fully mobile-first.
+11. Mobile Pass: Test 360/390/430 widths; fix overflow and reduce heavy copy blocks.
+12. Performance & Polish: Tighten assets, remove unused icons, and keep motion subtle.
+
+---
+
 ## Business Context
 
 - Pricing in **KES only** on Kenyan-facing UI — no USD display
@@ -282,14 +306,18 @@ npx playwright test
 
 ## Brand
 
-| Token        | Value                    |
-|--------------|--------------------------|
-| Primary      | `hsl(217 91% 60%)` (blue) |
-| Dark BG      | `hsl(222 47% 6%)`         |
-| Font         | Inter                     |
-| Product name | **ReviewFlow AI**         |
-| Parent brand | **Bensonn254**            |
-| Voice        | Professional, Kenya-first, direct |
+| Token          | Value                                 |
+|----------------|---------------------------------------|
+| Brand Primary  | `hsl(220 69% 40%)` (Brand Blue)       |
+| Brand Active   | `hsl(217 64% 33%)`                    |
+| Accent Yellow  | `hsl(45 100% 64.5%)`                  |
+| Accent Hover   | `hsl(45 85% 52%)`                     |
+| Background     | `hsl(220 20% 97%)` (Light mode)       |
+| Surface        | `hsl(0 0% 100%)` (White)              |
+| Font           | Inter                                 |
+| Product name   | **ReviewFlow AI**                     |
+| Parent brand   | **Bensonn254**                        |
+| Voice          | Professional, Kenya-first, direct     |
 
 ---
 

@@ -13,9 +13,10 @@ export function getUserDisplayName(user: User | null) {
 }
 
 export function getUserFirstName(user: User | null) {
-  const display = getUserDisplayName(user);
-  const first = display.trim().split(/\s+/)[0];
-  return first || display;
+  const meta = (user?.user_metadata || {}) as Record<string, string | undefined>;
+  // Prioritize given_name (common in Google OAuth) for the hero greeting
+  const first = meta.given_name || meta.first_name || getUserDisplayName(user).trim().split(/\s+/)[0];
+  return first;
 }
 
 export function getUserAvatarUrl(user: User | null) {

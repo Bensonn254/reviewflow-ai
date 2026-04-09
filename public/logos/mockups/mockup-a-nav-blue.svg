@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="240" viewBox="0 0 600 240">
+<rect width="100%" height="100%" fill="hsl(220 69% 40%)" />
+<g transform="translate(48,60)">
+<g transform="translate(8,8)"><polygon points="68,18 108,8 108,24 68,32" fill="hsl(45 100% 64.5%)"/><polygon points="68,38 98,30 98,44 68,50" fill="hsl(45 100% 64.5%)"/><path fill-rule="evenodd" d="M18,4H54Q72,4 72,20V58Q72,74 54,74H32L16,94L22,74H18Q4,74 4,58V20Q4,4 18,4Z M18,16H48Q60,16 60,28Q60,40 48,40H40L58,64H44L30,42V64H18Z M30,24V34H44Q50,34 50,29Q50,24 44,24Z" fill="hsl(0 0% 100%)"/></g>
+<text x="130" y="70" font-family="'Segoe UI',Roboto,sans-serif" font-weight="700" font-size="44" fill="hsl(0 0% 100%)">ReviewFlow <tspan fill="hsl(45 100% 64.5%)">AI</tspan></text>
+</g>
+</svg>

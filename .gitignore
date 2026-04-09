@@ -39,7 +39,12 @@ lint_output.txt
 
 # Supabase local
 supabase/.temp/
+supabase/.env
 
 # Lock files (optional — keep package-lock.json)
 bun.lock
 bun.lockb
+
+# Local Assets
+src/assets/images
+

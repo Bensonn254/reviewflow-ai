@@ -74,7 +74,7 @@
 | **State**          | [TanStack Query](https://tanstack.com/query)                    |
 | **Routing**        | [React Router v6](https://reactrouter.com)                      |
 | **Backend**        | [Supabase](https://supabase.com) (Auth, Database, Edge Functions) |
-| **AI**             | Google Gemini / OpenAI via Supabase Edge Functions               |
+| **AI**             | Google Gemini via Lovable / Llama 3 (Groq) via Supabase Edge Functions |
 | **Charts**         | [Recharts](https://recharts.org)                                |
 | **QR Codes**       | [qrcode.react](https://github.com/zpao/qrcode.react)           |
 | **Forms**          | [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev) |
@@ -176,6 +176,7 @@ Located in `supabase/functions/`:
 | `exchange-token`     | Exchanges Google OAuth authorization codes for access/refresh tokens |
 | `generate-response`  | Generates AI-powered review response drafts       |
 | `sync-reviews`       | Pulls latest reviews from the Google Business Profile API |
+| `support-chat`       | FlowBot AI support assistant powered by Groq             |
 
 ### Deploy Edge Functions
 
@@ -183,6 +184,7 @@ Located in `supabase/functions/`:
 supabase functions deploy exchange-token
 supabase functions deploy generate-response
 supabase functions deploy sync-reviews
+supabase functions deploy support-chat --no-verify-jwt
 ```
 
 ---

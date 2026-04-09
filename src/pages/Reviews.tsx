@@ -4,8 +4,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import ReviewCard from "@/components/ReviewCard";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import AppSidebar from "@/components/AppSidebar";
-import AppMobileNav from "@/components/AppMobileNav";
 import Preloader from "@/components/Preloader";
 
 interface Review {
@@ -93,23 +91,41 @@ const Reviews = () => {
   if (loading) return <Preloader label="Loading reviews..." />;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#042f2e] to-[#012423] text-[#F0FFF9]">
-      <div className="flex">
-        <AppSidebar />
-        <main className="flex-1 p-6 lg:p-8">
-          <AppMobileNav />
-          <div className="max-w-5xl">
-            <h2 className="text-2xl font-bold mb-6">Reviews</h2>
+    <div className="w-full space-y-10 animate-fade-in">
+      <div>
+        <h1 className="text-4xl font-black tracking-tight text-foreground mb-2">Customer Reviews</h1>
+        <p className="text-muted-foreground font-medium">Monitor and engage with your Google Business Profile feedback.</p>
+      </div>
 
-            <Tabs defaultValue="needs">
-              <div className="mb-4">
-                <TabsList className="bg-[#072726] border border-white/6">
-                  <TabsTrigger value="needs">Needs Review</TabsTrigger>
-                  <TabsTrigger value="publishing">Publishing</TabsTrigger>
-                  <TabsTrigger value="published">Published</TabsTrigger>
-                  <TabsTrigger value="rejected">Rejected</TabsTrigger>
-                </TabsList>
-              </div>
+      <Tabs defaultValue="needs" className="w-full">
+        <div className="mb-8 border-b border-divider">
+          <TabsList className="bg-transparent h-12 gap-8 p-0">
+            <TabsTrigger 
+              value="needs" 
+              className="px-0 pb-3 bg-transparent border-b-2 border-transparent data-[state=active]:border-brand data-[state=active]:text-brand rounded-none font-black uppercase tracking-widest text-[11px] transition-all"
+            >
+              Needs Review
+            </TabsTrigger>
+            <TabsTrigger 
+              value="publishing" 
+              className="px-0 pb-3 bg-transparent border-b-2 border-transparent data-[state=active]:border-brand data-[state=active]:text-brand rounded-none font-black uppercase tracking-widest text-[11px] transition-all"
+            >
+              Publishing
+            </TabsTrigger>
+            <TabsTrigger 
+              value="published" 
+              className="px-0 pb-3 bg-transparent border-b-2 border-transparent data-[state=active]:border-brand data-[state=active]:text-brand rounded-none font-black uppercase tracking-widest text-[11px] transition-all"
+            >
+              Published
+            </TabsTrigger>
+            <TabsTrigger 
+              value="rejected" 
+              className="px-0 pb-3 bg-transparent border-b-2 border-transparent data-[state=active]:border-brand data-[state=active]:text-brand rounded-none font-black uppercase tracking-widest text-[11px] transition-all"
+            >
+              Rejected
+            </TabsTrigger>
+          </TabsList>
+        </div>
 
               <TabsContent value="needs">
                 <div className="space-y-4">
@@ -128,7 +144,7 @@ const Reviews = () => {
                       onEditResponse={(id, txt) => updateReviewResponse(id, txt)}
                     />
                   ))}
-                  {byStatus("pending").length === 0 && <div className="text-emerald-100/70">No reviews needing attention.</div>}
+                  {byStatus("pending").length === 0 && <div className="text-muted-foreground font-medium bg-surface-2 rounded-xl p-8 text-center border border-border border-dashed">No reviews needing attention.</div>}
                 </div>
               </TabsContent>
 
@@ -149,7 +165,7 @@ const Reviews = () => {
                       onEditResponse={(id, txt) => updateReviewResponse(id, txt)}
                     />
                   ))}
-                  {byStatus("publishing").length === 0 && <div className="text-emerald-100/70">No publishing reviews.</div>}
+                  {byStatus("publishing").length === 0 && <div className="text-muted-foreground font-medium bg-surface-2 rounded-xl p-8 text-center border border-border border-dashed">No publishing reviews.</div>}
                 </div>
               </TabsContent>
 
@@ -167,7 +183,7 @@ const Reviews = () => {
                       createdAt={r.created_at}
                     />
                   ))}
-                  {byStatus("published").length === 0 && <div className="text-emerald-100/70">No published reviews yet.</div>}
+                  {byStatus("published").length === 0 && <div className="text-muted-foreground font-medium bg-surface-2 rounded-xl p-8 text-center border border-border border-dashed">No published reviews yet.</div>}
                 </div>
               </TabsContent>
 
@@ -185,13 +201,10 @@ const Reviews = () => {
                       createdAt={r.created_at}
                     />
                   ))}
-                  {byStatus("rejected").length === 0 && <div className="text-emerald-100/70">No rejected reviews.</div>}
+                  {byStatus("rejected").length === 0 && <div className="text-muted-foreground font-medium bg-surface-2 rounded-xl p-8 text-center border border-border border-dashed">No rejected reviews.</div>}
                 </div>
               </TabsContent>
             </Tabs>
-          </div>
-        </main>
-      </div>
     </div>
   );
 };

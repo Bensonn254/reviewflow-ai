@@ -1,6 +1,8 @@
 import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
-import { RFLogo } from "@/components/ui/rf-logo";
+import PublicNav from "@/components/PublicNav";
+import PublicFooter from "@/components/PublicFooter";
+import ChatWidget from "@/components/ChatWidget";
 
 const NotFound = () => {
   const location = useLocation();
@@ -10,19 +12,31 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#042f2e] to-[#012423] text-[#F0FFF9]">
-      <div className="flex items-center justify-center py-28">
-        <div className="text-center bg-[#072726] border border-white/10 rounded-2xl p-8">
-          <div className="flex justify-center mb-4">
-            <RFLogo className="scale-90" />
+    <div className="min-h-screen flex flex-col bg-bg-page text-foreground font-sans">
+      <PublicNav />
+      
+      <main className="flex-1 flex items-center justify-center py-28 px-6 mt-20">
+        <div className="text-center w-full max-w-md bg-white border border-border rounded-3xl p-10 shadow-xl">
+          <div className="flex justify-center mb-6">
+             <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-brand text-white font-black text-2xl shadow-lg ring-4 ring-brand/10">
+               404
+             </div>
           </div>
-          <h1 className="mb-4 text-4xl font-bold">404</h1>
-          <p className="mb-4 text-xl text-emerald-100/70">Oops! Page not found</p>
-          <Link to="/" className="text-[#06b6a4] underline hover:text-[#0ea5b7]">
+          <h1 className="mb-4 text-3xl font-black text-brand">Page Not Found</h1>
+          <p className="mb-8 text-lg text-muted-foreground font-medium">
+            Sorry, the page you are looking for doesn't exist or has been moved.
+          </p>
+          <Link 
+            to="/" 
+            className="inline-flex h-14 w-full items-center justify-center rounded-xl bg-brand px-8 text-lg font-bold text-white transition-all hover:bg-brand/90 hover:-translate-y-1 shadow-md active:scale-95"
+          >
             Return to Home
           </Link>
         </div>
-      </div>
+      </main>
+
+      <PublicFooter />
+      <ChatWidget />
     </div>
   );
 };

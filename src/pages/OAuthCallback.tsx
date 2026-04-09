@@ -5,6 +5,7 @@ import { exchangeCodeForTokens } from "@/lib/googleAuth";
 import { Loader2, CheckCircle2, XCircle } from "lucide-react";
 import { RFLogo } from "@/components/ui/rf-logo";
 import { Button } from "@/components/ui/button";
+import ChatWidget from "@/components/ChatWidget";
 
 const STATUS = {
   EXCHANGING: "exchanging",
@@ -104,7 +105,7 @@ export default function OAuthCallback() {
           {status === STATUS.ERROR && "Connection Failed"}
         </h2>
 
-        <p className="text-sm leading-relaxed mb-6 text-emerald-100/70">{message}</p>
+        <p className="text-sm leading-relaxed mb-6 text-emerald-100/80">{message}</p>
 
         {status === STATUS.ERROR && (
           <Button onClick={() => navigate("/dashboard")} className="w-full border-white/10 text-[#F0FFF9] hover:bg-white/5" variant="outline">
@@ -113,6 +114,7 @@ export default function OAuthCallback() {
         )}
         </div>
       </div>
+      <ChatWidget />
     </div>
   );
 }
