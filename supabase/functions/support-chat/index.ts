@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -25,7 +26,7 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { message, topic, history = [] } = await req.json();
+    const { message, topic, history = [], user_id } = await req.json();
     const GROQ_API_KEY = Deno.env.get("GROQ_API_KEY");
     
     if (!GROQ_API_KEY) {
@@ -76,6 +77,24 @@ ${history.map((m: any) => `${m.role}: ${m.content}`).join("\n")}
 
     const data = await response.json();
     const aiResponse = data.choices?.[0]?.message?.content || "";
+    const usage = data.usage;
+
+    // Log AI Usage asynchronously (don't block the response)
+    if (usage) {
+      const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+      const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      supabase.from("ai_usage_logs").insert({
+        user_id: user_id || null,
+        model: data.model || "llama-3.3-70b-versatile",
+        prompt_tokens: usage.prompt_tokens,
+        completion_tokens: usage.completion_tokens,
+        total_tokens: usage.total_tokens
+      }).then(({ error }) => {
+        if (error) console.error("Error logging AI usage:", error);
+      });
+    }
 
     // Simple detection if user wants an admin
     const triggerWords = ["admin", "human", "representative", "support form", "talk to someone", "person"];

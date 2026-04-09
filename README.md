@@ -57,10 +57,22 @@
 - **Guided Setup** — Contextual help tooltips guide you through finding each Google ID.
 - **WhatsApp Integration** — Set your WhatsApp number for instant negative feedback alerts.
 
-### 🔐 Authentication
-- **Supabase Auth** — Secure email/password authentication with Supabase.
+### 🦾 AI Support Assistant (FlowBot)
+- **Intelligent Flow** — Topic-based conversation with FlowBot, the ReviewFlow mascot.
+- **Context-Aware Knowledge** — Trained on the company's FAQ, features, and pricing via a high-performance LLM (Groq/Llama).
+- **Automatic Fallback** — Detects when a human admin is needed and triggers the support ticketing form.
+- **Anti-Bot Protection** — Integrated Honeypots and Database rate limiting (3 tickets/hour) prevent spam.
+
+### 🎫 Support Ticketing System
+- **Lead Generation** — Collects names, emails, and queries from potential leads and existing users.
+- **Unique Ticket Numbers** — Generates RF-XXXXXX format ticket IDs for easy tracking.
+- **Admin Dashboard Ready** — Tickets are stored securely with RLS, ready for admin follow-up.
+- **Usage Monitoring** — Transparently tracks AI token usage for cost management.
+
+### 🔐 Authentication & Roles
+- **Supabase Auth** — Secure email/password authentication.
+- **Admin Roles** — Support for `admin` and `user` roles to restrict sensitive data access.
 - **Password Reset** — Full password reset flow via email.
-- **Protected Routes** — Dashboard and settings are protected behind authentication.
 
 ---
 
@@ -166,6 +178,9 @@ The app expects the following tables (managed via migrations in `supabase/migrat
 - **`businesses`** — Business profile, Google tokens, QR code URL, WhatsApp number
 - **`reviews`** — Synced Google reviews with AI responses and status tracking
 - **`feedback`** — Private negative feedback submitted via the review gateway
+- **`support_tickets`** — Customer support queries and lead generation data
+- **`ai_usage_logs`** — Tracking of token usage and AI costs
+- **`profiles`** — User profiles with Role-Based Access Control (RBAC)
 
 ### Edge Functions
 

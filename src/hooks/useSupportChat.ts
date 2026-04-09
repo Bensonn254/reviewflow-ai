@@ -41,7 +41,8 @@ export const useSupportChat = () => {
         body: { 
           message: content, 
           topic, 
-          history: messages.slice(-5) // Send last 5 messages for context
+          history: messages.slice(-5), // Send last 5 messages for context
+          user_id: user?.id
         },
       });
 
@@ -65,7 +66,15 @@ export const useSupportChat = () => {
     }
   };
 
-  const submitTicket = async (name: string, email: string, query: string) => {
+  const submitTicket = async (name: string, email: string, query: string, honeypot?: string) => {
+    // Bot detection: if honeypot is filled, silent ignore or throw error
+    if (honeypot) {
+      console.warn("Bot detected via honeypot");
+      setStep("SUCCESS"); // Trick the bot into thinking it worked
+      setTicketNumber(`RF-${Math.random().toString(36).substring(2, 8).toUpperCase()}`);
+      return;
+    }
+
     setIsLoading(true);
     try {
       // Generate a ticket number locally first to show immediately

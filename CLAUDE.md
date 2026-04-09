@@ -10,8 +10,9 @@
 
 ReviewFlow AI connects to a business's Google Business Profile via OAuth, syncs reviews
 (GBP API integration is pending; `sync-reviews` is currently a stub), and generates
-AI-powered responses via the Lovable AI gateway (Gemini). Businesses and agencies
-manage reputation, track metrics, and respond to reviews from one dashboard.
+AI-powered responses via the Lovable AI gateway (Gemini). A localized "FlowBot"
+AI Support assistant (Groq/Llama) handles public leads and customer support,
+integrating with a secure ticketing system.
 
 **Live stack:** React + Vite + TypeScript · Tailwind CSS · shadcn/ui · Supabase · Node/npm
 
@@ -128,9 +129,10 @@ Exceptions:
 | Reusable UI component         | `src/components/ComponentName.tsx`                  |
 | shadcn primitive              | `src/components/ui/` via CLI only                   |
 | Page / route                  | `src/pages/PageName.tsx`                            |
-| Custom React hook             | `src/hooks/useHookName.ts`                          |
-| Pure utility / helper         | `src/lib/helperName.ts`                             |
 | Global state / context        | `src/contexts/ContextName.tsx`                      |
+| Custom React hook             | `src/hooks/useHookName.ts`                          |
+| AI Support logic hook         | `src/hooks/useSupportChat.ts`                       |
+| Pure utility / helper         | `src/lib/helperName.ts`                             |
 | Supabase Edge Function        | `supabase/functions/function-name/index.ts`         |
 | DB schema change              | New file in `supabase/migrations/`                  |
 
@@ -193,10 +195,8 @@ Required scope: `https://www.googleapis.com/auth/business.manage`
 
 - **Never edit existing migration files** — always add a new migration file
 - All tables must have **Row Level Security (RLS) enabled**
-- `src/integrations/supabase/types.ts` is generated — regenerate via CLI, never hand-edit:
-  ```bash
-  npx supabase gen types typescript --local > src/integrations/supabase/types.ts
-  ```
+- Use `public.is_admin()` SQL helper for cross-table admin access policies
+- RBAC roles: `user` (default), `admin`
 - Supabase client singleton is `src/integrations/supabase/client.ts` — import only from here
 
 ---

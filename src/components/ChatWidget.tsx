@@ -55,12 +55,13 @@ const ChatWidget = () => {
   const [formState, setFormState] = useState({
     name: user?.user_metadata?.full_name || "",
     email: user?.email || "",
-    query: ""
+    query: "",
+    website_url: "" // Honeypot field
   });
 
   const onFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    submitTicket(formState.name, formState.email, formState.query || input);
+    submitTicket(formState.name, formState.email, formState.query || input, formState.website_url);
   };
 
   const location = useLocation();
@@ -181,6 +182,16 @@ const ChatWidget = () => {
                 </div>
 
                 <form onSubmit={onFormSubmit} className="space-y-4">
+                  {/* Honeypot field - hidden from users */}
+                  <div className="hidden" aria-hidden="true">
+                    <Input 
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={formState.website_url}
+                      onChange={(e) => setFormState({...formState, website_url: e.target.value})}
+                    />
+                  </div>
+
                   <div className="space-y-1.5">
                     <label className="text-[11px] font-black uppercase tracking-widest text-muted-foreground/70 ml-1">Full Name</label>
                     <Input 

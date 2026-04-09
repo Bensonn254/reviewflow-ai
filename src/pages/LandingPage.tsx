@@ -132,7 +132,7 @@ export default function LandingPage() {
         {/* Full-bleed Background Image */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="/images/hero-img.jpg" 
+            src="images/hero-img.jpg" 
             alt="ReviewFlow Performance Background" 
             className="w-full h-full object-cover grayscale-[5%] contrast-[1.02] brightness-[0.98] object-right lg:object-center"
           />
