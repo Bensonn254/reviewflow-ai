@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
-import { exchangeCodeForTokens } from "@/lib/googleAuth";
 import { Loader2, CheckCircle2, XCircle } from "lucide-react";
 import { RFLogo } from "@/components/ui/rf-logo";
 import { Button } from "@/components/ui/button";
 import ChatWidget from "@/components/ChatWidget";
+import { useAuth } from "@/contexts/AuthContext";
+import { exchangeFacebookCode } from "@/lib/facebookAuth";
+import { useToast } from "@/hooks/use-toast";
 
 const STATUS = {
   EXCHANGING: "exchanging",
@@ -13,71 +14,88 @@ const STATUS = {
   ERROR: "error",
 };
 
-export default function OAuthCallback() {
+export default function FacebookCallback() {
   const [searchParams] = useSearchParams();
-  const { user, loading } = useAuth();
   const navigate = useNavigate();
+  const { user, loading } = useAuth();
+  const { toast } = useToast();
   const hasRun = useRef(false);
 
   const [status, setStatus] = useState(STATUS.EXCHANGING);
-  const [message, setMessage] = useState("Connecting your Google Business Profile...");
+  const [message, setMessage] = useState("Connecting your Facebook Page...");
 
-  // We capture code and error here
   const code = searchParams.get("code");
+  const state = searchParams.get("state");
   const oauthError = searchParams.get("error");
 
-  const handleExchange = useCallback(async (authCode: string) => {
-    try {
-      setMessage("Verifying your session...");
-      await exchangeCodeForTokens(authCode);
+  const handleExchange = useCallback(
+    async (authCode: string, businessId: string) => {
+      try {
+        setMessage("Verifying your session...");
+        await exchangeFacebookCode(authCode, businessId);
 
-      setStatus(STATUS.SUCCESS);
-      setMessage("Google Business Profile connected! Visit Settings to complete your profile.");
+        setStatus(STATUS.SUCCESS);
+        setMessage("Facebook Page connected! Redirecting you back to your locations...");
+        toast({ title: "Facebook Page connected!", description: "Your page is now linked to this business." });
 
-      // Redirect after showing success
-      setTimeout(() => navigate("/dashboard"), 2000);
-    } catch (err: unknown) {
-      console.error("OAuth exchange error:", err);
-
-      const errorMessage = err instanceof Error ? err.message : String(err);
-
-      // Session missing — send them to login then back here
-      if (errorMessage.includes("No active Supabase session")) {
-        navigate("/login?redirect=/oauth/callback");
-        return;
+        setTimeout(() => navigate("/my-gbps"), 1500);
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : String(err);
+        setStatus(STATUS.ERROR);
+        setMessage(errorMessage || "Facebook token exchange failed.");
       }
-
-      setStatus(STATUS.ERROR);
-      setMessage(errorMessage || "Token exchange failed. Check console for details.");
-    }
-  }, [navigate]);
+    },
+    [navigate, toast]
+  );
 
   useEffect(() => {
-    if (loading) return; // Wait until auth has fully initialized
+    if (loading) return;
 
     if (hasRun.current) return;
     hasRun.current = true;
 
     if (!user) {
       setStatus(STATUS.ERROR);
-      setMessage("You must be logged in to connect your Google Business Profile.");
+      setMessage("You must be logged in to connect a Facebook Page.");
       return;
     }
 
     if (oauthError) {
       setStatus(STATUS.ERROR);
-      setMessage("Google sign-in was cancelled or denied.");
+      setMessage("Facebook sign-in was cancelled or denied.");
       return;
     }
 
     if (!code) {
       setStatus(STATUS.ERROR);
-      setMessage("No authorization code received from Google.");
+      setMessage("No authorization code received from Facebook.");
       return;
     }
 
-    handleExchange(code);
-  }, [loading, user, code, oauthError, handleExchange]);
+    if (!state) {
+      setStatus(STATUS.ERROR);
+      setMessage("Missing connection state. Please try again.");
+      return;
+    }
+
+    let businessId = "";
+    try {
+      const decoded = JSON.parse(atob(state)) as { businessId?: string };
+      businessId = decoded.businessId || "";
+    } catch {
+      setStatus(STATUS.ERROR);
+      setMessage("Invalid connection state. Please try again.");
+      return;
+    }
+
+    if (!businessId) {
+      setStatus(STATUS.ERROR);
+      setMessage("Missing business identifier. Please try again.");
+      return;
+    }
+
+    handleExchange(code, businessId);
+  }, [loading, user, code, oauthError, state, handleExchange]);
 
   return (
     <div className="min-h-screen bg-surface flex flex-col font-sans">
@@ -91,7 +109,7 @@ export default function OAuthCallback() {
               <RFLogo className="scale-75 invert-0" />
             </div>
           </div>
-          
+
           {status === STATUS.EXCHANGING && (
             <Loader2 className="w-10 h-10 text-brand animate-spin mx-auto mb-6" />
           )}
@@ -108,17 +126,15 @@ export default function OAuthCallback() {
             {status === STATUS.ERROR && "Connection Failed"}
           </h2>
 
-          <p className="text-sm font-medium leading-relaxed mb-8 text-muted-foreground">
-            {message}
-          </p>
+          <p className="text-sm font-medium leading-relaxed mb-8 text-muted-foreground">{message}</p>
 
           {status === STATUS.ERROR && (
-            <Button 
-              onClick={() => navigate("/dashboard")} 
-              className="w-full h-11 rounded-xl bg-surface-2 hover:bg-border text-foreground font-bold border-border shadow-sm transition-all" 
+            <Button
+              onClick={() => navigate("/my-gbps")}
+              className="w-full h-11 rounded-xl bg-surface-2 hover:bg-border text-foreground font-bold border-border shadow-sm transition-all"
               variant="outline"
             >
-              Back to Dashboard
+              Back to Locations
             </Button>
           )}
         </div>

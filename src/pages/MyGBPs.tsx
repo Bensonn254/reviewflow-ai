@@ -4,16 +4,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import Preloader from "@/components/Preloader";
-import { cn } from "@/lib/utils";
+import PlatformChips from "@/components/PlatformChips";
 
 interface Business {
   id: string;
   name: string;
   location_area: string | null;
   service_type: string | null;
-  google_access_token: string | null;
 }
 
 const MyGBPs = () => {
@@ -26,7 +24,7 @@ const MyGBPs = () => {
       if (!user) return;
       const { data, error } = await supabase
         .from("businesses")
-        .select("id, name, location_area, service_type, google_access_token")
+        .select("id, name, location_area, service_type")
         .eq("owner_id", user.id)
         .order("created_at", { ascending: false });
       if (error) {
@@ -94,17 +92,12 @@ const MyGBPs = () => {
                     {b.service_type || "Service not set"}
                   </div>
                 </div>
+                <div className="mt-5">
+                  <PlatformChips businessId={b.id} />
+                </div>
               </div>
               
-              <div className="flex items-center justify-between pt-6 border-t border-divider">
-                <div className={cn(
-                  "text-[10px] font-black uppercase tracking-[0.15em] px-3 py-1 rounded-full border",
-                  b.google_access_token 
-                    ? "bg-success/10 border-success/20 text-success" 
-                    : "bg-red-500/10 border-red-500/20 text-red-500"
-                )}>
-                  {b.google_access_token ? "Live Sync" : "Connection Required"}
-                </div>
+              <div className="flex items-center justify-end pt-6 border-t border-divider">
                 <Link to={`/review/${b.id}`} className="text-xs font-black text-brand uppercase tracking-widest hover:underline flex items-center gap-1.5">
                   Settings <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                 </Link>

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
   { label: "Home", to: "/", anchor: false },
-  { label: "How It Works", to: "/#how-it-works", anchor: true },
+  { label: "How It Works", to: "/how-it-works", anchor: false },
   { label: "Pricing", to: "/pricing", anchor: false },
   { label: "Demo", to: "/demo", anchor: false },
   { label: "FAQ", to: "/faq", anchor: false },
@@ -32,7 +32,7 @@ const PublicNav = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-[100] w-full bg-brand/95 backdrop-blur-md text-white shadow-lg border-b border-white/5">
-      <div className="mx-auto flex max-w-screen-xl items-center justify-between px-6 py-6 sm:px-8">
+      <div className="mx-auto flex max-w-screen-xl items-center  justify-between px-6 py-5 sm:px-8">
         
         {/* ── Left: Logo ── */}
         <Link
@@ -55,8 +55,8 @@ const PublicNav = () => {
               to={link.to}
               onClick={(e) => handleAnchor(e, link.to)}
               className={cn(
-                "text-base font-medium whitespace-nowrap transition-colors hover:text-white/80",
-                isActive(link.to) ? "text-accent-yellow" : "text-white"
+                "text-lg font-medium whitespace-nowrap transition-colors hover:text-white/80",
+                isActive(link.to) ? "text-accent-yellow font-semibold" : "text-white font-medium"
               )}
             >
               {link.label}
@@ -68,13 +68,13 @@ const PublicNav = () => {
         <div className="hidden lg:flex items-center gap-5">
           <Link
             to="/login"
-            className="text-base font-medium text-white hover:text-white/80 transition-colors"
+            className="text-xl font-medium text-white hover:text-white/80 transition-colors"
           >
             Log in
           </Link>
           <Link
             to="/signup"
-            className="rounded-md bg-accent-yellow px-6 py-2.5 text-base font-bold text-[#0F1724] transition-all hover:bg-accent-yellow-700 hover:-translate-y-0.5 active:scale-95"
+            className="rounded-md bg-accent-yellow px-6 py-2.5 text-xl font-bold text-brand transition-all hover:bg-accent-yellow-700 hover:-translate-y-0.5 active:scale-95"
           >
             Free Trial
           </Link>

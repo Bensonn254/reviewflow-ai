@@ -17,6 +17,7 @@ import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
 import Notifications from "./pages/Notifications";
 import OAuthCallback from "./pages/OAuthCallback";
+import FacebookCallback from "./pages/FacebookCallback";
 import MyGBPs from "./pages/MyGBPs";
 import Reviews from "./pages/Reviews";
 import Pricing from "./pages/Pricing"; // Public Pricing
@@ -30,6 +31,7 @@ import HelpCenter from "./pages/HelpCenter";
 import ReviewGateway from "./pages/ReviewGateway";
 import NotFound from "./pages/NotFound";
 import FAQ from "./pages/public/FAQ";
+import HowItWorks from "./pages/public/HowItWorks";
 import About from "./pages/public/About";
 import Contact from "./pages/public/Contact";
 import Demo from "./pages/public/Demo";
@@ -70,6 +72,7 @@ const App = () => (
               <Route path="/contact" element={<Contact />} />
               <Route path="/demo" element={<Demo />} />
               <Route path="/faq" element={<FAQ />} />
+              <Route path="/how-it-works" element={<HowItWorks />} />
               
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
@@ -97,6 +100,7 @@ const App = () => (
               {/* Public Review Flow */}
               <Route path="/review/:businessId" element={<ReviewGateway />} />
               <Route path="/oauth/callback" element={<OAuthCallback />} />
+              <Route path="/oauth/facebook/callback" element={<FacebookCallback />} />
               
               <Route path="*" element={<NotFound />} />
             </Routes>

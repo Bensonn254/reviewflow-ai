@@ -164,8 +164,19 @@ Create a `.env` file in the project root. See [`.env.example`](.env.example) for
 | `VITE_SUPABASE_URL`             | Full Supabase project URL                |
 | `VITE_GOOGLE_CLIENT_ID`         | Google OAuth 2.0 client ID               |
 | `VITE_OAUTH_REDIRECT_URI`       | OAuth callback URL (e.g. `http://localhost:8080/oauth/callback`) |
+| `VITE_FACEBOOK_APP_ID`          | Facebook App ID (Phase 2)                |
+| `VITE_FACEBOOK_REDIRECT_URI`    | Facebook OAuth callback URL (Phase 2)    |
 
 > **⚠️ Important:** Never commit `.env` to version control. The `.gitignore` is configured to exclude it.
+
+### Supabase Edge Function Secrets
+
+Set these in Supabase (not in `.env`):
+
+| Secret                   | Description                                  |
+| ------------------------ | -------------------------------------------- |
+| `FACEBOOK_APP_ID`        | Facebook App ID for Graph API token exchange |
+| `FACEBOOK_APP_SECRET`    | Facebook App Secret                          |
 
 ---
 
@@ -201,6 +212,47 @@ supabase functions deploy generate-response
 supabase functions deploy sync-reviews
 supabase functions deploy support-chat --no-verify-jwt
 ```
+
+---
+
+## Phase 2: Multi-Platform Expansion (Facebook + Roadmap)
+
+Phase 2 adds:
+- `platforms` table (one row per platform per business)
+- `platform_type` enum and `reviews.platform`
+- Facebook Pages OAuth connection + token storage
+- UI chips for platform connection status
+- Platform filter on Reviews
+
+### What To Do Next (Ops Checklist)
+
+1. **Apply DB migration**
+   - `supabase db push`
+2. **Set Edge Function secrets**
+   - `supabase secrets set FACEBOOK_APP_ID=... FACEBOOK_APP_SECRET=...`
+3. **Deploy Edge Function**
+   - `supabase functions deploy exchange-facebook-token`
+4. **Update frontend env**
+   - `VITE_FACEBOOK_APP_ID`
+   - `VITE_FACEBOOK_REDIRECT_URI`
+5. **Test OAuth end-to-end**
+   - Connect Facebook from **My Locations**
+   - Verify `platforms` row created with `platform='facebook'`
+
+### Facebook API Setup Steps
+
+1. Create a Meta Developer App.
+2. Add **Facebook Login** product to the app.
+3. Enable **Client OAuth Login** and **Web OAuth Login**.
+4. Add redirect URIs:
+   - `http://localhost:5173/oauth/facebook/callback`
+   - `https://your-domain.com/oauth/facebook/callback`
+5. Request permissions for Pages:
+   - `pages_show_list`
+   - `pages_read_engagement`
+   - `pages_read_user_content`
+   - `pages_manage_posts`
+6. For real users, submit App Review and switch the app to **Live**.
 
 ---
 

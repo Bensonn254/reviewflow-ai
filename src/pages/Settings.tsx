@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { QRCodeSVG } from "qrcode.react";
-import { Save, QrCode, Download, Building2, HelpCircle, AlertCircle, Trash2, Users } from "lucide-react";
+import { Save, QrCode, Download, Building2, HelpCircle, AlertCircle, Trash2 } from "lucide-react";
 import GBPConnectBanner from "@/components/GBPConnectBanner";
 import { buildGBPAuthUrl } from "@/lib/googleAuth";
 import AppSidebar from "@/components/AppSidebar";
@@ -298,21 +298,6 @@ const Settings = () => {
                 {loading ? "Saving..." : "Save Settings"}
               </Button>
             </div>
-          </div>
-
-          {/* Workspace Collaboration */}
-          <div className="bg-white rounded-[2.5rem] p-8 space-y-6 border border-divider shadow-sm">
-            <h3 className="font-bold text-xl mb-2 flex items-center gap-2">
-              <Users className="h-5 w-5 text-brand" />
-              Workspace Access
-            </h3>
-            <div className="flex flex-col sm:flex-row gap-4 items-center">
-              <Input placeholder="colleague@company.com" className="h-12 flex-1 bg-surface-2 border-transparent text-foreground font-medium rounded-xl focus:bg-white focus:ring-4 focus:ring-brand/5 transition-all outline-none" />
-              <Button disabled variant="outline" className="h-12 rounded-xl font-bold border-divider w-full sm:w-auto">
-                Invite Colleague
-              </Button>
-            </div>
-            <p className="text-xs text-muted-foreground font-medium">Team collaboration is coming soon. You'll be able to invite managers to respond to reviews.</p>
           </div>
 
           {/* Danger Zone */}

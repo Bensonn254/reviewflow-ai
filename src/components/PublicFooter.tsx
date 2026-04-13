@@ -6,9 +6,9 @@ const PublicFooter = () => {
 
   return (
     <footer className="bg-brand border-t border-white/10 text-white/80 transition-colors">
-      <div className="max-w-screen-xl mx-auto px-6 sm:px-8 py-20 grid grid-cols-1 md:grid-cols-4 gap-12 sm:gap-16">
+      <div className="max-w-screen-xl mx-auto px-6 sm:px-8 py-20 grid grid-cols-2 md:grid-cols-4 gap-12 sm:gap-16">
         {/* Brand column */}
-        <div className="md:col-span-2 space-y-6">
+        <div className="col-span-2 md:col-span-2 space-y-6">
           <Link to="/" className="flex items-center gap-3 hover:opacity-90 transition-opacity">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent-yellow text-brand font-black text-lg shadow-lg">
               RF
@@ -57,13 +57,13 @@ const PublicFooter = () => {
 
       {/* Bottom bar */}
       <div className="border-t border-white/5 px-6 sm:px-8 py-8 bg-black/10">
-        <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-sm font-bold text-white/40 uppercase tracking-widest">
-          <div className="flex items-center gap-2">
+        <div className="max-w-screen-xl mx-auto grid grid-cols-2 gap-4 text-sm font-bold text-white/40 uppercase tracking-widest sm:flex sm:flex-row sm:items-center sm:justify-between">
+          <div className="col-span-2 flex items-center gap-2">
             <span>© {year} ReviewFlow AI</span>
             <span className="opacity-30">·</span>
             <span className="text-accent-yellow/60">A BenaWeb Product</span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="col-span-2 grid grid-cols-2 gap-3 justify-items-center sm:flex sm:items-center sm:justify-end sm:gap-4">
             <span className="px-3 py-1 rounded-md bg-white/5 border border-white/10">🇰🇪 Nairobi, Kenya</span>
             <span className="px-3 py-1 rounded-md bg-white/5 border border-white/10">Global-Ready</span>
           </div>

@@ -25,21 +25,22 @@ export function buildGBPAuthUrl() {
 }
 
 export async function exchangeCodeForTokens(code: string) {
-  // ── Wait for session to be available after the Google redirect ──────
-  // supabase.functions.invoke auto-attaches the JWT, but on a fresh page
-  // load (post-redirect) the session may not have hydrated from storage yet.
-  const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+  // ── Ensure a fresh JWT after the Google redirect ──────────────────
+  // getSession() returns the cached (possibly expired) token from storage.
+  // refreshSession() forces Supabase to issue a new access-token so the
+  // Edge Function Authorization header carries a valid JWT.
+  const { data: refreshData, error: refreshError } = await supabase.auth.refreshSession();
 
-  if (sessionError || !session) {
-    throw new Error("No active Supabase session — please sign in before connecting Google.");
+  if (refreshError || !refreshData?.session) {
+    // If refresh fails, try getSession as a last resort (may still be valid)
+    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+    if (sessionError || !session) {
+      throw new Error("No active Supabase session — please sign in before connecting Google.");
+    }
   }
 
   const { data, error } = await supabase.functions.invoke("exchange-token", {
     body: { code, redirectUri: REDIRECT_URI },
-    headers: {
-      // Explicitly pass the token instead of relying on auto-attach
-      Authorization: `Bearer ${session.access_token}`,
-    },
   });
 
   if (error) {

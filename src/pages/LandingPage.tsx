@@ -1,13 +1,12 @@
 import {
   CheckCircle2,
-  X,
+  XCircle,
   ShieldAlert,
   BarChart3,
   Clock,
   Sparkles,
   QrCode,
   Globe,
-  Settings,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import PublicNav from "@/components/PublicNav";
@@ -15,7 +14,7 @@ import PublicFooter from "@/components/PublicFooter";
 import ChatWidget from "@/components/ChatWidget";
 import PrimaryCard from "@/components/PrimaryCard";
 import DashboardPreview from "@/components/DashboardPreview";
-import { cn } from "@/lib/utils";
+import HowItWorksTimeline from "@/components/HowItWorksTimeline";
 
 const INTEGRATIONS = [
   {
@@ -73,30 +72,10 @@ const COMPARISON = [
   { feature: "24/7 Listing Monitoring", manual: "No", platform: "Yes" },
   { feature: "AI-Powered Drafts", manual: "No", platform: "Yes" },
   { feature: "Negative Review Shield", manual: "Reactive", platform: "Proactive" },
-  { feature: "Multi-Platform Sync", manual: "Manual Check", platform: "Auto-Sync" },
+  { feature: "Review Platform Coverage", manual: "One at a time", platform: "Multi-platform (expanding)" },
   { feature: "Cost to Manage", manual: "$$$ (Admin Time)", platform: "$ (Fixed Low Cost)" },
 ];
 
-const PROCESS_STEPS = [
-  {
-    step: 1,
-    title: "Connect Your Accounts",
-    desc: "Securely authorize your Google, Yelp, and Facebook accounts. Our intelligent importer fetches your entire history in seconds.",
-    bullets: ["Setup in minutes", "No technical skills required", "Real-time syncing"],
-  },
-  {
-    step: 2,
-    title: "Automate Requests",
-    desc: "Choose from our library of high-converting SMS and Email templates. We automatically ask your best customers for feedback right after checkout.",
-    bullets: ["Setup in minutes", "No technical skills required", "Real-time syncing"],
-  },
-  {
-    step: 3,
-    title: "AI Response Magic",
-    desc: "Our AI reads every review, understands the sentiment, and drafts a personalized response. Review and hit 'Send' in one tap.",
-    bullets: ["Setup in minutes", "No technical skills required", "Real-time syncing"],
-  },
-];
 
 const BENEFITS = [
   {
@@ -160,7 +139,7 @@ export default function LandingPage() {
               Into <span className="text-brand underline decoration-accent-yellow decoration-8 underline-offset-[8px] sm:underline-offset-[12px]">Growth.</span>
             </h1>
             
-            <p className="mb-10 text-lg leading-relaxed text-muted-foreground md:text-xl max-w-lg font-medium">
+            <p className="mb-10 text-lg leading-relaxed text-foreground/70 md:text-xl max-w-lg font-medium">
               ReviewFlow AI automates the tedious work of capturing, monitoring, and responding to reviews on your Google Business Profile. Get more 5-star ratings on autopilot.
             </p>
             
@@ -171,31 +150,19 @@ export default function LandingPage() {
               >
                 Get Started Free
               </Link>
-              <a
-                href="#demo"
+              <Link
+                to="/demo"
                 className="inline-flex h-16 w-full sm:w-auto items-center justify-center gap-3 rounded-xl border-2 border-brand/10 bg-white px-10 text-xl font-bold text-brand transition-all hover:border-brand/40 hover:bg-brand/5 hover:-translate-y-1"
               >
                 Watch 2min Demo
-              </a>
+              </Link>
             </div>
 
-            <div className="mt-12 flex items-center gap-5">
-              <div className="flex -space-x-4">
-                {[
-                  "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100&h=100&fit=crop&crop=face",
-                  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
-                  "https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?w=100&h=100&fit=crop&crop=face",
-                  "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=100&h=100&fit=crop&crop=face",
-                ].map((src, i) => (
-                  <div key={i} className="h-12 w-12 rounded-full border-4 border-white bg-surface-2 overflow-hidden shadow-md">
-                    <img src={src} alt="avatar" className="w-full h-full object-cover" />
-                  </div>
-                ))}
-              </div>
-              <div>
-                <div className="flex text-accent-yellow text-xl tracking-tighter">★★★★★</div>
-                <div className="text-sm font-bold text-muted-foreground mt-0.5">Trusted by 4,500+ Businesses</div>
-              </div>
+            <div className="mt-12 inline-flex items-center gap-3 rounded-full border border-brand/20 bg-white px-5 py-3 shadow-sm">
+              <span className="text-brand text-lg">★★★★★</span>
+              <span className="text-sm font-bold text-muted-foreground">
+                Used by local businesses across Africa & beyond
+              </span>
             </div>
           </div>
         </div>
@@ -203,18 +170,32 @@ export default function LandingPage() {
       </section>
 
       {/* ─── 2. INTEGRATIONS STRIP ─── */}
-      <section className="bg-brand py-12 shadow-inner text-white">
+      <section className="bg-[#0D1117] py-14 text-white">
         <div className="mx-auto max-w-screen-xl px-6 sm:px-8 text-center">
-          <p className="mb-10 text-base font-bold uppercase tracking-[0.2em] text-white/70">
-            Integrated with the world's leading platforms
+          <p className="mb-8 text-xs font-bold uppercase tracking-[0.2em] text-white/40">
+            CONNECTED INTEGRATIONS
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-10 sm:gap-16">
-            {INTEGRATIONS.map((app) => (
-              <div key={app.name} className="flex flex-col items-center gap-3 transition-transform hover:-translate-y-1">
-                <div className="text-white drop-shadow-md">
-                  {app.svg}
-                </div>
-                <span className="text-xs font-bold text-white/90">{app.name}</span>
+
+          <div className="flex flex-wrap justify-center gap-12 sm:gap-16">
+            {INTEGRATIONS.filter((i) => i.name === "Google" || i.name === "WhatsApp").map((app) => (
+              <div key={app.name} className="flex flex-col items-center gap-3">
+                <div className="w-10 h-10 flex items-center justify-center">{app.svg}</div>
+                <span className="text-sm font-semibold text-white/90">{app.name}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="border-t border-white/8 my-8 max-w-xs mx-auto" />
+
+          <p className="mb-8 text-xs font-bold uppercase tracking-[0.2em] text-white/40">
+            EXPANDING SOON
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-12 sm:gap-16">
+            {INTEGRATIONS.filter((i) => i.name !== "Google" && i.name !== "WhatsApp").map((app) => (
+              <div key={app.name} className="flex flex-col items-center gap-3 grayscale opacity-30">
+                <div className="w-10 h-10 flex items-center justify-center">{app.svg}</div>
+                <span className="text-xs text-white/30">{app.name}</span>
               </div>
             ))}
           </div>
@@ -222,130 +203,75 @@ export default function LandingPage() {
       </section>
 
       {/* ─── 3. COMPARISON SECTION ─── */}
-      <section id="features" className="bg-bg-page py-20 px-6 sm:px-8">
+      <section id="features" className="bg-bg-page py-14 sm:py-16 px-6 sm:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="mb-5 text-4xl font-black sm:text-5xl">Why ReviewFlow AI?</h2>
-          <p className="mb-14 text-lg text-muted-foreground w-full max-w-2xl mx-auto">
+          <h2 className="mb-5 text-4xl font-black tracking-tight sm:text-5xl">Why ReviewFlow AI?</h2>
+          <p className="mb-10 text-lg text-muted-foreground w-full max-w-2xl mx-auto">
             Stop wasting hours manually checking tabs. Our AI engine works 24/7 to protect your brand while you sleep.
           </p>
 
-          {/* Desktop Table View */}
-          <div className="hidden sm:block overflow-hidden rounded-xl border border-border bg-white shadow-lg">
-            <div className="flex bg-brand px-6 py-5 text-sm font-bold text-white uppercase tracking-wider">
-              <div className="w-1/2 text-left">Success Factor</div>
-              <div className="w-1/4 text-center">Manual Process</div>
-              <div className="w-1/4 text-center flex items-center justify-center gap-1.5 text-accent-yellow">
-                <Sparkles className="h-4 w-4" /> Our Platform
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-12">
+
+            {/* LEFT CARD — Manual Process */}
+            <div className="rounded-2xl border border-border bg-surface-2/60 p-8">
+              <div className="flex items-center gap-3 mb-8 pb-5 border-b border-border">
+                <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center">
+                  <XCircle className="text-red-400 w-5 h-5" />
+                </div>
+                <div className="text-left">
+                  <div className="font-black text-lg text-foreground">Manual Process</div>
+                  <div className="text-sm text-muted-foreground font-medium">What most businesses do today</div>
+                </div>
               </div>
-            </div>
-            <div className="divide-y divide-border">
-              {COMPARISON.map((row, i) => (
-                <div key={i} className="flex items-center px-6 py-5 text-base font-medium transition-colors hover:bg-surface-2/50">
-                  <div className="w-1/2 text-left text-foreground font-bold">{row.feature}</div>
-                  <div className="w-1/4 text-center text-muted-foreground flex justify-center">
-                    {row.manual === "No" ? <X className="h-6 w-6 text-red-500/80" /> : row.manual}
-                  </div>
-                  <div className="w-1/4 text-center text-brand font-black flex justify-center text-lg">
-                    {row.platform === "Yes" ? <CheckCircle2 className="h-6 w-6 text-brand" /> : row.platform}
-                  </div>
+              {COMPARISON.map((row) => (
+                <div key={row.feature} className="flex items-center justify-between py-3.5 border-b border-border/50 last:border-0">
+                  <span className="text-base font-medium text-foreground/80">{row.feature}</span>
+                  <span className="text-base font-bold text-muted-foreground flex items-center gap-1.5">
+                    {row.manual === "No"
+                      ? <XCircle className="w-5 h-5 text-red-400" />
+                      : row.manual}
+                  </span>
                 </div>
               ))}
             </div>
-          </div>
 
-          {/* Mobile Cards View */}
-          <div className="grid grid-cols-1 gap-4 sm:hidden">
-            {COMPARISON.map((row, i) => (
-              <div key={i} className="rounded-xl border border-border bg-white p-5 shadow-sm text-left">
-                <h3 className="font-black text-lg mb-4">{row.feature}</h3>
-                <div className="flex items-center justify-between mb-3 border-b border-border/50 pb-3">
-                  <span className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Manual Process</span>
-                  <span className="text-base text-muted-foreground font-medium flex items-center gap-1">
-                    {row.manual === "No" ? <X className="h-5 w-5 text-red-500/80" /> : row.manual}
-                  </span>
+            {/* RIGHT CARD — ReviewFlow AI */}
+            <div className="rounded-2xl border-2 border-brand/30 bg-brand p-8 shadow-2xl shadow-brand/20 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full -translate-y-12 translate-x-12 blur-2xl pointer-events-none" />
+              <div className="flex items-center gap-3 mb-8 pb-5 border-b border-white/20 relative z-10">
+                <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center">
+                  <CheckCircle2 className="text-accent-yellow w-5 h-5" />
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-bold text-brand uppercase tracking-wider flex items-center gap-1">
-                    <Sparkles className="h-3.5 w-3.5" /> Our Platform
-                  </span>
-                  <span className="text-lg font-black text-brand flex items-center gap-1">
-                    {row.platform === "Yes" ? <CheckCircle2 className="h-5 w-5 text-brand" /> : row.platform}
-                  </span>
+                <div className="text-left">
+                  <div className="font-black text-lg text-white">ReviewFlow AI</div>
+                  <div className="text-sm text-white/70 font-medium">Automated, intelligent, always on</div>
                 </div>
               </div>
-            ))}
+              {COMPARISON.map((row) => (
+                <div key={row.feature} className="flex items-center justify-between py-3.5 border-b border-white/10 last:border-0 relative z-10">
+                  <span className="text-base font-medium text-white/80">{row.feature}</span>
+                  <span className="text-base font-black text-accent-yellow flex items-center gap-1.5">
+                    {row.platform === "Yes"
+                      ? <CheckCircle2 className="w-5 h-5 text-accent-yellow" />
+                      : row.platform}
+                  </span>
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* ─── 4. HOW IT WORKS ─── */}
-      <section id="how-it-works" className="bg-white py-20 px-6 sm:px-8 relative overflow-hidden">
-        {/* Slanted blue bg block behind to break white dominance */}
-        <div className="absolute top-0 right-0 -z-10 h-[600px] w-full bg-surface-2/60 skew-y-3 origin-top-right"></div>
-        
+      <section id="how-it-works" className="bg-white py-14 sm:py-16 px-6 sm:px-8 overflow-hidden">
         <div className="mx-auto max-w-screen-xl">
-          <div className="mb-16 text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-brand/20 bg-brand/5 px-5 py-2 text-sm font-black uppercase tracking-[0.15em] text-brand shadow-sm">
-              <Settings className="w-4 h-4" /> The Process
-            </div>
-            <h2 className="mb-6 text-4xl font-black sm:text-5xl text-foreground">As Easy as 1-2-3</h2>
-            <p className="max-w-2xl mx-auto text-lg text-muted-foreground leading-relaxed">
-              No complex coding. No lengthy onboarding. Just brilliant results from day one.
-            </p>
-          </div>
-
-          <div className="grid gap-28">
-            {PROCESS_STEPS.map((step, index) => {
-               // 1 & 3: left text, right image. 
-               // 2: left image, right text. 
-               const isImageLeft = index === 1;
-
-              // Use real local placeholder images we just downloaded
-              const imageUrls = [
-                "/images/illustration-1.webp",
-                "/images/illustration-2.webp",
-                "/images/illustration-3.webp"
-              ];
-
-              return (
-                <div key={step.step} className="grid items-center gap-16 lg:grid-cols-2">
-                  {/* Text Content */}
-                  <div className={cn("order-2", isImageLeft ? "lg:order-2 text-left" : "lg:order-1")}>
-                    <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-xl bg-brand font-black text-white text-3xl shadow-lg ring-4 ring-brand/20">
-                      {step.step}
-                    </div>
-                    <h3 className="mb-5 text-3xl font-black">{step.title}</h3>
-                    <p className="mb-8 text-lg text-muted-foreground leading-relaxed">{step.desc}</p>
-                    <ul className="space-y-4">
-                      {step.bullets.map((b) => (
-                        <li key={b} className="flex items-center gap-3 text-lg font-bold text-foreground">
-                          <CheckCircle2 className="h-6 w-6 text-brand" /> {b}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Image Presentation */}
-                  <div className={cn("order-1", isImageLeft ? "lg:order-1" : "lg:order-2")}>
-                    <div className="aspect-[4/3] rounded-3xl bg-white border-2 border-border/60 overflow-hidden p-3 shadow-2xl shadow-brand/10">
-                      <div className="w-full h-full rounded-2xl overflow-hidden relative">
-                        <img 
-                          src={imageUrls[index]} 
-                          alt={step.title}
-                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <HowItWorksTimeline />
         </div>
       </section>
 
       {/* ─── 5. BENEFITS GRID ─── */}
-      <section className="bg-bg-page py-24 px-6 sm:px-8 border-t border-border">
+      <section className="bg-bg-page py-14 sm:py-16 px-6 sm:px-8 border-t border-border">
         <div className="mx-auto max-w-screen-xl grid gap-16 lg:grid-cols-3 items-start">
           
           <div className="lg:sticky lg:top-40 lg:pr-8">
@@ -364,8 +290,10 @@ export default function LandingPage() {
                   <ShieldAlert className="h-6 w-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg mb-1">GDPR Compliant</h4>
-                  <p className="text-sm text-muted-foreground">Your data is safe and strictly encrypted.</p>
+                  <h4 className="font-bold text-lg mb-1">Secure by Design</h4>
+                  <p className="text-sm text-muted-foreground">
+                    OAuth tokens stored encrypted server-side. Your credentials never touch the frontend.
+                  </p>
                 </div>
               </div>
               <div className="flex gap-5">
@@ -373,8 +301,10 @@ export default function LandingPage() {
                   <Globe className="h-6 w-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg mb-1">Multi-Language</h4>
-                  <p className="text-sm text-muted-foreground">Auto-respond in over 45 languages globally.</p>
+                  <h4 className="font-bold text-lg mb-1">Built for Global Scale</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Launching in Africa. Expanding to Europe, Middle East, and Southeast Asia.
+                  </p>
                 </div>
               </div>
             </div>
@@ -399,14 +329,14 @@ export default function LandingPage() {
       </section>
 
       {/* ─── 6. FINAL CTA ─── */}
-      <section className="bg-white py-16 sm:py-24 px-6 sm:px-8">
+      <section className="bg-white py-14 sm:py-16 px-6 sm:px-8">
         <div className="mx-auto max-w-screen-xl relative overflow-hidden rounded-3xl sm:rounded-[2.5rem] bg-brand px-6 py-16 sm:py-20 text-center shadow-2xl">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-white/10 blur-[100px]" />
 
           <div className="relative z-10 mx-auto max-w-3xl">
             <h2 className="mb-8 text-4xl sm:text-5xl font-black text-white leading-tight text-center">Ready to Boost Your<br /><span className="block mt-3">Rankings?</span></h2>
             <p className="mb-12 text-lg sm:text-xl text-white/80 font-medium px-4 text-center">
-              Join 4,500+ businesses who have already seen a 300% increase in monthly reviews. Start your trial today.
+              Join forward-thinking businesses managing their online reputation with AI. Start your free trial today.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-5 w-full max-w-sm mx-auto sm:max-w-none">

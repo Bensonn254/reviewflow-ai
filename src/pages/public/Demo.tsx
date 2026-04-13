@@ -37,7 +37,14 @@ const features = [
   },
 ];
 
-const platforms = ["Google Business", "Trustpilot", "Yelp", "Facebook", "Clutch", "Capterra"];
+const platforms = [
+  { name: "Google Business Profile", live: true },
+  { name: "WhatsApp", live: true },
+  { name: "Facebook Pages", live: false },
+  { name: "Trustpilot", live: false },
+  { name: "Yelp", live: false },
+  { name: "TripAdvisor", live: false },
+];
 
 const walkthrough = [
   "No credit card required to start",
@@ -130,10 +137,20 @@ const Demo = () => {
       {/* ─── PLATFORM STRIP ─── */}
       <section className="border-y border-border bg-white py-10">
         <div className="max-w-screen-xl mx-auto px-6 sm:px-8 flex flex-wrap items-center justify-center gap-8 sm:gap-14">
-          {platforms.map((name) => (
-            <span key={name} className="text-base font-bold text-muted-foreground/50 hover:text-brand transition-colors cursor-default">
-              {name}
-            </span>
+          {platforms.map((platform) => (
+            <div
+              key={platform.name}
+              className="flex items-center gap-3 rounded-full border border-border/60 bg-white px-4 py-2 text-base font-bold text-muted-foreground/70"
+            >
+              <span>{platform.name}</span>
+              <span
+                className={`rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest ${
+                  platform.live ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"
+                }`}
+              >
+                {platform.live ? "Live" : "Coming Soon"}
+              </span>
+            </div>
           ))}
         </div>
       </section>

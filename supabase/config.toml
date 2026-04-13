@@ -1,1 +1,7 @@
 project_id = "ypvkhrzaxqgaejrupysz"
+
+[functions.support-chat]
+verify_jwt = false
+
+[functions.exchange-token]
+verify_jwt = true

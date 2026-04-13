@@ -5,6 +5,7 @@ import ReviewCard from "@/components/ReviewCard";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import Preloader from "@/components/Preloader";
+import { cn } from "@/lib/utils";
 
 interface Review {
   id: string;
@@ -15,6 +16,7 @@ interface Review {
   status: string;
   created_at: string;
   business_id: string;
+  platform: string;
 }
 
 const Reviews = () => {
@@ -22,6 +24,7 @@ const Reviews = () => {
   const { toast } = useToast();
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
+  const [platformFilter, setPlatformFilter] = useState<string>("all");
 
   const fetchReviews = useCallback(async () => {
     if (!user) return;
@@ -57,7 +60,7 @@ const Reviews = () => {
       console.error(revErr.message);
       setReviews([]);
     } else {
-      setReviews(revs || []);
+      setReviews((revs || []) as Review[]);
     }
     setLoading(false);
   }, [user]);
@@ -86,7 +89,12 @@ const Reviews = () => {
     toast({ title: "Saved", description: "Response updated." });
   };
 
-  const byStatus = (status: string) => reviews.filter((r) => r.status === status);
+  const filteredReviews = platformFilter === "all"
+    ? reviews
+    : reviews.filter((r) => r.platform === platformFilter);
+
+  const byStatus = (status: string) =>
+    filteredReviews.filter((r) => r.status === status);
 
   if (loading) return <Preloader label="Loading reviews..." />;
 
@@ -98,6 +106,22 @@ const Reviews = () => {
       </div>
 
       <Tabs defaultValue="needs" className="w-full">
+        <div className="flex flex-wrap gap-2 mb-4">
+          {["all", "google", "facebook"].map((p) => (
+            <button
+              key={p}
+              onClick={() => setPlatformFilter(p)}
+              className={cn(
+                "px-4 py-1.5 rounded-full text-sm font-bold border transition-all capitalize",
+                platformFilter === p
+                  ? "bg-brand text-white border-brand"
+                  : "border-border text-muted-foreground hover:border-brand/40 bg-white"
+              )}
+            >
+              {p === "all" ? "All Platforms" : p}
+            </button>
+          ))}
+        </div>
         <div className="mb-8 border-b border-divider">
           <TabsList className="bg-transparent h-12 gap-8 p-0">
             <TabsTrigger 

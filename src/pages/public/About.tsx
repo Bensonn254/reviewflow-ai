@@ -3,7 +3,7 @@ import PublicFooter from "@/components/PublicFooter";
 import PublicNav from "@/components/PublicNav";
 import ChatWidget from "@/components/ChatWidget";
 import { Shield, Sparkles, Heart, Eye, ArrowRight } from "lucide-react";
-import { FaGoogle, FaYelp, FaFacebook, FaWhatsapp, FaStar } from "react-icons/fa";
+import { FaGoogle, FaYelp, FaFacebook, FaWhatsapp } from "react-icons/fa";
 import { SiTrustpilot } from "react-icons/si";
 
 const values = [
@@ -32,12 +32,11 @@ const values = [
 
 
 const partners = [
-  { name: "Google", icon: FaGoogle },
-  { name: "Yelp", icon: FaYelp },
-  { name: "Facebook", icon: FaFacebook },
-  { name: "Trustpilot", icon: SiTrustpilot },
-  { name: "WhatsApp", icon: FaWhatsapp },
-  { name: "Capterra", icon: FaStar },
+  { name: "Google", icon: FaGoogle, live: true },
+  { name: "WhatsApp", icon: FaWhatsapp, live: true },
+  { name: "Facebook", icon: FaFacebook, live: false },
+  { name: "Yelp", icon: FaYelp, live: false },
+  { name: "Trustpilot", icon: SiTrustpilot, live: false },
 ];
 
 const About = () => {
@@ -126,13 +125,21 @@ const About = () => {
           <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
             {partners.map((partner) => {
               const Icon = partner.icon;
+              const isLive = partner.live;
               return (
                 <div
                   key={partner.name}
-                  className="px-6 py-3 rounded-xl bg-white border border-border shadow-sm flex items-center gap-3 text-muted-foreground font-bold text-base transition-all hover:shadow-md hover:-translate-y-1 hover:text-brand"
+                  className={`px-6 py-3 rounded-xl bg-white border border-border shadow-sm flex flex-col items-center gap-2 text-muted-foreground font-bold text-base transition-all hover:shadow-md hover:-translate-y-1 hover:text-brand ${isLive ? "" : "opacity-50"}`}
                 >
-                  <Icon className="h-5 w-5" />
-                  {partner.name}
+                  <div className="flex items-center gap-3">
+                    <Icon className="h-5 w-5" />
+                    {partner.name}
+                  </div>
+                  {!isLive && (
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                      Soon
+                    </span>
+                  )}
                 </div>
               );
             })}
