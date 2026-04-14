@@ -68,13 +68,13 @@ const PublicNav = () => {
         <div className="hidden lg:flex items-center gap-5">
           <Link
             to="/login"
-            className="text-xl font-medium text-white hover:text-white/80 transition-colors"
+            className="text-lg font-medium text-white hover:text-white/80 transition-colors"
           >
             Log in
           </Link>
           <Link
             to="/signup"
-            className="rounded-md bg-accent-yellow px-6 py-2.5 text-xl font-bold text-brand transition-all hover:bg-accent-yellow-700 hover:-translate-y-0.5 active:scale-95"
+            className="rounded-md bg-accent-yellow px-5 py-2 text-lg font-bold text-brand transition-all hover:bg-accent-yellow-700 hover:-translate-y-0.5 active:scale-95"
           >
             Free Trial
           </Link>

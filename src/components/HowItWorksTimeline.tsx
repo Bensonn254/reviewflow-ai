@@ -8,6 +8,16 @@ const STEPS = [
     title: "Connect Your Profile",
     desc: "Securely link your Google Business Profile via OAuth. More platforms — Facebook, Yelp, Trustpilot — are rolling out in Phase 2.",
     bullets: ["Done in under 2 minutes", "No technical skills needed", "Fully encrypted connection"],
+    theme: {
+      cardBg: "bg-gradient-to-br from-[#0F1724] to-[#1e293b]",
+      border: "border-slate-800 shadow-slate-900/20",
+      labelColor: "text-blue-400",
+      titleColor: "text-white",
+      descColor: "text-slate-300",
+      bulletColor: "text-slate-200",
+      iconColor: "text-blue-500",
+      illustrationBg: "bg-slate-800/50 border-slate-700",
+    },
     illustration: (
       <svg viewBox="0 0 200 150" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
         <rect width="200" height="150" rx="12" fill="#F0F4FF" />
@@ -37,7 +47,17 @@ const STEPS = [
     label: "STEP 02",
     title: "AI Drafts Responses",
     desc: "Every Monday, ReviewFlow fetches your new reviews and generates locally-tuned AI responses — ready for your approval. No prompting required.",
-    bullets: ["Responses tuned to your location & industry", "Runs automatically every week", "You stay in full control"],
+    bullets: ["Responses tuned to your location", "Runs automatically every week", "You stay in full control"],
+    theme: {
+      cardBg: "bg-gradient-to-br from-blue-500 to-cyan-400",
+      border: "border-blue-400/50 shadow-blue-500/20",
+      labelColor: "text-blue-100",
+      titleColor: "text-white",
+      descColor: "text-blue-50",
+      bulletColor: "text-white",
+      iconColor: "text-cyan-200",
+      illustrationBg: "bg-white/20 border-white/30 backdrop-blur-sm",
+    },
     illustration: (
       <svg viewBox="0 0 200 150" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
         <rect width="200" height="150" rx="12" fill="#FFFDF0" />
@@ -62,7 +82,17 @@ const STEPS = [
     label: "STEP 03",
     title: "Approve in One Click",
     desc: "Review each AI draft in your dashboard. Edit if you want, or approve as-is. We publish to Google instantly.",
-    bullets: ["Nothing goes live without your sign-off", "Edit or reject any draft", "Published directly to Google"],
+    bullets: ["Nothing goes live without sign-off", "Edit or reject any draft", "Published directly to Google"],
+    theme: {
+      cardBg: "bg-gradient-to-br from-fuchsia-500 to-purple-600",
+      border: "border-purple-400/50 shadow-purple-500/20",
+      labelColor: "text-fuchsia-200",
+      titleColor: "text-white",
+      descColor: "text-fuchsia-100",
+      bulletColor: "text-white",
+      iconColor: "text-fuchsia-300",
+      illustrationBg: "bg-white/10 border-white/20 backdrop-blur-sm",
+    },
     illustration: (
       <svg viewBox="0 0 200 150" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
         <rect width="200" height="150" rx="12" fill="#F0FFF4" />
@@ -83,33 +113,16 @@ export default function HowItWorksTimeline() {
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    // Timeline line animation
-    const lineObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("timeline-active");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    lineObserver.observe(section);
-
-    // Step entry animations
     const stepObservers: IntersectionObserver[] = [];
     stepRefs.current.forEach((el) => {
       if (!el) return;
-      el.classList.add("step-hidden");
+      el.classList.add("opacity-0", "translate-y-10");
       const obs = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.remove("step-hidden");
-              entry.target.classList.add("step-visible");
+              entry.target.classList.remove("opacity-0", "translate-y-10");
+              entry.target.classList.add("opacity-100", "translate-y-0");
             }
           });
         },
@@ -120,19 +133,15 @@ export default function HowItWorksTimeline() {
     });
 
     return () => {
-      lineObserver.disconnect();
       stepObservers.forEach((obs) => obs.disconnect());
     };
   }, []);
 
   return (
-    <div>
+    <div className="max-w-6xl mx-auto px-6">
       {/* Section heading */}
-      <div className="text-center mb-16">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-brand/20 bg-brand/5 px-5 py-2 text-xs font-black uppercase tracking-[0.2em] text-brand">
-          THE PROCESS
-        </div>
-        <h2 className="mb-4 text-4xl font-black tracking-tight sm:text-5xl text-foreground">
+      <div className="text-center mb-20">
+        <h2 className="mb-4 text-4xl md:text-5xl font-bold tracking-tight text-foreground">
           As Easy as 1-2-3
         </h2>
         <p className="max-w-xl mx-auto text-lg text-muted-foreground leading-relaxed">
@@ -141,80 +150,50 @@ export default function HowItWorksTimeline() {
       </div>
 
       {/* Timeline container */}
-      <div ref={sectionRef} className="relative max-w-3xl mx-auto">
+      <div ref={sectionRef} className="relative">
+        {/* Horizontal line for desktop connecting the numbers */}
+        <div className="absolute top-8 left-[16%] right-[16%] h-[2px] hidden md:block bg-gradient-to-r from-blue-500/20 via-blue-500/50 to-blue-500/20 z-0" />
 
-        {/* Vertical line — desktop (center) */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] hidden sm:block overflow-hidden">
-          <div
-            className="timeline-line w-full"
-            style={{ background: "linear-gradient(to bottom, hsl(220 69% 40%), hsl(220 69% 40% / 0.15))" }}
-          />
-        </div>
-
-        {/* Vertical line — mobile (left) */}
-        <div className="absolute left-[28px] top-0 bottom-0 w-[2px] sm:hidden overflow-hidden">
-          <div
-            className="timeline-line w-full"
-            style={{ background: "linear-gradient(to bottom, hsl(220 69% 40%), hsl(220 69% 40% / 0.15))" }}
-          />
-        </div>
-
-        {/* Steps */}
-        <div className="relative flex flex-col gap-20">
-          {STEPS.map((step, index) => {
-            const isTextLeft = index % 2 === 0;
-
-            return (
-              <div
-                key={step.step}
-                ref={(el) => { stepRefs.current[index] = el; }}
-                style={{ transitionDelay: `${0.2 + index * 0.3}s` }}
-                className="relative"
-              >
-                {/* Timeline circle node — desktop */}
-                <div className="absolute left-1/2 -translate-x-1/2 top-6 hidden sm:flex w-12 h-12 rounded-full bg-brand border-4 border-white shadow-lg items-center justify-center z-10">
-                  <span className="text-white font-black text-lg leading-none">{step.step}</span>
-                </div>
-
-                {/* Timeline circle node — mobile */}
-                <div className="absolute left-[16px] top-0 flex sm:hidden w-[24px] h-[24px] rounded-full bg-brand border-2 border-white shadow-md items-center justify-center z-10">
-                  <span className="text-white font-black text-[10px] leading-none">{step.step}</span>
-                </div>
-
-                {/* Content grid */}
-                <div className="grid sm:grid-cols-2 gap-8 items-center pl-14 sm:pl-0">
-
-                  {/* Text side */}
-                  <div className={isTextLeft ? "sm:order-1 sm:pr-16 sm:text-right" : "sm:order-2 sm:pl-16"}>
-                    <p className="text-xs font-black uppercase tracking-[0.2em] text-brand mb-2">{step.label}</p>
-                    <h3 className="text-2xl sm:text-3xl font-black text-foreground mb-3 tracking-tight">
-                      {step.title}
-                    </h3>
-                    <p className="text-base text-muted-foreground leading-relaxed mb-5">{step.desc}</p>
-                    <ul className={`space-y-2 ${isTextLeft ? "sm:flex sm:flex-col sm:items-end" : ""}`}>
-                      {step.bullets.map((b) => (
-                        <li
-                          key={b}
-                          className={`flex items-center gap-2 text-sm font-semibold text-foreground ${isTextLeft ? "sm:flex-row-reverse" : ""}`}
-                        >
-                          <CheckCircle2 className="w-4 h-4 text-brand shrink-0" />
-                          {b}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Illustration side */}
-                  <div className={isTextLeft ? "sm:order-2" : "sm:order-1"}>
-                    <div className="rounded-2xl bg-surface-2 border border-border aspect-[4/3] flex items-center justify-center overflow-hidden p-4 shadow-sm">
-                      {step.illustration}
-                    </div>
-                  </div>
-
-                </div>
+        <div className="grid md:grid-cols-3 gap-8 md:gap-6 relative">
+          {STEPS.map((step, index) => (
+            <div
+              key={step.step}
+              ref={(el) => { stepRefs.current[index] = el; }}
+              style={{ transitionDelay: `${0.1 + index * 0.2}s` }}
+              className="relative z-10 flex flex-col transition-all duration-700 ease-out"
+            >
+              {/* Step number badge */}
+              <div className="w-16 h-16 rounded-2xl bg-white shadow-lg shadow-blue-900/5 border border-slate-100 flex items-center justify-center text-blue-600 font-black text-2xl mb-8 mx-auto relative z-20">
+                {step.step}
+                {/* Mobile vertical line connecting cards */}
+                {index < STEPS.length - 1 && (
+                  <div className="absolute top-16 left-1/2 -ml-[1px] w-[2px] h-[calc(100%+2rem)] bg-gradient-to-b from-blue-500/20 to-transparent md:hidden -z-10" />
+                )}
               </div>
-            );
-          })}
+
+              {/* Card */}
+              <div className={`rounded-3xl p-8 border shadow-xl flex flex-col h-full hover:-translate-y-2 transition-transform duration-300 ${step.theme.cardBg} ${step.theme.border}`}>
+                <p className={`text-xs font-black uppercase tracking-[0.2em] mb-2 ${step.theme.labelColor}`}>
+                  {step.label}
+                </p>
+                <h3 className={`text-2xl font-bold mb-4 tracking-tight ${step.theme.titleColor}`}>{step.title}</h3>
+                <p className={`mb-6 leading-relaxed flex-grow ${step.theme.descColor}`}>{step.desc}</p>
+
+                <div className={`rounded-2xl border p-4 aspect-[4/3] mb-6 flex items-center justify-center overflow-hidden ${step.theme.illustrationBg}`}>
+                  {step.illustration}
+                </div>
+
+                <ul className="space-y-3">
+                  {step.bullets.map((b) => (
+                    <li key={b} className={`flex items-start text-sm font-medium ${step.theme.bulletColor}`}>
+                      <CheckCircle2 className={`w-5 h-5 mr-3 shrink-0 ${step.theme.iconColor}`} />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
