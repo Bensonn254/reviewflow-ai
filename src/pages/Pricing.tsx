@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Check, Clock, Sparkles, Zap, MessageCircle, ChevronDown, ChevronUp, BarChart3, Globe, QrCode } from "lucide-react";
+import { Check, X, Clock, Sparkles, Zap, MessageCircle, ChevronDown, ChevronUp, BarChart3, Globe, QrCode } from "lucide-react";
 import ChatWidget from "@/components/ChatWidget";
 import PublicFooter from "@/components/PublicFooter";
 import PublicNav from "@/components/PublicNav";
@@ -98,82 +98,11 @@ const regionCurrencyMap: Record<string, string> = {
   NZ: "NZD",
 };
 
-const resolveCurrency = () => {
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  if (timeZone === "Africa/Nairobi") return "KES";
-  const locale = navigator.language || "en-US";
-  let region = "";
-  if ("Locale" in Intl) {
-    try {
-      region = new Intl.Locale(locale).region || "";
-    } catch {
-      region = "";
-    }
-  }
-  if (!region) {
-    const parts = locale.split("-");
-    region = parts[1] || "";
-  }
-  return regionCurrencyMap[region] || "USD";
-};
-
-const roundPrice = (value: number, currency: string) => {
-  const step = currency === "KES" ? 50 : currency === "JPY" ? 100 : currency === "UGX" ? 500 : 1;
-  return Math.round(value / step) * step;
-};
-
 const Pricing = () => {
   const [billing, setBilling] = useState<BillingCycle>("monthly");
-  const [currency, setCurrency] = useState("KES");
-  const [rates, setRates] = useState<Record<string, number> | null>(null);
-  const [rateSource, setRateSource] = useState<"fallback" | "api">("fallback");
-  const [rateUpdatedAt, setRateUpdatedAt] = useState<string | null>(null);
   const [pricePulse, setPricePulse] = useState(false);
   const [showSalesModal, setShowSalesModal] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const detectedCurrency = resolveCurrency();
-    setCurrency(detectedCurrency);
-
-    if (detectedCurrency === "KES") {
-      setRates({ KES: 1 });
-      return;
-    }
-
-    const cacheKey = "rfx_rates_kes_v1";
-    const cached = window.localStorage.getItem(cacheKey);
-    if (cached) {
-      try {
-        const parsed = JSON.parse(cached) as { rates: Record<string, number>; timestamp: number };
-        if (Date.now() - parsed.timestamp < 1000 * 60 * 60 * 24) {
-          setRates(parsed.rates);
-          setRateSource("api");
-          setRateUpdatedAt(new Date(parsed.timestamp).toLocaleDateString());
-          return;
-        }
-      } catch {
-        window.localStorage.removeItem(cacheKey);
-      }
-    }
-
-    fetch("https://open.er-api.com/v6/latest/KES")
-      .then((res) => res.json())
-      .then((data: { rates?: Record<string, number> }) => {
-        if (!data.rates) return;
-        setRates(data.rates);
-        setRateSource("api");
-        const timestamp = Date.now();
-        window.localStorage.setItem(cacheKey, JSON.stringify({ rates: data.rates, timestamp }));
-        setRateUpdatedAt(new Date(timestamp).toLocaleDateString());
-      })
-      .catch(() => {
-        setRates({ KES: 1 });
-        setCurrency("KES");
-        setRateSource("fallback");
-      });
-  }, []);
 
   useEffect(() => {
     setPricePulse(true);
@@ -182,143 +111,139 @@ const Pricing = () => {
   }, [billing]);
 
   const formatter = useMemo(() => {
-    try {
-      return new Intl.NumberFormat(undefined, { style: "currency", currency, maximumFractionDigits: 0 });
-    } catch {
-      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
-    }
-  }, [currency]);
+    return new Intl.NumberFormat("en-KE", { 
+      style: "currency", 
+      currency: "KES", 
+      maximumFractionDigits: 0 
+    });
+  }, []);
 
   const formatPrice = (amountKes: number) => {
-    const rate = rates?.[currency] ?? 1;
-    const converted = amountKes * rate;
-    return formatter.format(roundPrice(converted, currency));
+    return formatter.format(amountKes);
   };
 
   return (
-    <div className="min-h-screen bg-bg-page text-foreground font-sans">
+    <div className="min-h-screen bg-[#FBFBFA] text-foreground font-sans">
       <PublicNav />
 
-      <header className="max-w-screen-xl mx-auto px-6 sm:px-8 pt-32 pb-12 text-center">
-        <h1 className="text-4xl sm:text-5xl font-black mb-6 tracking-tight">Simple, Transparent Pricing</h1>
-        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+      <header className="max-w-screen-xl mx-auto px-6 sm:px-8 pt-32 pb-10 text-center">
+        <h1 className="text-5xl sm:text-6xl font-black mb-6 tracking-tight text-[#0F1724]">Simple, Transparent Pricing</h1>
+        <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto font-medium">
           One plan per location. No hidden fees. Cancel anytime.
         </p>
 
-        <div className="mt-12 flex items-center justify-center gap-4">
-          <button
-            type="button"
-            onClick={() => setBilling("monthly")}
-            className={cn(
-              "px-6 py-3 text-base font-bold rounded-xl border transition-all duration-300",
-              billing === "monthly"
-                ? "bg-brand text-white border-brand shadow-lg"
-                : "bg-white text-muted-foreground border-border hover:border-brand/40"
-            )}
-          >
-            Monthly Billing
-          </button>
-          <button
-            type="button"
-            onClick={() => setBilling("annual")}
-            className={cn(
-              "px-6 py-3 text-base font-bold rounded-xl border flex items-center gap-3 transition-all duration-300 relative",
-              billing === "annual"
-                ? "bg-brand text-white border-brand shadow-lg"
-                : "bg-white text-muted-foreground border-border hover:border-brand/40"
-            )}
-          >
-            Annual Billing
-            <span className="bg-accent-yellow text-brand text-xs px-3 py-1 rounded-full font-black uppercase tracking-wider">
-              Save 17%
-            </span>
-          </button>
+        <div className="mt-10 flex items-center justify-center">
+           <div className="bg-[#F0F0EE] p-1.5 rounded-full flex items-center gap-1 shadow-inner">
+              <button
+                type="button"
+                onClick={() => setBilling("monthly")}
+                className={cn(
+                  "px-8 py-3 text-sm font-bold rounded-full transition-all duration-300",
+                  billing === "monthly"
+                    ? "bg-white text-black shadow-sm"
+                    : "text-slate-500 hover:text-black"
+                )}
+              >
+                Monthly
+              </button>
+              <button
+                type="button"
+                onClick={() => setBilling("annual")}
+                className={cn(
+                  "px-8 py-3 text-sm font-bold rounded-full transition-all duration-300",
+                  billing === "annual"
+                    ? "bg-black text-white shadow-md shadow-black/10"
+                    : "text-slate-500 hover:text-black"
+                )}
+              >
+                Annual
+              </button>
+           </div>
         </div>
 
-        <p className="mt-8 text-sm font-medium text-muted-foreground italic">
-          Prices shown in {currency}. Exchange rates are rounded for clarity.
-          {rateSource === "api" && rateUpdatedAt ? ` Last updated: ${rateUpdatedAt}.` : ""}
+        <p className="mt-6 text-sm font-bold text-slate-400 italic">
+          Prices in Kenyan Shillings (KES).
         </p>
       </header>
 
       <section className="max-w-screen-xl mx-auto px-6 sm:px-8 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
           {plans.map((plan) => {
             const monthlyPrice = formatPrice(plan.monthlyKes);
-            const annualPrice = formatPrice(plan.monthlyKes * 12 * 0.83);
-            const annualMonthly = formatPrice(plan.monthlyKes * 0.83);
+            const annualPrice = formatPrice(plan.monthlyKes * 12 * 0.83); // 17% Discount
             const isFeatured = plan.highlight;
 
             return (
               <div
                 key={plan.name}
                 className={cn(
-                  "rounded-[2rem] p-8 border transition-all duration-300 flex flex-col relative",
+                  "relative p-10 flex flex-col transition-all duration-500 group border border-slate-200/60",
                   isFeatured
-                    ? "bg-surface-2 border-brand border-2 shadow-xl ring-8 ring-brand/5 lg:scale-105 z-10"
-                    : "bg-white border-border shadow-sm hover:shadow-md"
+                    ? "bg-[#0F1724] text-white rounded-[2rem] rounded-tl-[6rem] shadow-2xl scale-[1.02] z-10"
+                    : "bg-[#F3F3F1]/50 text-slate-900 rounded-[2rem] rounded-tl-[6rem] hover:bg-white hover:shadow-xl"
                 )}
               >
-                {isFeatured && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand text-white text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
-                    Most Popular
+                {/* Asymmetric Badge */}
+                {isFeatured ? (
+                  <div className="absolute top-0 right-0 overflow-hidden w-24 h-24 rounded-tr-[1.5rem] pointer-events-none">
+                     <div className="absolute top-4 -right-10 w-32 bg-accent-yellow text-brand text-[10px] font-black py-1 px-10 rotate-45 text-center shadow-lg">
+                        SAVE 17%
+                     </div>
+                  </div>
+                ) : (
+                  <div className="absolute top-6 right-6 flex items-center gap-1.5 grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 transition-all">
+                    <span className="text-[10px] font-black uppercase tracking-widest">{plan.name === "Launch" ? "Starter" : "Pro"}</span>
+                    <div className="h-1.5 w-1.5 rounded-full bg-accent-yellow animate-pulse" />
                   </div>
                 )}
                 
-                <div className="mb-8">
-                  <h3 className="text-2xl font-black mb-2">{plan.name}</h3>
-                  <p className="text-sm text-muted-foreground font-medium uppercase tracking-wider">
-                    {plan.description}
-                  </p>
-                </div>
-
-                <div className="mb-8">
-                  <div className="flex items-baseline gap-1">
-                    <span className={cn(
-                      "text-5xl font-black transition-all",
-                      pricePulse && "scale-95 opacity-50"
-                    )}>
-                      {billing === "monthly" ? monthlyPrice : annualPrice}
-                    </span>
-                    <span className="text-muted-foreground font-bold italic">
-                      /{billing === "monthly" ? "mo" : "yr"}
-                    </span>
-                  </div>
-                  <p className="mt-2 text-sm text-muted-foreground font-medium">
-                    {billing === "monthly"
-                      ? `Or ${annualPrice}/year with annual billing`
-                      : `Equivalent to ${annualMonthly}/month`}
-                  </p>
-                </div>
-
-                <div className="mb-8 space-y-4 flex-1">
-                  <div className="text-sm font-bold text-brand uppercase tracking-tighter flex items-center gap-2">
-                    <Check className="h-4 w-4" /> {plan.locations}
-                  </div>
-                  
-                  {plan.accentFeatures && (
-                    <div className="space-y-2">
-                      {plan.accentFeatures.map((feature) => (
-                        <div
-                          key={feature}
-                          className="flex items-center gap-3 rounded-xl bg-brand/5 border border-brand/10 px-4 py-3 text-sm font-bold text-brand"
-                        >
-                          <Sparkles className="h-4 w-4 shrink-0" />
-                          {feature}
-                        </div>
-                      ))}
+                <div className="mb-10 text-center">
+                  <h3 className="text-3xl font-black mb-1">{plan.name}</h3>
+                  <div className="flex flex-col items-center justify-center h-24">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-6xl font-black tracking-tighter">
+                        {billing === "monthly" ? monthlyPrice : annualPrice}
+                      </span>
                     </div>
-                  )}
+                    <span className={cn(
+                      "text-xs font-bold uppercase tracking-[0.2em] mt-2",
+                      isFeatured ? "text-slate-400" : "text-slate-500"
+                    )}>
+                      {billing === "monthly" ? "/ monthly (KES)" : "/ year billed annually"}
+                    </span>
+                  </div>
+                </div>
 
-                  <ul className="space-y-3 pt-2">
-                    {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-3">
-                        <div className="h-5 w-5 rounded-full bg-brand/10 flex items-center justify-center shrink-0 mt-0.5">
-                          <Check className="h-3 w-3 text-brand" />
-                        </div>
-                        <span className="text-foreground/80 text-sm font-medium leading-tight">
-                          {feature}
-                        </span>
+                <p className={cn(
+                  "text-sm font-medium leading-relaxed mb-8 text-center px-4",
+                  isFeatured ? "text-slate-300" : "text-slate-600"
+                )}>
+                  {plan.description}
+                </p>
+
+                <div className="mb-10 space-y-4 flex-1">
+                  <ul className="space-y-4">
+                    {plan.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center gap-4">
+                         <div className={cn(
+                           "h-6 w-6 rounded-full flex items-center justify-center shrink-0",
+                           isFeatured ? "bg-green-500 text-[#0F1724]" : "bg-green-100 text-green-600"
+                         )}>
+                            <Check className="h-3.5 w-3.5" />
+                         </div>
+                         <span className="text-sm font-bold opacity-80">{feature}</span>
+                      </li>
+                    ))}
+                    {plan.name === "Launch" && [
+                      "Smart review routing",
+                      "Priority Support",
+                      "Custom Branding"
+                    ].map((feat) => (
+                      <li key={feat} className="flex items-center gap-4 opacity-30">
+                         <div className="h-6 w-6 rounded-full bg-slate-200 text-slate-400 flex items-center justify-center shrink-0">
+                            <X className="h-3.5 w-3.5" />
+                         </div>
+                         <span className="text-sm font-bold italic line-through">{feat}</span>
                       </li>
                     ))}
                   </ul>
@@ -327,29 +252,24 @@ const Pricing = () => {
                 <Link
                   to="/signup"
                   className={cn(
-                    "w-full py-4 rounded-xl text-lg font-black transition-all text-center",
+                    "w-full py-5 rounded-full text-lg font-black transition-all text-center",
                     isFeatured
-                      ? "bg-accent-yellow text-brand hover:bg-accent-yellow-700 hover:-translate-y-1 shadow-lg shadow-accent-yellow/20"
-                      : "bg-brand/10 text-brand border border-brand/20 hover:bg-brand hover:text-white shadow-sm"
+                      ? "bg-white text-[#0F1724] hover:bg-accent-yellow hover:scale-105 shadow-xl shadow-white/5"
+                      : "bg-white text-slate-900 border border-slate-200 hover:border-brand hover:text-brand hover:-translate-y-1 shadow-sm"
                   )}
                 >
-                  {plan.cta}
+                  {plan.name === "Launch" ? "Free Trial" : plan.cta}
                 </Link>
               </div>
             );
           })}
         </div>
 
+
         <div className="mt-12 text-center text-sm font-medium text-muted-foreground">
           All prices exclude VAT. Cancel anytime. No long-term commitment.
           <div className="mt-2">
             Need more than 10 locations? <span className="text-brand font-bold">Contact us for enterprise pricing</span>
-          </div>
-          <div className="mt-2 flex items-center justify-center gap-1 opacity-60">
-            Rates by{" "}
-            <a href="https://www.exchangerate-api.com" className="text-brand hover:underline font-bold" target="_blank" rel="noreferrer">
-              ExchangeRate-API
-            </a>
           </div>
         </div>
       </section>

@@ -27,7 +27,7 @@ serve(async (req) => {
     const {
       data: { user },
       error: userError,
-    } = await supabaseUser.auth.getUser();
+    } = await supabaseUser.auth.getUser(authHeader.replace("Bearer ", ""));
     if (userError || !user) throw new Error("Unauthorized");
 
     // ── 2. Read request body ─────────────────────────────────────────

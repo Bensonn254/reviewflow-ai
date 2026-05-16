@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>How It Works - ReviewFlow AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@900,800&amp;f[]=satoshi@400,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#2b0052",
+                    "surface-interactive": "#EAECEF",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f3fbfe",
+                    "surface-container-highest": "#dce4e7",
+                    "on-secondary-container": "#3b0081",
+                    "on-primary-fixed-variant": "#6600b7",
+                    "inverse-surface": "#2a3234",
+                    "on-secondary-fixed": "#260058",
+                    "secondary": "#7241c3",
+                    "tertiary": "#32424d",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#f3fbfe",
+                    "on-tertiary-fixed-variant": "#394954",
+                    "surface-dim": "#d3dbde",
+                    "surface-elevated": "#FFFFFF",
+                    "on-background": "#151d1f",
+                    "inverse-on-surface": "#eaf2f5",
+                    "secondary-container": "#a979fe",
+                    "on-surface": "#151d1f",
+                    "slate": "#7C8C99",
+                    "primary-fixed-dim": "#dbb8ff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#e0c1ff",
+                    "tertiary-container": "#495965",
+                    "on-error-container": "#93000a",
+                    "success": "#15803D",
+                    "violet": "#7B11D7",
+                    "primary-fixed": "#efdbff",
+                    "indigo": "#49049A",
+                    "primary": "#5d00a7",
+                    "on-tertiary-fixed": "#0d1d28",
+                    "background": "#f3fbfe",
+                    "on-surface-variant": "#4c4355",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#b8c9d7",
+                    "inverse-primary": "#dbb8ff",
+                    "surface-container": "#e7eff2",
+                    "on-tertiary-container": "#bfcfdd",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#dce4e7",
+                    "on-secondary-fixed-variant": "#5923aa",
+                    "warning": "#B45309",
+                    "surface-nested": "#F4F6F8",
+                    "outline": "#7e7386",
+                    "outline-variant": "#cfc2d7",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e1e9ec",
+                    "primary-container": "#7b11d7",
+                    "ink": "#171425",
+                    "alabaster": "#E0E8EB",
+                    "tertiary-fixed": "#d4e5f3",
+                    "secondary-fixed-dim": "#d4bbff",
+                    "error": "#B91C1C",
+                    "secondary-fixed": "#ebdcff",
+                    "surface-tint": "#8322df",
+                    "surface-container-low": "#edf5f8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "max-width": "1100px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "sm": "8px",
+                    "xl": "32px",
+                    "xxl": "48px",
+                    "section": "72px",
+                    "hero": "112px",
+                    "md": "16px",
+                    "gutter": "52px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Cabinet Grotesk"],
+                    "label-sm": ["Satoshi"],
+                    "body-md": ["Satoshi"],
+                    "display-1": ["Cabinet Grotesk"],
+                    "headline-sm": ["Cabinet Grotesk"],
+                    "display-2": ["Cabinet Grotesk"],
+                    "headline-md": ["Cabinet Grotesk"],
+                    "body-lg": ["Satoshi"],
+                    "mono": ["jetbrainsMono"],
+                    "headline-lg-mobile": ["Cabinet Grotesk"]
+            },
+            "fontSize": {
+                    "headline-lg": ["38px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "900" }],
+                    "label-sm": ["10px", { "lineHeight": "1", "letterSpacing": "0.14em", "fontWeight": "700" }],
+                    "body-md": ["14px", { "lineHeight": "1.5", "letterSpacing": "normal", "fontWeight": "400" }],
+                    "display-1": ["80px", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "900" }],
+                    "headline-sm": ["19px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                    "display-2": ["54px", { "lineHeight": "1.1", "letterSpacing": "-0.025em", "fontWeight": "900" }],
+                    "headline-md": ["26px", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "900" }],
+                    "body-lg": ["17px", { "lineHeight": "1.6", "letterSpacing": "normal", "fontWeight": "400" }],
+                    "mono": ["12px", { "lineHeight": "1.5", "letterSpacing": "0.04em", "fontWeight": "400" }],
+                    "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "900" }]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { background-color: theme('colors.alabaster'); }
+        
+        /* Premium Shadows */
+        .shadow-level-1 { box-shadow: 0 2px 12px rgba(23,20,37,0.07); }
+        .shadow-level-2 { box-shadow: 0 8px 28px rgba(23,20,37,0.11); }
+        .shadow-brand { box-shadow: 0 6px 28px rgba(123,17,215,0.22); }
+        
+        /* Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, theme('colors.violet'), theme('colors.indigo'));
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.20), 0 6px 28px rgba(123,17,215,0.22);
+        }
+        .btn-secondary {
+            border: 1px solid rgba(23,20,37,0.14);
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-secondary:hover {
+            border-color: rgba(23,20,37,0.24);
+            transform: translateY(-1px);
+        }
+        
+        /* Card Interactions */
+        .card-interactive {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-interactive:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(23,20,37,0.11);
+        }
+    </style>
+</head>
+<body class="text-on-background font-body-md antialiased selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav aria-label="Main Navigation" class="bg-surface-container-lowest dark:bg-surface-dim font-body-md text-body-md docked full-width top-0 sticky z-50 shadow-sm dark:shadow-none transition-all duration-300 border-b border-[rgba(23,20,37,0.04)]" role="navigation">
+<div class="flex justify-between items-center max-w-[1100px] mx-auto px-md md:px-lg h-20">
+<!-- Brand -->
+<a class="font-headline-sm text-headline-sm font-black text-ink dark:text-surface-bright tracking-tight flex items-center gap-2" href="/">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                ReviewFlow AI
+            </a>
+<!-- Desktop Nav -->
+<ul class="hidden md:flex items-center gap-xl">
+<li><a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:border-b-2 hover:border-primary transition-all duration-200 py-2" href="#">Features</a></li>
+<li><a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary pb-1 hover:text-primary dark:hover:text-primary-fixed-dim transition-all duration-200" href="#">How It Works</a></li>
+<li><a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:border-b-2 hover:border-primary transition-all duration-200 py-2" href="#">Pricing</a></li>
+<li><a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:border-b-2 hover:border-primary transition-all duration-200 py-2" href="#">Contact</a></li>
+</ul>
+<!-- Actions -->
+<div class="flex items-center gap-md">
+<a class="hidden md:inline-flex text-on-background font-body-md text-body-md font-medium hover:text-primary transition-colors" href="#">Log In</a>
+<a class="btn-primary text-white px-lg py-sm rounded-DEFAULT font-medium text-body-md hover:scale-[0.98] transition-transform duration-200 shadow-brand" href="#">Get Started</a>
+</div>
+</div>
+</nav>
+<main class="w-full">
+<!-- Hero Section -->
+<section class="max-w-[1100px] mx-auto px-gutter py-hero text-center flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Decorative background blur -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-fixed rounded-full blur-[120px] opacity-40 -z-10 pointer-events-none"></div>
+<h1 class="font-display-2 text-display-2 text-ink mb-lg max-w-3xl">How it works.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+                A seamless, automated pipeline that turns scattered customer feedback into actionable insights. Minimal setup required.
+            </p>
+</section>
+<!-- Three-Step Process Grid -->
+<section class="max-w-[1100px] mx-auto px-gutter py-section pb-hero">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Step 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-xl shadow-level-1 card-interactive flex flex-col h-full relative overflow-hidden group">
+<div class="w-12 h-12 bg-violet text-white rounded flex items-center justify-center font-headline-md text-headline-md font-black mb-xl shadow-brand">
+                        1
+                    </div>
+<h3 class="font-headline-sm text-headline-sm text-ink mb-sm">Connect</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+                        Integrate effortlessly with your existing tools. We pull reviews directly from platforms, support tickets, and CRM systems into one unified inbox.
+                    </p>
+<div class="mt-xl pt-lg border-t border-[rgba(23,20,37,0.08)]">
+<div class="flex gap-sm text-surface-tint">
+<span class="material-symbols-outlined" data-icon="api" style="font-variation-settings: 'FILL' 0;">api</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-slate mt-1">20+ Integrations</span>
+</div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-xl shadow-level-1 card-interactive flex flex-col h-full relative overflow-hidden group">
+<div class="w-12 h-12 bg-violet text-white rounded flex items-center justify-center font-headline-md text-headline-md font-black mb-xl shadow-brand">
+                        2
+                    </div>
+<h3 class="font-headline-sm text-headline-sm text-ink mb-sm">Route</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+                        Our AI engine instantly analyzes sentiment and urgency, automatically routing critical feedback to the right team members before issues escalate.
+                    </p>
+<div class="mt-xl pt-lg border-t border-[rgba(23,20,37,0.08)]">
+<div class="flex gap-sm text-surface-tint">
+<span class="material-symbols-outlined" data-icon="alt_route" style="font-variation-settings: 'FILL' 0;">alt_route</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-slate mt-1">Smart Sorting</span>
+</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-xl shadow-level-1 card-interactive flex flex-col h-full relative overflow-hidden group">
+<div class="w-12 h-12 bg-violet text-white rounded flex items-center justify-center font-headline-md text-headline-md font-black mb-xl shadow-brand">
+                        3
+                    </div>
+<h3 class="font-headline-sm text-headline-sm text-ink mb-sm">Drafts</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+                        Generate context-aware, personalized response drafts in milliseconds. Review, approve, and send without leaving the platform.
+                    </p>
+<div class="mt-xl pt-lg border-t border-[rgba(23,20,37,0.08)]">
+<div class="flex gap-sm text-surface-tint">
+<span class="material-symbols-outlined" data-icon="edit_document" style="font-variation-settings: 'FILL' 0;">edit_document</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-slate mt-1">AI Generation</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Banner -->
+<section class="max-w-[1100px] mx-auto px-gutter pb-hero">
+<div class="bg-ink rounded-xl p-xxl md:p-hero text-center relative overflow-hidden shadow-level-2">
+<!-- Subtle background pattern for CTA -->
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, theme('colors.primary-fixed') 1px, transparent 0); background-size: 24px 24px;"></div>
+<div class="relative z-10 flex flex-col items-center">
+<h2 class="font-display-2 text-display-2 text-surface-bright mb-lg max-w-2xl">Ready to see it in action?</h2>
+<p class="font-body-lg text-body-lg text-tertiary-fixed-dim mb-xl max-w-xl">
+                        Join hundreds of forward-thinking teams optimizing their customer feedback loop.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-md">
+<button class="btn-primary text-white px-xl py-md rounded-DEFAULT font-medium text-body-md hover:scale-[0.98] transition-transform duration-200 shadow-brand">
+                            Start Free Trial
+                        </button>
+<button class="bg-transparent border border-[rgba(255,255,255,0.2)] text-surface-bright px-xl py-md rounded-DEFAULT font-medium text-body-md hover:bg-[rgba(255,255,255,0.05)] transition-colors duration-200">
+                            Book a Demo
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-ink dark:bg-ink full-width py-section" role="contentinfo">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-lg max-w-[1100px] mx-auto px-md md:px-lg">
+<div class="col-span-2 md:col-span-1 flex flex-col gap-sm">
+<div class="font-headline-sm text-headline-sm text-surface-bright font-black mb-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                    ReviewFlow AI
+                </div>
+<p class="font-body-md text-body-md text-surface-variant opacity-80 mt-auto">
+                    © 2024 ReviewFlow AI. Global-Ready
+                </p>
+</div>
+<div class="col-span-1">
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-tertiary-fixed-dim mb-md">Product</h4>
+<ul class="flex flex-col gap-sm font-body-md text-body-md">
+<li><a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">Platform</a></li>
+<li><a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">Enterprise</a></li>
+<li><a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">Security</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-tertiary-fixed-dim mb-md">Company</h4>
+<ul class="flex flex-col gap-sm font-body-md text-body-md">
+<li><a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">About</a></li>
+<li><a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">Blog</a></li>
+<li><a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">Support</a></li>
+</ul>
+</div>
+<div class="col-span-2 md:col-span-1">
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-tertiary-fixed-dim mb-md">Legal</h4>
+<ul class="flex flex-col gap-sm font-body-md text-body-md">
+<li><a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">Privacy Policy</a></li>
+<li><a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

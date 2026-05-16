@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact - ReviewFlow AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@900,800,700,500,400&amp;f[]=satoshi@900,700,500,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#2b0052",
+                      "surface-interactive": "#EAECEF",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#f3fbfe",
+                      "surface-container-highest": "#dce4e7",
+                      "on-secondary-container": "#3b0081",
+                      "on-primary-fixed-variant": "#6600b7",
+                      "inverse-surface": "#2a3234",
+                      "on-secondary-fixed": "#260058",
+                      "secondary": "#7241c3",
+                      "tertiary": "#32424d",
+                      "on-tertiary": "#ffffff",
+                      "surface": "#f3fbfe",
+                      "on-tertiary-fixed-variant": "#394954",
+                      "surface-dim": "#d3dbde",
+                      "surface-elevated": "#FFFFFF",
+                      "on-background": "#151d1f",
+                      "inverse-on-surface": "#eaf2f5",
+                      "secondary-container": "#a979fe",
+                      "on-surface": "#151d1f",
+                      "slate": "#7C8C99",
+                      "primary-fixed-dim": "#dbb8ff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#e0c1ff",
+                      "tertiary-container": "#495965",
+                      "on-error-container": "#93000a",
+                      "success": "#15803D",
+                      "violet": "#7B11D7",
+                      "primary-fixed": "#efdbff",
+                      "indigo": "#49049A",
+                      "primary": "#5d00a7",
+                      "on-tertiary-fixed": "#0d1d28",
+                      "background": "#f3fbfe",
+                      "on-surface-variant": "#4c4355",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed-dim": "#b8c9d7",
+                      "inverse-primary": "#dbb8ff",
+                      "surface-container": "#e7eff2",
+                      "on-tertiary-container": "#bfcfdd",
+                      "on-primary": "#ffffff",
+                      "surface-variant": "#dce4e7",
+                      "on-secondary-fixed-variant": "#5923aa",
+                      "warning": "#B45309",
+                      "surface-nested": "#F4F6F8",
+                      "outline": "#7e7386",
+                      "outline-variant": "#cfc2d7",
+                      "error-container": "#ffdad6",
+                      "surface-container-high": "#e1e9ec",
+                      "primary-container": "#7b11d7",
+                      "ink": "#171425",
+                      "alabaster": "#E0E8EB",
+                      "tertiary-fixed": "#d4e5f3",
+                      "secondary-fixed-dim": "#d4bbff",
+                      "error": "#B91C1C",
+                      "secondary-fixed": "#ebdcff",
+                      "surface-tint": "#8322df",
+                      "surface-container-low": "#edf5f8"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "max-width": "1100px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "sm": "8px",
+                      "xl": "32px",
+                      "xxl": "48px",
+                      "section": "72px",
+                      "hero": "112px",
+                      "md": "16px",
+                      "gutter": "52px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Cabinet Grotesk"
+                      ],
+                      "label-sm": [
+                              "Satoshi"
+                      ],
+                      "body-md": [
+                              "Satoshi"
+                      ],
+                      "display-1": [
+                              "Cabinet Grotesk"
+                      ],
+                      "headline-sm": [
+                              "Cabinet Grotesk"
+                      ],
+                      "display-2": [
+                              "Cabinet Grotesk"
+                      ],
+                      "headline-md": [
+                              "Cabinet Grotesk"
+                      ],
+                      "body-lg": [
+                              "Satoshi"
+                      ],
+                      "mono": [
+                              "jetbrainsMono"
+                      ],
+                      "headline-lg-mobile": [
+                              "Cabinet Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "38px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "label-sm": [
+                              "10px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.14em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "letterSpacing": "normal",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-1": [
+                              "80px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.03em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "headline-sm": [
+                              "19px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "display-2": [
+                              "54px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.025em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "headline-md": [
+                              "26px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "letterSpacing": "-0.015em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "body-lg": [
+                              "17px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "letterSpacing": "normal",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "letterSpacing": "0.04em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "900"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .shadow-level-1 { box-shadow: 0 2px 12px rgba(23,20,37,0.07); }
+        .shadow-level-2 { box-shadow: 0 8px 28px rgba(23,20,37,0.11); }
+        .shadow-brand { box-shadow: 0 6px 28px rgba(123,17,215,0.22); }
+        .glass-highlight { box-shadow: inset 0 1px 0 rgba(255,255,255,0.20); }
+      </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-surface-dim shadow-sm dark:shadow-none docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center max-w-[1100px] mx-auto px-md md:px-lg h-20">
+<a class="font-headline-sm text-headline-sm font-black text-ink dark:text-surface-bright flex items-center gap-2" href="/">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+                ReviewFlow AI
+            </a>
+<div class="hidden md:flex items-center gap-lg font-body-md text-body-md">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:border-b-2 hover:border-primary transition-all duration-200 py-1" href="/features">Features</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:border-b-2 hover:border-primary transition-all duration-200 py-1" href="/how-it-works">How It Works</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:border-b-2 hover:border-primary transition-all duration-200 py-1" href="/pricing">Pricing</a>
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary pb-1 py-1 hover:text-primary dark:hover:text-primary-fixed-dim hover:border-b-2 hover:border-primary transition-all duration-200" href="/contact">Contact</a>
+</div>
+<div class="hidden md:flex items-center gap-sm">
+<a class="px-lg py-sm rounded-DEFAULT text-on-surface-variant hover:bg-surface-nested transition-colors duration-200 border border-transparent" href="/login">Log In</a>
+<a class="bg-gradient-to-r from-primary to-violet text-on-primary px-lg py-sm rounded-DEFAULT shadow-brand glass-highlight hover:scale-95 transition-transform duration-200 font-medium" href="/get-started">Get Started</a>
+</div>
+<button class="md:hidden text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="max-w-[1100px] mx-auto px-md md:px-lg pt-hero pb-section text-center">
+<h1 class="font-display-2 text-display-2 text-ink max-w-3xl mx-auto mb-lg">
+                We're here to help <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-violet">scale your reputation</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto">
+                Whether you have a question about features, pricing, or need technical support, our team is ready to assist you.
+            </p>
+</section>
+<!-- Contact Layout -->
+<section class="max-w-[1100px] mx-auto px-md md:px-lg pb-hero">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-xl">
+<!-- Left Column: Info Cards -->
+<div class="flex flex-col gap-lg">
+<div class="bg-surface-container-lowest p-lg rounded-lg shadow-level-1 hover:shadow-level-2 hover:-translate-y-1 transition-all duration-300 border border-black/5">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-primary">mail</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-ink mb-xs">Email Us</h3>
+<p class="text-on-surface-variant mb-sm">For general inquiries and support.</p>
+<a class="text-primary font-medium hover:underline" href="mailto:hello@reviewflow.ai">hello@reviewflow.ai</a>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-lg shadow-level-1 hover:shadow-level-2 hover:-translate-y-1 transition-all duration-300 border border-black/5">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-secondary">call</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-ink mb-xs">Call Us</h3>
+<p class="text-on-surface-variant mb-sm">Mon-Fri from 9am to 6pm EST.</p>
+<a class="text-secondary font-medium hover:underline" href="tel:+18005550199">+1 (800) 555-0199</a>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-lg shadow-level-1 hover:shadow-level-2 hover:-translate-y-1 transition-all duration-300 border border-black/5">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-tertiary">location_on</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-ink mb-xs">Office</h3>
+<p class="text-on-surface-variant">
+                            100 Innovation Drive<br/>
+                            Suite 400<br/>
+                            San Francisco, CA 94103
+                        </p>
+</div>
+<div class="bg-surface-bright border border-primary/20 p-lg rounded-lg mt-sm">
+<div class="flex items-start gap-md">
+<span class="material-symbols-outlined text-primary mt-1" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-ink mb-xs">Response Guarantee</h4>
+<p class="text-on-surface-variant text-sm">We guarantee a response to all inquiries within 24 business hours. Premium and Enterprise customers receive priority 4-hour SLA routing.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Form -->
+<div class="bg-surface-container-lowest p-xl rounded-lg shadow-level-1 border border-black/5">
+<h2 class="font-headline-md text-headline-md text-ink mb-lg">Send a Message</h2>
+<form class="flex flex-col gap-md">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-slate uppercase" for="firstName">First Name</label>
+<input class="px-md py-sm bg-surface-container-lowest border border-black/10 rounded-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors shadow-level-1" id="firstName" placeholder="Jane" type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-slate uppercase" for="lastName">Last Name</label>
+<input class="px-md py-sm bg-surface-container-lowest border border-black/10 rounded-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors shadow-level-1" id="lastName" placeholder="Doe" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-slate uppercase" for="email">Work Email</label>
+<input class="px-md py-sm bg-surface-container-lowest border border-black/10 rounded-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors shadow-level-1" id="email" placeholder="jane@company.com" type="email"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-slate uppercase" for="subject">Subject</label>
+<select class="px-md py-sm bg-surface-container-lowest border border-black/10 rounded-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors shadow-level-1 text-ink" id="subject">
+<option>Sales Inquiry</option>
+<option>Technical Support</option>
+<option>Billing Question</option>
+<option>Partnership</option>
+<option>Other</option>
+</select>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-sm text-label-sm text-slate uppercase" for="message">Message</label>
+<textarea class="px-md py-sm bg-surface-container-lowest border border-black/10 rounded-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors shadow-level-1 resize-none" id="message" placeholder="How can we help you?" rows="5"></textarea>
+</div>
+<button class="mt-sm bg-gradient-to-r from-primary to-violet text-on-primary px-xl py-md rounded-DEFAULT shadow-brand glass-highlight hover:scale-95 transition-transform duration-200 font-medium flex justify-center items-center gap-2" type="submit">
+                            Send Message
+                            <span class="material-symbols-outlined text-sm">send</span>
+</button>
+</form>
+</div>
+</div>
+</section>
+<!-- CTA Banner -->
+<section class="bg-ink text-surface-bright py-section rounded-t-xl mt-xxl relative overflow-hidden">
+<!-- Decorative gradient orb -->
+<div class="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full mix-blend-screen filter blur-[100px] opacity-20 pointer-events-none"></div>
+<div class="max-w-[1100px] mx-auto px-md md:px-lg text-center relative z-10">
+<h2 class="font-headline-lg text-headline-lg mb-md">Ready to see it in action?</h2>
+<p class="font-body-lg text-body-lg text-surface-variant max-w-2xl mx-auto mb-xl">
+                    Skip the contact form and schedule a live demo with one of our product experts right now.
+                </p>
+<div class="flex justify-center gap-md">
+<a class="bg-surface-bright text-ink px-xl py-md rounded-DEFAULT font-medium hover:bg-white transition-colors duration-200" href="/demo">Book a Demo</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-ink dark:bg-ink full-width pt-section pb-xl text-surface-bright">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-lg max-w-[1100px] mx-auto px-md md:px-lg mb-xl border-b border-surface-variant/20 pb-xl">
+<div class="col-span-2 md:col-span-1">
+<div class="font-headline-sm text-headline-sm text-surface-bright font-black mb-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">star</span>
+                    ReviewFlow AI
+                </div>
+<p class="text-surface-variant text-sm mb-lg max-w-xs">Intelligent reputation management for modern enterprises.</p>
+</div>
+<div class="flex flex-col gap-sm font-body-md text-body-md">
+<h4 class="font-bold text-surface-bright mb-xs">Platform</h4>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="/features">Features</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="/pricing">Pricing</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="/integrations">Integrations</a>
+</div>
+<div class="flex flex-col gap-sm font-body-md text-body-md">
+<h4 class="font-bold text-surface-bright mb-xs">Support</h4>
+<a class="text-primary-fixed-dim font-bold hover:text-primary-fixed-dim transition-colors duration-200" href="/contact">Contact</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="/help">Help Center</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="/status">System Status</a>
+</div>
+<div class="flex flex-col gap-sm font-body-md text-body-md">
+<h4 class="font-bold text-surface-bright mb-xs">Enterprise</h4>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="/security">Security</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="/compliance">Compliance</a>
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="/partners">Partners</a>
+</div>
+</div>
+<div class="max-w-[1100px] mx-auto px-md md:px-lg flex flex-col md:flex-row justify-between items-center gap-md text-surface-variant text-sm">
+<p>© 2024 ReviewFlow AI. Global-Ready</p>
+<div class="flex gap-md">
+<a class="hover:text-primary-fixed-dim transition-colors" href="/privacy">Privacy Policy</a>
+<a class="hover:text-primary-fixed-dim transition-colors" href="/terms">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>

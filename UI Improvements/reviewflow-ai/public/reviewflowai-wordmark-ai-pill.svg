@@ -1,0 +1,21 @@
+<!-- reviewflowai-wordmark-ai-pill.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="220" viewBox="0 0 900 220" role="img" aria-label="ReviewFlow AI wordmark (AI pill)">
+  <!-- RF monogram (left) -->
+  <g id="monogram" transform="translate(10,20)">
+    <text x="0" y="120" font-family="Segoe UI, Roboto, Inter, system-ui, sans-serif" font-weight="800" font-size="140" fill="hsl(220 69% 40%)">RF</text>
+  </g>
+
+  <!-- Wordmark -->
+  <g id="wordmark" transform="translate(200,70)">
+    <text id="reviewflow" x="0" y="60" font-family="Segoe UI, Roboto, Inter, system-ui, sans-serif" font-weight="700" font-size="48" fill="hsl(217 41% 10%)">ReviewFlow</text>
+
+    <!-- AI pill -->
+    <g id="ai-pill" transform="translate(360,22)">
+      <rect x="0" y="0" rx="14" ry="14" width="72" height="40" fill="hsl(45 100% 64.5%)"/>
+      <text x="36" y="28" font-family="Segoe UI, Roboto, Inter, system-ui, sans-serif" font-weight="700" font-size="20" fill="hsl(0 0% 100%)" text-anchor="middle">AI</text>
+    </g>
+  </g>
+
+  <!-- Safe area box (optional visual guide) -->
+  <rect x="4" y="4" width="892" height="212" fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>
+</svg>

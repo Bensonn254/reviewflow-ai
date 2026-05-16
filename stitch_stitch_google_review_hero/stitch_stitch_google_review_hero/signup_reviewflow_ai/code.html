@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReviewFlow AI - Sign Up</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@800;900&amp;family=Satoshi:wght@400;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#2b0052",
+                      "surface-interactive": "#EAECEF",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#f3fbfe",
+                      "surface-container-highest": "#dce4e7",
+                      "on-secondary-container": "#3b0081",
+                      "on-primary-fixed-variant": "#6600b7",
+                      "inverse-surface": "#2a3234",
+                      "on-secondary-fixed": "#260058",
+                      "secondary": "#7241c3",
+                      "tertiary": "#32424d",
+                      "on-tertiary": "#ffffff",
+                      "surface": "#f3fbfe",
+                      "on-tertiary-fixed-variant": "#394954",
+                      "surface-dim": "#d3dbde",
+                      "surface-elevated": "#FFFFFF",
+                      "on-background": "#151d1f",
+                      "inverse-on-surface": "#eaf2f5",
+                      "secondary-container": "#a979fe",
+                      "on-surface": "#151d1f",
+                      "slate": "#7C8C99",
+                      "primary-fixed-dim": "#dbb8ff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#e0c1ff",
+                      "tertiary-container": "#495965",
+                      "on-error-container": "#93000a",
+                      "success": "#15803D",
+                      "violet": "#7B11D7",
+                      "primary-fixed": "#efdbff",
+                      "indigo": "#49049A",
+                      "primary": "#5d00a7",
+                      "on-tertiary-fixed": "#0d1d28",
+                      "background": "#f3fbfe",
+                      "on-surface-variant": "#4c4355",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed-dim": "#b8c9d7",
+                      "inverse-primary": "#dbb8ff",
+                      "surface-container": "#e7eff2",
+                      "on-tertiary-container": "#bfcfdd",
+                      "on-primary": "#ffffff",
+                      "surface-variant": "#dce4e7",
+                      "on-secondary-fixed-variant": "#5923aa",
+                      "warning": "#B45309",
+                      "surface-nested": "#F4F6F8",
+                      "outline": "#7e7386",
+                      "outline-variant": "#cfc2d7",
+                      "error-container": "#ffdad6",
+                      "surface-container-high": "#e1e9ec",
+                      "primary-container": "#7b11d7",
+                      "ink": "#171425",
+                      "alabaster": "#E0E8EB",
+                      "tertiary-fixed": "#d4e5f3",
+                      "secondary-fixed-dim": "#d4bbff",
+                      "error": "#B91C1C",
+                      "secondary-fixed": "#ebdcff",
+                      "surface-tint": "#8322df",
+                      "surface-container-low": "#edf5f8"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "max-width": "1100px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "sm": "8px",
+                      "xl": "32px",
+                      "xxl": "48px",
+                      "section": "72px",
+                      "hero": "112px",
+                      "md": "16px",
+                      "gutter": "52px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Cabinet Grotesk"
+                      ],
+                      "label-sm": [
+                              "Satoshi"
+                      ],
+                      "body-md": [
+                              "Satoshi"
+                      ],
+                      "display-1": [
+                              "Cabinet Grotesk"
+                      ],
+                      "headline-sm": [
+                              "Cabinet Grotesk"
+                      ],
+                      "display-2": [
+                              "Cabinet Grotesk"
+                      ],
+                      "headline-md": [
+                              "Cabinet Grotesk"
+                      ],
+                      "body-lg": [
+                              "Satoshi"
+                      ],
+                      "mono": [
+                              "jetbrainsMono"
+                      ],
+                      "headline-lg-mobile": [
+                              "Cabinet Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "38px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "label-sm": [
+                              "10px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.14em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "letterSpacing": "normal",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-1": [
+                              "80px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.03em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "headline-sm": [
+                              "19px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "display-2": [
+                              "54px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.025em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "headline-md": [
+                              "26px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "letterSpacing": "-0.015em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "body-lg": [
+                              "17px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "letterSpacing": "normal",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "letterSpacing": "0.04em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "900"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body { background-color: theme('colors.alabaster'); }
+        .glass-highlight { box-shadow: inset 0 1px 0 rgba(255,255,255,0.20), 0 6px 28px rgba(123,17,215,0.22); }
+        .shadow-level-1 { box-shadow: 0 2px 12px rgba(23,20,37,0.07); }
+      </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-on-background">
+<!-- Suppressed TopNavBar based on logic: Linear/Transactional intent -->
+<main class="flex-grow flex w-full">
+<div class="flex flex-col lg:flex-row w-full min-h-screen">
+<!-- Left Side - Ink Background -->
+<div class="hidden lg:flex lg:w-5/12 bg-ink text-surface-bright p-xxl flex-col justify-between relative overflow-hidden">
+<!-- Abstract Background Element -->
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at top right, theme('colors.secondary-container'), transparent 40%);"></div>
+<div class="z-10 mt-xl">
+<div class="font-headline-sm text-headline-sm font-black mb-hero">
+                        ReviewFlow AI
+                    </div>
+<h1 class="font-display-2 text-display-2 mb-xl">Everything you need for 5-Star growth.</h1>
+<ul class="space-y-lg font-body-lg text-body-lg text-surface-dim">
+<li class="flex items-start">
+<span class="material-symbols-outlined text-primary-fixed-dim mr-md" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Automated review collection across 20+ platforms.
+                        </li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-primary-fixed-dim mr-md" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            AI-powered sentiment analysis and response drafting.
+                        </li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-primary-fixed-dim mr-md" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Actionable insights to improve operational quality.
+                        </li>
+</ul>
+</div>
+<div class="z-10 font-body-md text-body-md text-surface-variant">
+                    Trusted by over 10,000 global businesses.
+                </div>
+</div>
+<!-- Right Side - Form -->
+<div class="flex-1 bg-surface-container-lowest flex flex-col justify-center px-lg py-xl lg:px-hero relative">
+<!-- Mobile Header (Visible only on small screens) -->
+<div class="lg:hidden w-full flex justify-center mb-xl">
+<span class="font-headline-sm text-headline-sm font-black text-ink">ReviewFlow AI</span>
+</div>
+<div class="max-w-md w-full mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-xs">Start Free Trial</h2>
+<p class="font-body-md text-body-md text-slate mb-xl">No credit card required. 14-day full access.</p>
+<!-- OAuth -->
+<button class="w-full flex items-center justify-center space-x-sm border border-[rgba(23,20,37,0.14)] rounded-DEFAULT py-[10px] hover:border-[rgba(23,20,37,0.24)] hover:-translate-y-[1px] transition-all duration-200 shadow-level-1 mb-lg bg-surface-elevated font-body-md text-body-md font-bold">
+<svg class="w-5 h-5" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+<span>Sign up with Google</span>
+</button>
+<div class="flex items-center mb-lg">
+<div class="flex-grow border-t border-[rgba(23,20,37,0.08)]"></div>
+<span class="mx-md text-slate font-label-sm text-label-sm uppercase">or</span>
+<div class="flex-grow border-t border-[rgba(23,20,37,0.08)]"></div>
+</div>
+<!-- Email Form -->
+<form class="space-y-md">
+<div class="grid grid-cols-2 gap-md">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs" for="firstName">FIRST NAME</label>
+<input class="w-full bg-surface-elevated border-none shadow-level-1 rounded-sm py-sm px-md font-body-md text-body-md text-on-background placeholder-slate focus:ring-1 focus:ring-primary focus:outline-none transition-shadow" id="firstName" placeholder="Jane" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs" for="lastName">LAST NAME</label>
+<input class="w-full bg-surface-elevated border-none shadow-level-1 rounded-sm py-sm px-md font-body-md text-body-md text-on-background placeholder-slate focus:ring-1 focus:ring-primary focus:outline-none transition-shadow" id="lastName" placeholder="Doe" type="text"/>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs" for="workEmail">WORK EMAIL</label>
+<input class="w-full bg-surface-elevated border-none shadow-level-1 rounded-sm py-sm px-md font-body-md text-body-md text-on-background placeholder-slate focus:ring-1 focus:ring-primary focus:outline-none transition-shadow" id="workEmail" placeholder="jane@company.com" type="email"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs" for="password">PASSWORD</label>
+<input class="w-full bg-surface-elevated border-none shadow-level-1 rounded-sm py-sm px-md font-body-md text-body-md text-on-background placeholder-slate focus:ring-1 focus:ring-primary focus:outline-none transition-shadow" id="password" placeholder="••••••••" type="password"/>
+</div>
+<button class="w-full mt-xl bg-gradient-to-r from-primary to-indigo text-on-primary font-body-md text-body-md font-bold py-[12px] rounded-DEFAULT glass-highlight hover:scale-[0.98] transition-transform duration-200" type="button">
+                            Create Account
+                        </button>
+</form>
+<div class="mt-lg text-center font-body-md text-body-md text-slate">
+                        Already have an account? <a class="text-primary font-bold hover:underline" href="#">Log in</a>
+</div>
+</div>
+<!-- Footer Links (Suppressed global footer, contextual footer per prompt) -->
+<div class="absolute bottom-md left-0 right-0 w-full flex justify-center space-x-lg font-body-md text-body-md text-slate">
+<a class="hover:text-primary transition-colors" href="#">FAQ</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms</a>
+</div>
+</div>
+</div>
+</main>
+</body></html>

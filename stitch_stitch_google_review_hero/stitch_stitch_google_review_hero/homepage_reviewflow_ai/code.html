@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReviewFlow AI</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900,400&amp;f[]=satoshi@700,500,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#2b0052",
+                        "surface-interactive": "#EAECEF",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f3fbfe",
+                        "surface-container-highest": "#dce4e7",
+                        "on-secondary-container": "#3b0081",
+                        "on-primary-fixed-variant": "#6600b7",
+                        "inverse-surface": "#2a3234",
+                        "on-secondary-fixed": "#260058",
+                        "secondary": "#7241c3",
+                        "tertiary": "#32424d",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f3fbfe",
+                        "on-tertiary-fixed-variant": "#394954",
+                        "surface-dim": "#d3dbde",
+                        "surface-elevated": "#FFFFFF",
+                        "on-background": "#151d1f",
+                        "inverse-on-surface": "#eaf2f5",
+                        "secondary-container": "#a979fe",
+                        "on-surface": "#151d1f",
+                        "slate": "#7C8C99",
+                        "primary-fixed-dim": "#dbb8ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#e0c1ff",
+                        "tertiary-container": "#495965",
+                        "on-error-container": "#93000a",
+                        "success": "#15803D",
+                        "violet": "#7B11D7",
+                        "primary-fixed": "#efdbff",
+                        "indigo": "#49049A",
+                        "primary": "#5d00a7",
+                        "on-tertiary-fixed": "#0d1d28",
+                        "background": "#f3fbfe",
+                        "on-surface-variant": "#4c4355",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#b8c9d7",
+                        "inverse-primary": "#dbb8ff",
+                        "surface-container": "#e7eff2",
+                        "on-tertiary-container": "#bfcfdd",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#dce4e7",
+                        "on-secondary-fixed-variant": "#5923aa",
+                        "warning": "#B45309",
+                        "surface-nested": "#F4F6F8",
+                        "outline": "#7e7386",
+                        "outline-variant": "#cfc2d7",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e1e9ec",
+                        "primary-container": "#7b11d7",
+                        "ink": "#171425",
+                        "alabaster": "#E0E8EB",
+                        "tertiary-fixed": "#d4e5f3",
+                        "secondary-fixed-dim": "#d4bbff",
+                        "error": "#B91C1C",
+                        "secondary-fixed": "#ebdcff",
+                        "surface-tint": "#8322df",
+                        "surface-container-low": "#edf5f8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "xs": "6px"
+                    },
+                    "spacing": {
+                        "max-width": "1100px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "xl": "32px",
+                        "xxl": "48px",
+                        "section": "72px",
+                        "hero": "112px",
+                        "md": "16px",
+                        "gutter": "52px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Cabinet Grotesk", "sans-serif"],
+                        "label-sm": ["Satoshi", "sans-serif"],
+                        "body-md": ["Satoshi", "sans-serif"],
+                        "display-1": ["Cabinet Grotesk", "sans-serif"],
+                        "headline-sm": ["Cabinet Grotesk", "sans-serif"],
+                        "display-2": ["Cabinet Grotesk", "sans-serif"],
+                        "headline-md": ["Cabinet Grotesk", "sans-serif"],
+                        "body-lg": ["Satoshi", "sans-serif"],
+                        "mono": ["jetbrainsMono", "monospace"],
+                        "headline-lg-mobile": ["Cabinet Grotesk", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["38px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                        "label-sm": ["10px", {"lineHeight": "1", "letterSpacing": "0.14em", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "letterSpacing": "normal", "fontWeight": "400"}],
+                        "display-1": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "900"}],
+                        "headline-sm": ["19px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                        "display-2": ["54px", {"lineHeight": "1.1", "letterSpacing": "-0.025em", "fontWeight": "900"}],
+                        "headline-md": ["26px", {"lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "900"}],
+                        "body-lg": ["17px", {"lineHeight": "1.6", "letterSpacing": "normal", "fontWeight": "400"}],
+                        "mono": ["12px", {"lineHeight": "1.5", "letterSpacing": "0.04em", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "900"}]
+                    },
+                    "boxShadow": {
+                        'level-1': '0 2px 12px rgba(23,20,37,0.07)',
+                        'level-2': '0 8px 28px rgba(23,20,37,0.11)',
+                        'brand': 'inset 0 1px 0 rgba(255,255,255,0.20), 0 6px 28px rgba(123,17,215,0.22)'
+                    }
+                }
+            }
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .btn-primary {
+                @apply bg-gradient-to-r from-primary to-violet text-on-primary shadow-brand rounded font-label-sm text-label-sm px-lg py-[12px] uppercase transition-all duration-200 hover:scale-[0.98];
+            }
+            .btn-secondary {
+                @apply bg-surface-container-lowest text-on-surface border border-[rgba(23,20,37,0.14)] hover:border-[rgba(23,20,37,0.24)] hover:-translate-y-[1px] shadow-level-1 rounded font-label-sm text-label-sm px-lg py-[12px] uppercase transition-all duration-200;
+            }
+            .card-standard {
+                @apply bg-surface-container-lowest shadow-level-1 rounded-lg transition-all duration-200 hover:shadow-level-2 hover:-translate-y-[2px];
+            }
+        }
+    </style>
+</head>
+<body class="bg-alabaster text-on-background font-body-md text-body-md antialiased overflow-x-hidden">
+<!-- TopNavBar JSON Injection -->
+<nav class="w-full sticky top-0 z-50 shadow-sm bg-surface-container-lowest transition-all">
+<div class="flex justify-between items-center max-w-[1100px] mx-auto px-md md:px-lg h-20">
+<!-- Brand -->
+<div class="font-headline-sm text-headline-sm font-black text-ink flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">stars</span>
+                ReviewFlow AI
+            </div>
+<!-- Links (Desktop) -->
+<div class="hidden md:flex space-x-lg items-center font-body-md text-body-md">
+<a class="text-on-surface-variant hover:text-primary hover:border-b-2 hover:border-primary transition-all duration-200 py-1" href="#">Features</a>
+<a class="text-on-surface-variant hover:text-primary hover:border-b-2 hover:border-primary transition-all duration-200 py-1" href="#">How It Works</a>
+<a class="text-on-surface-variant hover:text-primary hover:border-b-2 hover:border-primary transition-all duration-200 py-1" href="#">Pricing</a>
+<a class="text-on-surface-variant hover:text-primary hover:border-b-2 hover:border-primary transition-all duration-200 py-1" href="#">Contact</a>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-sm">
+<button class="hidden md:block btn-secondary">Log In</button>
+<button class="btn-primary">Get Started</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="w-full px-[20px] md:px-gutter pb-section">
+<!-- 1. Hero Section -->
+<section class="max-w-[1100px] mx-auto pt-hero pb-section flex flex-col md:flex-row items-center gap-xxl">
+<div class="flex-1 space-y-xl text-center md:text-left z-10">
+<span class="inline-block px-sm py-[4px] bg-primary/10 text-primary rounded-full font-label-sm text-label-sm uppercase tracking-widest">AI-Powered Reputation Management</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-display-1 md:text-display-1 text-ink">
+                    Turn Every Customer Into a Happy <span class="bg-clip-text text-transparent bg-gradient-to-r from-violet to-primary">Advocate</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mx-auto md:mx-0">
+                    Automate your review collection, analyze sentiment instantly, and respond to customer feedback across all platforms from one unified, intelligent dashboard.
+                </p>
+<div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-md">
+<button class="btn-primary w-full sm:w-auto">Start Free Trial</button>
+<button class="btn-secondary w-full sm:w-auto">See How It Works</button>
+</div>
+</div>
+<div class="flex-1 relative w-full aspect-square md:aspect-auto md:h-[600px]">
+<div class="absolute inset-0 bg-gradient-to-tr from-surface-nested to-surface-bright rounded-xl shadow-level-2 border border-[rgba(23,20,37,0.08)] overflow-hidden">
+<img alt="Dashboard Interface" class="w-full h-full object-cover opacity-90 mix-blend-multiply" data-alt="A clean, minimalist software dashboard interface displayed on a high-resolution screen, angled slightly. The interface features soft white backgrounds with subtle royal violet accents on data visualizations and charts. The setting implies a modern, high-end corporate tech environment with soft, diffused natural lighting. The overall aesthetic is sleek, intelligent, and highly professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6yxZxN06UDDfwZRYeQeoCN2vDeL_RLQb1A8N5JsSqtQmfnJC5xiFenK5UGCQjYLHeM-UJq06YDVGWNWIaIlCGFe3d5aMOwYe8U_WdcD-SztqsIcdcmuCIoKjTcRPGthIu32a5HZXHpsKvWt-qc1pt9voyXATWDC7kon9apteo7DP9kxbZZBp5LSqGS-9xdG9BSCFPN9oUpf5V8Y252RKWgWyl9nQWdLhPtzF9cXEci8-O_SQHnBo19b0FfGg4XSMgrkg7P4iJ_6M"/>
+</div>
+</div>
+</section>
+<!-- 2. Platform Strip -->
+<section class="max-w-[1100px] mx-auto py-xl border-y border-[rgba(23,20,37,0.04)] mb-section flex flex-wrap justify-center gap-xxl items-center opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+<div class="flex items-center gap-sm font-headline-sm text-headline-sm text-tertiary">
+<span class="material-symbols-outlined text-3xl">search</span> Google 
+                <span class="bg-success/10 text-success px-2 py-1 rounded-xs font-label-sm text-label-sm">LIVE</span>
+</div>
+<div class="flex items-center gap-sm font-headline-sm text-headline-sm text-tertiary">
+<span class="material-symbols-outlined text-3xl">chat</span> WhatsApp
+                <span class="bg-success/10 text-success px-2 py-1 rounded-xs font-label-sm text-label-sm">LIVE</span>
+</div>
+<div class="flex items-center gap-sm font-headline-sm text-headline-sm text-tertiary opacity-50">
+<span class="material-symbols-outlined text-3xl">thumb_up</span> Facebook
+                <span class="bg-surface-dim text-on-surface-variant px-2 py-1 rounded-xs font-label-sm text-label-sm">SOON</span>
+</div>
+</section>
+<!-- 3. How It Works -->
+<section class="max-w-[1100px] mx-auto py-section">
+<div class="text-center mb-xxl space-y-md">
+<h2 class="font-headline-md text-headline-md text-ink">As Easy as 1-2-3</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Automate your reputation in minutes, not days.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="card-standard p-lg text-center space-y-md border border-[rgba(23,20,37,0.04)]">
+<div class="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center text-primary font-headline-sm">1</div>
+<h3 class="font-headline-sm text-headline-sm text-ink">Connect Platforms</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Link your business accounts securely with one click.</p>
+</div>
+<div class="card-standard p-lg text-center space-y-md border border-[rgba(23,20,37,0.04)]">
+<div class="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center text-primary font-headline-sm">2</div>
+<h3 class="font-headline-sm text-headline-sm text-ink">Automate Requests</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Our AI triggers perfectly timed review requests to recent customers.</p>
+</div>
+<div class="card-standard p-lg text-center space-y-md border border-[rgba(23,20,37,0.04)]">
+<div class="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center text-primary font-headline-sm">3</div>
+<h3 class="font-headline-sm text-headline-sm text-ink">Watch Ratings Grow</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Respond from the dashboard and turn feedback into fuel.</p>
+</div>
+</div>
+</section>
+<!-- 4. Comparison Table (Bento Style) -->
+<section class="max-w-[1100px] mx-auto py-section">
+<div class="bg-surface-container-lowest rounded-xl shadow-level-1 overflow-hidden p-md md:p-xl border border-[rgba(23,20,37,0.08)]">
+<div class="grid grid-cols-3 gap-sm items-center border-b border-[rgba(23,20,37,0.08)] pb-md mb-md">
+<div class="font-headline-sm text-headline-sm text-ink">Feature</div>
+<div class="text-center font-headline-sm text-headline-sm text-slate">Competitors</div>
+<div class="text-center font-headline-sm text-headline-sm text-primary flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">stars</span> ReviewFlow
+                    </div>
+</div>
+<div class="space-y-sm">
+<div class="grid grid-cols-3 gap-sm items-center p-sm rounded-lg hover:bg-surface-nested transition-colors">
+<div class="font-body-md text-body-md text-ink">AI Sentiment Analysis</div>
+<div class="text-center"><span class="material-symbols-outlined text-error">close</span></div>
+<div class="text-center"><span class="material-symbols-outlined text-violet">check_circle</span></div>
+</div>
+<div class="grid grid-cols-3 gap-sm items-center p-sm rounded-lg hover:bg-surface-nested transition-colors bg-surface-container-low">
+<div class="font-body-md text-body-md text-ink">Unified Dashboard</div>
+<div class="text-center"><span class="material-symbols-outlined text-error">close</span></div>
+<div class="text-center"><span class="material-symbols-outlined text-violet">check_circle</span></div>
+</div>
+<div class="grid grid-cols-3 gap-sm items-center p-sm rounded-lg hover:bg-surface-nested transition-colors">
+<div class="font-body-md text-body-md text-ink">Automated WhatsApp Flows</div>
+<div class="text-center"><span class="material-symbols-outlined text-error">close</span></div>
+<div class="text-center"><span class="material-symbols-outlined text-violet">check_circle</span></div>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. Pricing Teaser -->
+<section class="max-w-[1100px] mx-auto py-section">
+<div class="text-center mb-xxl">
+<h2 class="font-headline-md text-headline-md text-ink">Simple Pricing</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg items-end">
+<div class="card-standard p-lg border border-[rgba(23,20,37,0.04)] h-full flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-ink mb-sm">Free</h3>
+<div class="font-headline-lg text-headline-lg text-ink mb-md">KES 0<span class="text-body-md font-body-md text-slate">/mo</span></div>
+<button class="btn-secondary w-full mt-auto">Start Free</button>
+</div>
+<div class="card-standard p-lg border-2 border-primary shadow-level-2 relative h-[105%] flex flex-col z-10">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-on-primary px-sm py-xs rounded-full font-label-sm text-label-sm tracking-widest">POPULAR</div>
+<h3 class="font-headline-sm text-headline-sm text-ink mb-sm">Pro</h3>
+<div class="font-headline-lg text-headline-lg text-violet mb-md">KES 4,999<span class="text-body-md font-body-md text-slate">/mo</span></div>
+<ul class="mb-lg space-y-sm text-on-surface-variant font-body-md flex-1">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-violet">check</span> AI Auto-replies</li>
+</ul>
+<button class="btn-primary w-full mt-auto">Get Pro</button>
+</div>
+<div class="card-standard p-lg border border-[rgba(23,20,37,0.04)] h-full flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-ink mb-sm">Business</h3>
+<div class="font-headline-lg text-headline-lg text-ink mb-md">KES 14,999<span class="text-body-md font-body-md text-slate">/mo</span></div>
+<button class="btn-secondary w-full mt-auto">Contact Sales</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer JSON Injection -->
+<footer class="w-full bg-ink pt-section pb-lg">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-lg max-w-[1100px] mx-auto px-md md:px-lg mb-xxl">
+<!-- Brand Column -->
+<div class="col-span-2 md:col-span-1 space-y-md">
+<div class="font-headline-sm text-headline-sm text-surface-bright font-black flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">stars</span>
+                    ReviewFlow AI
+                </div>
+</div>
+<!-- Links Column -->
+<div class="space-y-sm flex flex-col">
+<a class="font-body-md text-body-md text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">Platform</a>
+<a class="font-body-md text-body-md text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">Support</a>
+<a class="font-body-md text-body-md text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">Enterprise</a>
+</div>
+</div>
+<div class="max-w-[1100px] mx-auto px-md md:px-lg border-t border-[rgba(255,255,255,0.1)] pt-lg text-center md:text-left">
+<p class="font-body-md text-body-md text-surface-variant opacity-70">© 2024 ReviewFlow AI. Global-Ready</p>
+</div>
+</footer>
+</body></html>

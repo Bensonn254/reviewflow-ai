@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stitch - GBP Review Management Hero</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://api.fontshare.com" rel="preconnect"/>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&amp;f[]=satoshi@400,500,700&amp;display=swap" rel="stylesheet"/>
+<style data-purpose="design-system-tokens">
+    :root {
+      /* Tokens from Design System */
+      --alabaster: #E0E8EB;
+      --violet: #7B11D7;
+      --indigo: #49049A;
+      --slate: #7C8C99;
+      --ink: #171425;
+      
+      --s0: #E0E8EB;
+      --s1: #FFFFFF;
+      --s2: #F4F6F8;
+      --s3: #EAECEF;
+
+      --b-subtle: rgba(23,20,37,0.08);
+      --b-default: rgba(23,20,37,0.14);
+      --b-strong: rgba(23,20,37,0.24);
+      --b-violet: rgba(123,17,215,0.30);
+
+      --grad-cta: linear-gradient(135deg, #49049A 0%, #7B11D7 100%);
+      --grad-text: linear-gradient(135deg, #49049A 0%, #7B11D7 100%);
+
+      --sh-card: 0 2px 12px rgba(23,20,37,0.07);
+      --sh-raised: 0 8px 28px rgba(23,20,37,0.11);
+      --sh-violet: 0 6px 28px rgba(123,17,215,0.22);
+
+      --f-display: 'Cabinet Grotesk', sans-serif;
+      --f-body: 'Satoshi', sans-serif;
+
+      --r-xs: 6px;
+      --r-sm: 10px;
+      --r-md: 14px;
+      --r-lg: 20px;
+      --r-xl: 28px;
+      --r-full: 999px;
+
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body {
+      font-family: var(--f-body);
+      background: var(--s1);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+<style data-purpose="component-styles">
+    /* Typography */
+    .td1 {
+      font-family: var(--f-display);
+      font-size: 80px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      color: var(--ink);
+    }
+    
+    .tlead {
+      font-family: var(--f-body);
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--slate);
+    }
+    
+    .tcap {
+      font-family: var(--f-body);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--slate);
+    }
+
+    .text-grad {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--f-body);
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s var(--ease), box-shadow 0.2s, background 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .btn:active { transform: scale(0.97) !important; }
+    .btn-md { font-size: 14px; padding: 12px 24px; border-radius: var(--r-sm); }
+    .btn-lg { font-size: 15px; padding: 16px 34px; border-radius: var(--r-sm); }
+    .btn-pill { border-radius: var(--r-full) !important; }
+
+    .btn-primary {
+      background: var(--grad-cta);
+      color: #fff;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.20), var(--sh-violet);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.24), 0 10px 36px rgba(123,17,215,0.30);
+    }
+
+    .btn-secondary {
+      background: var(--s1);
+      color: var(--ink);
+      border: 1.5px solid var(--b-default);
+      box-shadow: var(--sh-card);
+    }
+    .btn-secondary:hover {
+      border-color: var(--b-strong);
+      box-shadow: var(--sh-raised);
+      transform: translateY(-1px);
+    }
+
+    /* Hero Layout */
+    .hero-wrap {
+      background: var(--alabaster);
+      border: 1px solid var(--b-subtle);
+      border-radius: var(--r-xl);
+      padding: 112px 64px;
+      position: relative;
+      overflow: hidden;
+      max-width: 1200px;
+      margin: 40px auto;
+    }
+    .hero-wrap::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(123,17,215,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 56px;
+      align-items: center;
+    }
+
+    /* Panel */
+    .hero-panel {
+      background: var(--s1);
+      border: 1px solid var(--b-default);
+      border-radius: var(--r-lg);
+      box-shadow: var(--sh-raised);
+      overflow: hidden;
+    }
+    .panel-bar {
+      background: var(--s2);
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--b-subtle);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .panel-dots { display: flex; gap: 5px; }
+    .panel-dot { width: 9px; height: 9px; border-radius: 50%; }
+    .panel-ttl {
+      font-family: var(--f-body);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--slate);
+      margin-left: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    /* Animation Classes */
+    .animate-entrance {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeUp 600ms var(--ease) forwards;
+    }
+    
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- BEGIN: HeroSection -->
+<main class="w-full px-4">
+<div class="hero-wrap">
+<div class="hero-inner">
+<!-- Left Content -->
+<div class="flex flex-col gap-8">
+<!-- Headline -->
+<h1 class="td1 animate-entrance" style="animation-delay: 0ms;">
+            AI responses for your GBP —<br/>
+<span class="text-grad">faster replies</span>,<br/>
+            better ratings
+          </h1>
+<!-- Lead -->
+<p class="tlead animate-entrance max-w-[500px]" style="animation-delay: 80ms;">
+            Connect your GBP to auto-generate human-quality replies and convert every review into a lead.
+          </p>
+<!-- Micro-benefits -->
+<div class="flex items-center gap-6 animate-entrance" style="animation-delay: 160ms;">
+<div class="flex items-center gap-2">
+<svg class="w-4 h-4 text-[#7B11D7]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="tcap">Auto-reply templates</span>
+</div>
+<div class="flex items-center gap-2">
+<svg class="w-4 h-4 text-[#7B11D7]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="tcap">KES pricing &amp; M-Pesa</span>
+</div>
+<div class="flex items-center gap-2">
+<svg class="w-4 h-4 text-[#7B11D7]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="tcap">Multi-location support</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-3 animate-entrance" style="animation-delay: 240ms;">
+<div class="flex items-center gap-4">
+<button class="btn btn-primary btn-lg btn-pill">Connect GBP</button>
+<button class="btn btn-secondary btn-md">Watch Demo</button>
+</div>
+<p class="text-[10px] text-[var(--slate)] font-bold tracking-wider uppercase ml-4">🔒 Secure Google OAuth encryption.</p>
+</div>
+<!-- Trust -->
+<div class="mt-4 p-4 rounded-[14px] bg-[var(--s1)] border border-[var(--b-subtle)] shadow-[var(--sh-card)] max-w-sm animate-entrance" style="animation-delay: 320ms;">
+<div class="flex items-center gap-2 mb-2">
+<div class="text-[#7B11D7] text-xs tracking-widest">★★★★★</div>
+<span class="text-xs font-bold text-[var(--ink)]">ApexRetail</span>
+</div>
+<p class="text-sm text-[var(--slate)] italic">"Stitch saved us 10+ hours a week."</p>
+</div>
+</div>
+<!-- Right Visual -->
+<div class="hero-panel animate-entrance" style="animation-delay: 400ms;">
+<div class="panel-bar">
+<div class="panel-dots">
+<div class="panel-dot" style="background:#FF5F57;"></div>
+<div class="panel-dot" style="background:#FFBD2E;"></div>
+<div class="panel-dot" style="background:#28C840;"></div>
+</div>
+<span class="panel-ttl">AI Response Draft</span>
+</div>
+<div class="p-6 flex flex-col gap-4">
+<!-- Incoming Review -->
+<div class="flex gap-3 pb-4 border-b border-[var(--b-subtle)]">
+<div class="w-8 h-8 rounded-full bg-[rgba(123,17,215,0.08)] flex items-center justify-center font-[var(--f-display)] font-black text-xs text-[var(--violet)] shrink-0">G</div>
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs font-bold text-[var(--ink)]">Sarah Jenkins</span>
+<div class="text-[10px] text-[var(--violet)] tracking-widest">★★★★★</div>
+</div>
+<p class="text-xs text-[var(--slate)] leading-relaxed">"Amazing coffee and the staff were incredibly friendly. Will definitely be coming back on my next trip!"</p>
+</div>
+</div>
+<!-- AI Draft Process -->
+<div class="bg-[var(--s2)] rounded-[10px] p-4 border border-[var(--b-subtle)]">
+<div class="flex items-center gap-2 mb-3">
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--violet)] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-[var(--violet)]"></span>
+</span>
+<span class="text-[10px] font-bold text-[var(--violet)] uppercase tracking-wider">Generating Reply...</span>
+</div>
+<p class="text-sm font-medium text-[var(--ink)] leading-relaxed border-l-2 border-[var(--violet)] pl-3">
+                "Hi Sarah, thank you so much for the 5-star review! We're thrilled to hear you enjoyed the coffee and our team's service. Looking forward to welcoming you back!"
+              </p>
+</div>
+<!-- Publish Button -->
+<div class="mt-2 flex justify-end">
+<button class="btn btn-primary btn-sm px-4 py-2 text-xs rounded-md">Publish to Google</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- END: HeroSection -->
+</body></html>

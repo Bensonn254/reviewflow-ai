@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FAQ - ReviewFlow AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@900,800&amp;f[]=satoshi@700,500,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#2b0052",
+                        "surface-interactive": "#EAECEF",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f3fbfe",
+                        "surface-container-highest": "#dce4e7",
+                        "on-secondary-container": "#3b0081",
+                        "on-primary-fixed-variant": "#6600b7",
+                        "inverse-surface": "#2a3234",
+                        "on-secondary-fixed": "#260058",
+                        "secondary": "#7241c3",
+                        "tertiary": "#32424d",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f3fbfe",
+                        "on-tertiary-fixed-variant": "#394954",
+                        "surface-dim": "#d3dbde",
+                        "surface-elevated": "#FFFFFF",
+                        "on-background": "#151d1f",
+                        "inverse-on-surface": "#eaf2f5",
+                        "secondary-container": "#a979fe",
+                        "on-surface": "#151d1f",
+                        "slate": "#7C8C99",
+                        "primary-fixed-dim": "#dbb8ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#e0c1ff",
+                        "tertiary-container": "#495965",
+                        "on-error-container": "#93000a",
+                        "success": "#15803D",
+                        "violet": "#7B11D7",
+                        "primary-fixed": "#efdbff",
+                        "indigo": "#49049A",
+                        "primary": "#5d00a7",
+                        "on-tertiary-fixed": "#0d1d28",
+                        "background": "#f3fbfe",
+                        "on-surface-variant": "#4c4355",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#b8c9d7",
+                        "inverse-primary": "#dbb8ff",
+                        "surface-container": "#e7eff2",
+                        "on-tertiary-container": "#bfcfdd",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#dce4e7",
+                        "on-secondary-fixed-variant": "#5923aa",
+                        "warning": "#B45309",
+                        "surface-nested": "#F4F6F8",
+                        "outline": "#7e7386",
+                        "outline-variant": "#cfc2d7",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e1e9ec",
+                        "primary-container": "#7b11d7",
+                        "ink": "#171425",
+                        "alabaster": "#E0E8EB",
+                        "tertiary-fixed": "#d4e5f3",
+                        "secondary-fixed-dim": "#d4bbff",
+                        "error": "#B91C1C",
+                        "secondary-fixed": "#ebdcff",
+                        "surface-tint": "#8322df",
+                        "surface-container-low": "#edf5f8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "max-width": "1100px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "xl": "32px",
+                        "xxl": "48px",
+                        "section": "72px",
+                        "hero": "112px",
+                        "md": "16px",
+                        "gutter": "52px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Cabinet Grotesk"],
+                        "label-sm": ["Satoshi"],
+                        "body-md": ["Satoshi"],
+                        "display-1": ["Cabinet Grotesk"],
+                        "headline-sm": ["Cabinet Grotesk"],
+                        "display-2": ["Cabinet Grotesk"],
+                        "headline-md": ["Cabinet Grotesk"],
+                        "body-lg": ["Satoshi"],
+                        "mono": ["jetbrainsMono"],
+                        "headline-lg-mobile": ["Cabinet Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["38px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "900" }],
+                        "label-sm": ["10px", { "lineHeight": "1", "letterSpacing": "0.14em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "letterSpacing": "normal", "fontWeight": "400" }],
+                        "display-1": ["80px", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "900" }],
+                        "headline-sm": ["19px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                        "display-2": ["54px", { "lineHeight": "1.1", "letterSpacing": "-0.025em", "fontWeight": "900" }],
+                        "headline-md": ["26px", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "900" }],
+                        "body-lg": ["17px", { "lineHeight": "1.6", "letterSpacing": "normal", "fontWeight": "400" }],
+                        "mono": ["12px", { "lineHeight": "1.5", "letterSpacing": "0.04em", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "900" }]
+                    },
+                    boxShadow: {
+                        'level-1': '0 2px 12px rgba(23,20,37,0.07)',
+                        'level-2': '0 8px 28px rgba(23,20,37,0.11)',
+                        'level-3': '0 6px 28px rgba(123,17,215,0.22)',
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-highlight {
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.20);
+        }
+        .accordion-content {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.active {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 16px;
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+        .accordion-icon.active {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-alabaster text-on-background font-body-md flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 sticky z-50 shadow-sm dark:shadow-none bg-surface-container-lowest dark:bg-surface-dim">
+<div class="flex justify-between items-center max-w-[1100px] mx-auto px-md md:px-lg h-20">
+<div class="font-headline-sm text-headline-sm font-black text-ink dark:text-surface-bright">ReviewFlow AI</div>
+<nav class="hidden md:flex gap-lg font-body-md text-body-md">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:border-b-2 hover:border-primary transition-all duration-200" href="#">Features</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:border-b-2 hover:border-primary transition-all duration-200" href="#">How It Works</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:border-b-2 hover:border-primary transition-all duration-200" href="#">Pricing</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:border-b-2 hover:border-primary transition-all duration-200" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-sm">
+<button class="hidden md:block font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors px-sm py-xs">Log In</button>
+<button class="bg-gradient-to-r from-violet to-indigo text-on-primary font-body-md px-lg py-sm rounded-lg glass-highlight shadow-level-3 hover:scale-95 transition-all duration-200">Get Started</button>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="pt-hero pb-xl px-gutter max-w-max-width mx-auto text-center">
+<h1 class="font-display-2 text-display-2 text-ink mb-lg">Frequently Asked Questions</h1>
+<p class="font-body-lg text-body-lg text-slate max-w-2xl mx-auto mb-xl">Find answers to common questions about ReviewFlow AI, integrations, and pricing. Can't find what you're looking for? Reach out to our team.</p>
+<div class="max-w-xl mx-auto relative group">
+<span class="material-symbols-outlined absolute left-lg top-1/2 -translate-y-1/2 text-slate group-focus-within:text-violet transition-colors">search</span>
+<input class="w-full bg-surface-container-lowest border-0 rounded-lg shadow-level-1 pl-[52px] pr-lg py-[16px] font-body-md text-body-md text-ink placeholder:text-slate focus:ring-1 focus:ring-violet focus:shadow-level-2 transition-all duration-200" placeholder="Search questions..." type="text"/>
+</div>
+</section>
+<!-- FAQ Content -->
+<section class="py-xl px-gutter max-w-max-width mx-auto grid grid-cols-1 md:grid-cols-[240px_1fr] gap-xxl">
+<!-- Sidebar / Tabs -->
+<aside class="space-y-sm">
+<button class="w-full text-left px-lg py-sm rounded-lg bg-surface-container-lowest shadow-level-1 font-body-md text-body-md text-violet border border-violet/10 flex items-center justify-between group">
+<span class="font-bold">All Questions</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+<button class="w-full text-left px-lg py-sm rounded-lg bg-transparent hover:bg-surface-nested font-body-md text-body-md text-on-surface-variant transition-colors duration-200 flex items-center justify-between">
+<span>General</span>
+</button>
+<button class="w-full text-left px-lg py-sm rounded-lg bg-transparent hover:bg-surface-nested font-body-md text-body-md text-on-surface-variant transition-colors duration-200 flex items-center justify-between">
+<span>AI Capabilities</span>
+</button>
+<button class="w-full text-left px-lg py-sm rounded-lg bg-transparent hover:bg-surface-nested font-body-md text-body-md text-on-surface-variant transition-colors duration-200 flex items-center justify-between">
+<span>Google Integration</span>
+</button>
+<button class="w-full text-left px-lg py-sm rounded-lg bg-transparent hover:bg-surface-nested font-body-md text-body-md text-on-surface-variant transition-colors duration-200 flex items-center justify-between">
+<span>Pricing &amp; Billing</span>
+</button>
+</aside>
+<!-- Accordion List -->
+<div class="space-y-md">
+<!-- FAQ Item 1 -->
+<div class="bg-surface-container-lowest rounded-lg shadow-level-1 p-lg border border-transparent hover:shadow-level-2 hover:-translate-y-[2px] transition-all duration-200 cursor-pointer faq-item">
+<div class="flex justify-between items-center gap-lg">
+<h3 class="font-headline-sm text-headline-sm text-ink">How does the AI sentiment analysis work?</h3>
+<span class="material-symbols-outlined text-slate accordion-icon">expand_more</span>
+</div>
+<div class="accordion-content font-body-md text-body-md text-slate">
+                        Our proprietary AI engine uses advanced natural language processing (NLP) to read and interpret the emotional tone behind every review. It automatically categorizes feedback into positive, neutral, or negative sentiments, allowing you to quickly identify trends and areas requiring immediate attention without manual triage.
+                    </div>
+</div>
+<!-- FAQ Item 2 -->
+<div class="bg-surface-container-lowest rounded-lg shadow-level-1 p-lg border border-transparent hover:shadow-level-2 hover:-translate-y-[2px] transition-all duration-200 cursor-pointer faq-item">
+<div class="flex justify-between items-center gap-lg">
+<h3 class="font-headline-sm text-headline-sm text-ink">Is it safe to connect my Google Business Profile?</h3>
+<span class="material-symbols-outlined text-slate accordion-icon">expand_more</span>
+</div>
+<div class="accordion-content font-body-md text-body-md text-slate">
+                        Absolutely. We use Google's official API with OAuth 2.0 authentication. We never store your Google password, and we only request the specific permissions needed to read and reply to reviews on your behalf. You can revoke access at any time from your Google account settings.
+                    </div>
+</div>
+<!-- FAQ Item 3 -->
+<div class="bg-surface-container-lowest rounded-lg shadow-level-1 p-lg border border-transparent hover:shadow-level-2 hover:-translate-y-[2px] transition-all duration-200 cursor-pointer faq-item">
+<div class="flex justify-between items-center gap-lg">
+<h3 class="font-headline-sm text-headline-sm text-ink">Can I customize the automated AI responses?</h3>
+<span class="material-symbols-outlined text-slate accordion-icon">expand_more</span>
+</div>
+<div class="accordion-content font-body-md text-body-md text-slate">
+                        Yes, you have full control. You can set strict guidelines, define your brand's voice (e.g., professional, casual, empathetic), and even require manual approval for responses generated for 1-star or 2-star reviews before they are published to Google.
+                    </div>
+</div>
+<!-- FAQ Item 4 -->
+<div class="bg-surface-container-lowest rounded-lg shadow-level-1 p-lg border border-transparent hover:shadow-level-2 hover:-translate-y-[2px] transition-all duration-200 cursor-pointer faq-item">
+<div class="flex justify-between items-center gap-lg">
+<h3 class="font-headline-sm text-headline-sm text-ink">What happens if I exceed my monthly review limit?</h3>
+<span class="material-symbols-outlined text-slate accordion-icon">expand_more</span>
+</div>
+<div class="accordion-content font-body-md text-body-md text-slate">
+                        If you approach your limit, we'll notify you in advance. If you exceed it, new reviews will still be collected and stored, but AI auto-responses and deep sentiment analysis will be paused until the next billing cycle or until you upgrade your plan. We never block access to your raw data.
+                    </div>
+</div>
+</div>
+</section>
+<!-- CTA & Resources Section -->
+<section class="py-section px-gutter max-w-max-width mx-auto mt-xl">
+<div class="bg-surface-container-lowest rounded-xl shadow-level-2 p-xxl relative overflow-hidden border border-[rgba(23,20,37,0.08)]">
+<!-- Decorative background elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-violet/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
+<div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-xl">
+<div class="text-center md:text-left">
+<h2 class="font-headline-md text-headline-md text-ink mb-sm">Still have questions?</h2>
+<p class="font-body-lg text-body-lg text-slate max-w-md">Our support team is ready to help you get the most out of ReviewFlow AI.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-md w-full md:w-auto">
+<button class="bg-surface-container-lowest text-ink font-body-md px-lg py-sm rounded-lg border border-[rgba(23,20,37,0.14)] hover:border-[rgba(23,20,37,0.24)] hover:-translate-y-[1px] transition-all duration-200 flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+                            Contact Support
+                        </button>
+<button class="bg-gradient-to-r from-violet to-indigo text-on-primary font-body-md px-lg py-sm rounded-lg glass-highlight shadow-level-3 hover:scale-95 transition-all duration-200 flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                            Book a Demo
+                        </button>
+</div>
+</div>
+<div class="mt-xl pt-xl border-t border-[rgba(23,20,37,0.08)] grid grid-cols-1 md:grid-cols-3 gap-lg">
+<a class="flex items-start gap-md p-md rounded-lg hover:bg-surface-nested transition-colors duration-200 group" href="#">
+<div class="p-sm bg-surface-bright rounded-md text-violet group-hover:bg-violet group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">menu_book</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-ink font-bold mb-xs">Documentation</h4>
+<p class="font-body-md text-body-md text-slate text-sm">Detailed guides and API references.</p>
+</div>
+</a>
+<a class="flex items-start gap-md p-md rounded-lg hover:bg-surface-nested transition-colors duration-200 group" href="#">
+<div class="p-sm bg-surface-bright rounded-md text-violet group-hover:bg-violet group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">play_circle</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-ink font-bold mb-xs">Video Tutorials</h4>
+<p class="font-body-md text-body-md text-slate text-sm">Step-by-step visual learning.</p>
+</div>
+</a>
+<a class="flex items-start gap-md p-md rounded-lg hover:bg-surface-nested transition-colors duration-200 group" href="#">
+<div class="p-sm bg-surface-bright rounded-md text-violet group-hover:bg-violet group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<div>
+<h4 class="font-body-lg text-body-lg text-ink font-bold mb-xs">Community Forum</h4>
+<p class="font-body-md text-body-md text-slate text-sm">Connect with other users.</p>
+</div>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-ink dark:bg-ink full-width none flat no shadows mt-auto">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-lg max-w-[1100px] mx-auto px-md md:px-lg py-section">
+<div class="col-span-2 md:col-span-1">
+<div class="font-headline-sm text-headline-sm text-surface-bright font-black mb-md">ReviewFlow AI</div>
+<p class="font-body-md text-body-md text-surface-variant opacity-80">© 2024 ReviewFlow AI. Global-Ready</p>
+</div>
+<div class="flex flex-col gap-sm font-body-md text-body-md">
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">Platform</a>
+</div>
+<div class="flex flex-col gap-sm font-body-md text-body-md">
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">Support</a>
+</div>
+<div class="flex flex-col gap-sm font-body-md text-body-md">
+<a class="text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">Enterprise</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Accordion Logic
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const content = item.querySelector('.accordion-content');
+                const icon = item.querySelector('.accordion-icon');
+                const isActive = content.classList.contains('active');
+                
+                // Close all other accordions (optional, but good for cleanliness)
+                document.querySelectorAll('.accordion-content.active').forEach(activeContent => {
+                    if(activeContent !== content) {
+                        activeContent.classList.remove('active');
+                        activeContent.previousElementSibling.querySelector('.accordion-icon').classList.remove('active');
+                    }
+                });
+
+                // Toggle current
+                if(!isActive) {
+                    content.classList.add('active');
+                    icon.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                    icon.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body></html>

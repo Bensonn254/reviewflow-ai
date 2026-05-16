@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 const DashboardPricing = () => {
   const tiers = [
     {
-      name: "Starter",
-      price: "KES 1,500",
+      name: "Launch",
+      price: "KES 0",
       description: "Perfect for single locations",
       icon: Building2,
       features: [
@@ -33,8 +33,8 @@ const DashboardPricing = () => {
       popular: true
     },
     {
-      name: "Pro",
-      price: "KES 7,500",
+      name: "Scale",
+      price: "KES 7,000",
       description: "For agencies & multi-units",
       icon: Crown,
       features: [
@@ -49,86 +49,94 @@ const DashboardPricing = () => {
   ];
 
   return (
-    <div className="w-full space-y-8 animate-fade-in pb-20">
+    <div className="w-full space-y-8 animate-in fade-in duration-500 pb-20">
       <div className="text-center max-w-2xl mx-auto space-y-4">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 text-[10px] font-black uppercase tracking-widest text-brand border border-brand/20">
           <Sparkles className="h-3.5 w-3.5" />
           Flexible Subscriptions
         </div>
-        <h1 className="text-4xl font-black tracking-tight text-foreground">Select Your <span className="text-brand">Growth Path</span></h1>
+        <h1 className="text-4xl font-black tracking-tight text-[#0F1724]">Select Your <span className="text-brand">Growth Path</span></h1>
         <p className="text-muted-foreground font-medium">Precision tools for modern reputation management. Choose the plan that fits your business scale.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {tiers.map((tier) => (
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
+        {tiers.map((tier) => {
+          const isFeatured = tier.popular;
+          return (
           <div 
             key={tier.name}
             className={cn(
-              "relative p-8 rounded-[2.5rem] border transition-all duration-500 flex flex-col group",
-              tier.current 
-                ? "bg-white border-brand shadow-2xl ring-8 ring-brand/5 scale-105 z-10" 
-                : "bg-white border-divider hover:border-brand/40 hover:shadow-xl"
+              "relative p-10 flex flex-col transition-all duration-500 group border border-slate-200/60 shadow-md",
+              isFeatured 
+                ? "bg-[#0F1724] text-white rounded-[2rem] rounded-tl-[6rem] shadow-2xl scale-[1.02] z-10" 
+                : "bg-white text-slate-900 rounded-[2rem] rounded-tl-[6rem] hover:shadow-xl"
             )}
           >
-            {tier.popular && (
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand text-white text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg">
-                Most Popular
+            {isFeatured && (
+               <div className="absolute top-0 right-0 overflow-hidden w-24 h-24 rounded-tr-[1.5rem] pointer-events-none">
+                 <div className="absolute top-4 -right-10 w-32 bg-accent-yellow text-brand text-[10px] font-black py-1 px-10 rotate-45 text-center shadow-lg">
+                    POPULAR
+                 </div>
               </div>
             )}
 
             <div className="mb-8">
               <div className={cn(
-                "h-14 w-14 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110",
-                tier.current ? "bg-brand text-white shadow-lg shadow-brand/20" : "bg-surface-2 text-muted-foreground"
+                "h-12 w-12 rounded-2xl flex items-center justify-center mb-6",
+                isFeatured ? "bg-white/10 text-accent-yellow" : "bg-brand/10 text-brand"
               )}>
-                <tier.icon className="h-8 w-8" />
+                <tier.icon className="h-6 w-6" />
               </div>
-              <h3 className="text-2xl font-black text-foreground mb-2">{tier.name}</h3>
-              <p className="text-sm font-medium text-muted-foreground">{tier.description}</p>
+              <h3 className="text-2xl font-black mb-1">{tier.name}</h3>
+              <div className="flex items-baseline gap-1">
+                <span className="text-4xl font-black tracking-tighter">{tier.price}</span>
+                <span className={cn("text-xs font-bold uppercase tracking-widest opacity-60")}>/mo</span>
+              </div>
             </div>
 
-            <div className="mb-10">
-              <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-black tracking-tight text-foreground">{tier.price}</span>
-                <span className="text-muted-foreground font-bold text-sm">/mo</span>
-              </div>
-            </div>
+            <p className={cn(
+              "text-sm font-medium leading-relaxed mb-8",
+              isFeatured ? "text-slate-400" : "text-slate-500"
+            )}>
+              {tier.description}
+            </p>
 
             <div className="space-y-4 mb-10 flex-1">
               {tier.features.map((feature) => (
                 <div key={feature} className="flex items-center gap-3">
                   <div className={cn(
                     "h-5 w-5 rounded-full flex items-center justify-center shrink-0",
-                    tier.current ? "bg-brand/10 text-brand" : "bg-success/10 text-success"
+                    isFeatured ? "bg-green-500 text-[#0F1724]" : "bg-green-100 text-green-600"
                   )}>
                     <Check className="h-3 w-3" />
                   </div>
-                  <span className="text-sm font-bold text-muted-foreground">{feature}</span>
+                  <span className="text-sm font-bold opacity-80">{feature}</span>
                 </div>
               ))}
             </div>
 
             <Button 
               className={cn(
-                "w-full h-14 rounded-2xl font-black text-base shadow-lg transition-all active:scale-95",
+                "w-full h-14 rounded-full font-black text-base transition-all active:scale-95",
                 tier.current 
-                  ? "bg-brand hover:bg-brand/90 text-white shadow-brand/20" 
-                  : "bg-surface-2 hover:bg-brand hover:text-white text-foreground"
+                  ? (isFeatured ? "bg-white/10 text-white/40 cursor-default" : "bg-slate-50 text-slate-300 cursor-default")
+                  : isFeatured
+                  ? "bg-white text-[#0F1724] hover:bg-accent-yellow shadow-xl shadow-white/5"
+                  : "bg-brand text-white hover:scale-[1.02] shadow-lg shadow-brand/20"
               )}
             >
-              {tier.current ? "Current Plan" : "Choose " + tier.name}
+              {tier.current ? "Current Plan" : "Select " + tier.name}
             </Button>
           </div>
-        ))}
+        )})}
       </div>
 
-      <div className="max-w-4xl mx-auto bg-[#0F1724] p-10 rounded-[2.5rem] text-white flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl border border-white/5">
-        <div className="absolute top-0 right-0 h-40 w-40 bg-brand rounded-full blur-[100px] opacity-30" />
+      <div className="max-w-4xl mx-auto bg-[#F3F3F1] p-10 rounded-[2.5rem] rounded-tl-[6rem] text-slate-900 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-sm border border-slate-200/60">
         <div className="relative z-10 text-center md:text-left">
-          <h3 className="text-2xl font-black mb-2">Need a custom enterprise solution?</h3>
-          <p className="text-white/60 font-medium">Custom integrations, API access, and tailored reporting for larger teams.</p>
+          <h3 className="text-2xl font-black mb-2 text-[#0F1724]">Need a custom enterprise solution?</h3>
+          <p className="text-slate-600 font-medium">Custom integrations, API access, and tailored reporting for larger networks.</p>
         </div>
-        <Button className="relative z-10 bg-white text-brand hover:bg-white/90 font-black px-10 h-14 rounded-2xl shadow-xl shadow-white/5 active:scale-95 transition-all">
+        <Button className="relative z-10 bg-[#0F1724] text-white hover:bg-slate-800 font-black px-10 h-14 rounded-full shadow-xl active:scale-95 transition-all">
           Contact Sales
         </Button>
       </div>

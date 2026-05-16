@@ -141,15 +141,7 @@ const Contact = () => {
                 </button>
               </form>
 
-              {/* Trust badges */}
-              <div className="mt-8 flex items-center justify-center gap-6">
-                <div className="flex items-center gap-2 text-sm font-bold text-muted-foreground">
-                  <Lock className="h-4 w-4 text-brand" /> SSL Encrypted
-                </div>
-                <div className="flex items-center gap-2 text-sm font-bold text-muted-foreground">
-                  <Shield className="h-4 w-4 text-brand" /> GDPR Compliant
-                </div>
-              </div>
+
             </div>
           </div>
         </div>

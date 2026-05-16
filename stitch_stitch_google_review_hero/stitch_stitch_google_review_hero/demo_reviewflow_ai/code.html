@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReviewFlow AI - Request a Demo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@900,800,700,500,400&f[]=satoshi@900,700,500,400&display=swap');
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .shadow-level-1 {
+            box-shadow: 0 2px 12px rgba(23, 20, 37, 0.07);
+        }
+        
+        .shadow-level-2 {
+            box-shadow: 0 8px 28px rgba(23, 20, 37, 0.11);
+        }
+        
+        .shadow-brand {
+            box-shadow: 0 6px 28px rgba(123, 17, 215, 0.22);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #7B11D7 0%, #5d00a7 100%);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.20), 0 6px 28px rgba(123,17,215,0.22);
+        }
+
+        .input-focus-ring:focus {
+            box-shadow: 0 0 0 1px #7B11D7;
+            border-color: #7B11D7;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#2b0052",
+                      "surface-interactive": "#EAECEF",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#f3fbfe",
+                      "surface-container-highest": "#dce4e7",
+                      "on-secondary-container": "#3b0081",
+                      "on-primary-fixed-variant": "#6600b7",
+                      "inverse-surface": "#2a3234",
+                      "on-secondary-fixed": "#260058",
+                      "secondary": "#7241c3",
+                      "tertiary": "#32424d",
+                      "on-tertiary": "#ffffff",
+                      "surface": "#f3fbfe",
+                      "on-tertiary-fixed-variant": "#394954",
+                      "surface-dim": "#d3dbde",
+                      "surface-elevated": "#FFFFFF",
+                      "on-background": "#151d1f",
+                      "inverse-on-surface": "#eaf2f5",
+                      "secondary-container": "#a979fe",
+                      "on-surface": "#151d1f",
+                      "slate": "#7C8C99",
+                      "primary-fixed-dim": "#dbb8ff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#e0c1ff",
+                      "tertiary-container": "#495965",
+                      "on-error-container": "#93000a",
+                      "success": "#15803D",
+                      "violet": "#7B11D7",
+                      "primary-fixed": "#efdbff",
+                      "indigo": "#49049A",
+                      "primary": "#5d00a7",
+                      "on-tertiary-fixed": "#0d1d28",
+                      "background": "#f3fbfe",
+                      "on-surface-variant": "#4c4355",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed-dim": "#b8c9d7",
+                      "inverse-primary": "#dbb8ff",
+                      "surface-container": "#e7eff2",
+                      "on-tertiary-container": "#bfcfdd",
+                      "on-primary": "#ffffff",
+                      "surface-variant": "#dce4e7",
+                      "on-secondary-fixed-variant": "#5923aa",
+                      "warning": "#B45309",
+                      "surface-nested": "#F4F6F8",
+                      "outline": "#7e7386",
+                      "outline-variant": "#cfc2d7",
+                      "error-container": "#ffdad6",
+                      "surface-container-high": "#e1e9ec",
+                      "primary-container": "#7b11d7",
+                      "ink": "#171425",
+                      "alabaster": "#E0E8EB",
+                      "tertiary-fixed": "#d4e5f3",
+                      "secondary-fixed-dim": "#d4bbff",
+                      "error": "#B91C1C",
+                      "secondary-fixed": "#ebdcff",
+                      "surface-tint": "#8322df",
+                      "surface-container-low": "#edf5f8"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "max-width": "1100px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "sm": "8px",
+                      "xl": "32px",
+                      "xxl": "48px",
+                      "section": "72px",
+                      "hero": "112px",
+                      "md": "16px",
+                      "gutter": "52px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Cabinet Grotesk"],
+                      "label-sm": ["Satoshi"],
+                      "body-md": ["Satoshi"],
+                      "display-1": ["Cabinet Grotesk"],
+                      "headline-sm": ["Cabinet Grotesk"],
+                      "display-2": ["Cabinet Grotesk"],
+                      "headline-md": ["Cabinet Grotesk"],
+                      "body-lg": ["Satoshi"],
+                      "mono": ["jetbrainsMono"],
+                      "headline-lg-mobile": ["Cabinet Grotesk"]
+              },
+              "fontSize": {
+                      "headline-lg": ["38px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "900" }],
+                      "label-sm": ["10px", { "lineHeight": "1", "letterSpacing": "0.14em", "fontWeight": "700" }],
+                      "body-md": ["14px", { "lineHeight": "1.5", "letterSpacing": "normal", "fontWeight": "400" }],
+                      "display-1": ["80px", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "900" }],
+                      "headline-sm": ["19px", { "lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "800" }],
+                      "display-2": ["54px", { "lineHeight": "1.1", "letterSpacing": "-0.025em", "fontWeight": "900" }],
+                      "headline-md": ["26px", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "900" }],
+                      "body-lg": ["17px", { "lineHeight": "1.6", "letterSpacing": "normal", "fontWeight": "400" }],
+                      "mono": ["12px", { "lineHeight": "1.5", "letterSpacing": "0.04em", "fontWeight": "400" }],
+                      "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "900" }]
+              }
+            }
+          }
+        }
+      </script>
+</head>
+<body class="bg-alabaster text-on-surface font-body-md min-h-screen flex flex-col selection:bg-primary selection:text-white">
+<!-- TopNavBar -->
+<nav class="docked full-width top-0 sticky z-50 shadow-sm dark:shadow-none bg-surface-container-lowest dark:bg-surface-dim">
+<div class="flex justify-between items-center max-w-[1100px] mx-auto px-md md:px-lg h-20">
+<!-- Brand -->
+<a class="font-headline-sm text-headline-sm font-black text-ink dark:text-surface-bright tracking-tight" href="#">
+                ReviewFlow AI
+            </a>
+<!-- Links (Web) -->
+<div class="hidden md:flex space-x-lg font-body-md text-body-md">
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:border-b-2 hover:border-primary transition-all duration-200" href="#">Features</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:border-b-2 hover:border-primary transition-all duration-200" href="#">How It Works</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim hover:border-b-2 hover:border-primary transition-all duration-200" href="#">Pricing</a>
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary pb-1 transition-all duration-200" href="#">Contact</a>
+</div>
+<!-- Actions -->
+<div class="flex items-center space-x-sm">
+<a class="hidden md:inline-flex items-center justify-center px-lg py-sm rounded-DEFAULT border border-[rgba(23,20,37,0.14)] bg-white text-on-surface hover:border-[rgba(23,20,37,0.24)] hover:-translate-y-[1px] transition-all duration-200 font-body-md text-body-md" href="#">
+                    Log In
+                </a>
+<a class="btn-primary text-white px-lg py-sm rounded-DEFAULT hover:scale-95 transition-transform duration-200 font-body-md text-body-md font-bold" href="#">
+                    Get Started
+                </a>
+</div>
+</div>
+</nav>
+<main class="flex-grow">
+<!-- Section 1: Hero -->
+<section class="max-w-[1100px] mx-auto px-5 md:px-gutter py-hero grid grid-cols-1 md:grid-cols-2 gap-xxl items-center">
+<div class="flex flex-col space-y-xl">
+<h1 class="font-display-2 text-display-2 md:text-[64px] text-ink">Protect Your Reputation At Scale</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                    See how ReviewFlow AI automatically categorizes, responds to, and escalates customer reviews across all your digital touchpoints.
+                </p>
+<div class="flex items-center space-x-sm">
+<div class="flex -space-x-3">
+<img class="w-10 h-10 rounded-full border-2 border-alabaster object-cover" data-alt="A close up portrait of a young professional woman in a bright, modern office space. Soft, high-key lighting creates a professional and approachable mood, aligning with a corporate modern aesthetic. Her expression is confident and friendly, framed by a subtle Royal Violet gradient background detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD78QDGw3j3j4pZCtIkE4aO54cq36w60aUdVxdA6BwvJFrtw4Z6-clYtgYt8HZuY-S3ARveXxFSKpM2Z5xuojjhr1S85HCIUMsktlyYr_grElH8__az2epXOjav6S3tCwPxncKm_lFuzZtQ-_MLA3zq_MxpHxgwsQ_uUcWPX50P7QlxVc7hBNzg-QZRhnWjriZfHL3qra_-s7T8hx7eRBggcpqHTB1hrileqpY3epJndRXH6VRW8BU43f6yN8chejXSt2bT73eO_Bo"/>
+<img class="w-10 h-10 rounded-full border-2 border-alabaster object-cover" data-alt="A portrait of a male executive in a well-lit, contemporary workspace. The image uses a minimalist palette of crisp whites and deep blacks, with a focus on high-quality tactile digitality. The lighting is precise, highlighting his professional demeanor against a soft, out-of-focus background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjOTn4AAZoqq8b2Q1491toa5kUqvOPTYdIOkFlEQLolma2OhKKEEGiXpk_kawcJCOqy2ZZGOW2ZEUf4yAW1otasccTQexsilBQOzJ08sWIWm0SFl7zkqUVBkWEJqjRsp53bQbYd4fkIRXUIQVuOQBwuprVlZIAvQnh-Nzg-Ihg2XATKxXVFur8UJVuw9e08ZTjU21WsOD2vX5rmlacO_LJC9pqVEtUqXSqW2nzP9Z2-kkTZilWZQFgQ5bH2cRE54uioK_4uDtjlIA"/>
+<img class="w-10 h-10 rounded-full border-2 border-alabaster object-cover" data-alt="Portrait of an upbeat customer success manager in a bright, minimalist setting. The photograph leverages a gallery canvas aesthetic with soft, wide-dispersion light. Subtle violet accents are visible in her attire, reinforcing the intelligent and energetic brand identity of a premium AI service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDoe02ithQ8hPBXaHUszXbUUGcOWbCT-RHESwtPfmyVWGBPqjrmvqi3-aPouPKEzyKhT2-0Atuasq1HSzfm5Pgyjk1rz7lP7v3H7KixTZaZIhAGFytxF3tKg2j-v5hNQuQB7IEs-LV2-Y6XPOO-70C0q6OVSTl4vk8857nql1rGv9jOg4VrfOPN9uHi-eabQGSi6uXe_qGI23RT8HCCOP6anvFpw4QIxBs9Az0E7nUWESOigWGudAkaTUz4JE9OUbL6UHX2zKO9ko"/>
+</div>
+<span class="font-body-md text-body-md text-slate ml-sm">Join 500+ enterprise teams</span>
+</div>
+</div>
+<div class="relative w-full aspect-video rounded-lg shadow-level-2 overflow-hidden group cursor-pointer bg-surface-container-lowest">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A close-up view of a sleek laptop screen displaying a sophisticated digital dashboard with modern charts and analytics. The setting is a minimalist, high-end office environment with bright, diffuse lighting. The interface on the screen features Royal Violet accents against a clean white background, conveying a high-tech, reliable AI platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArx5KQmWIuGeKy-K06BYHtQJ7lqPDONPj1G6uI1EHZZ05rAvrVb10Om4o-7aiTrYj8nxGddOw8CTxQ-scbnvSbgIk0fvSKdn_pigzs1Bmu2fEnc7h8a1ieqZRpnjejaE824jWIMw5Xq6rY79IbTAQ1x9bcj5FArKnrqW6tcgjMHNr_mp0SeOuOOe0giVFsRSk3VRf48D5Jy66EgiHhTcFboKAFINQuOmBPngkfHYH-a73LFVwz_RgnpvIxXHTEmOn7RvBM9dLnHO0"/>
+<div class="absolute inset-0 bg-ink/20 flex items-center justify-center transition-colors duration-300 group-hover:bg-ink/30">
+<div class="w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-level-1 transform transition-transform duration-300 group-hover:scale-110">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Platform Strip -->
+<section class="border-y border-[rgba(23,20,37,0.08)] bg-white py-xl">
+<div class="max-w-[1100px] mx-auto px-5 md:px-gutter text-center">
+<p class="font-label-sm text-label-sm text-slate uppercase mb-lg">Trusted by innovative customer experience teams</p>
+<div class="flex flex-wrap justify-center items-center gap-xl md:gap-xxl opacity-60 grayscale">
+<!-- Faux Logos via typography/icons for demo -->
+<div class="flex items-center space-x-2"><span class="material-symbols-outlined text-2xl">local_mall</span><span class="font-headline-sm font-bold">RetailCo</span></div>
+<div class="flex items-center space-x-2"><span class="material-symbols-outlined text-2xl">flight_takeoff</span><span class="font-headline-sm font-bold">AeroGlobal</span></div>
+<div class="flex items-center space-x-2"><span class="material-symbols-outlined text-2xl">account_balance</span><span class="font-headline-sm font-bold">FinTrust</span></div>
+<div class="flex items-center space-x-2"><span class="material-symbols-outlined text-2xl">medical_services</span><span class="font-headline-sm font-bold">HealthPlus</span></div>
+</div>
+</div>
+</section>
+<!-- Section 3: Feature Highlights -->
+<section class="max-w-[1100px] mx-auto px-5 md:px-gutter py-section">
+<div class="text-center mb-xxl">
+<h2 class="font-headline-lg text-headline-lg text-ink mb-sm">Inside The Platform</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Discover how our AI core transforms chaotic feedback into structured, actionable intelligence.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Card 1 -->
+<div class="bg-white p-lg rounded-lg shadow-level-1 hover:shadow-level-2 hover:-translate-y-[2px] transition-all duration-300 border border-[rgba(23,20,37,0.04)] flex flex-col">
+<div class="w-12 h-12 rounded-full bg-surface-nested flex items-center justify-center mb-md text-primary">
+<span class="material-symbols-outlined">smart_toy</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-ink mb-sm">Auto-Categorization</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Instantly tag and route reviews based on sentiment, urgency, and topic without human intervention.</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-lg rounded-lg shadow-level-1 hover:shadow-level-2 hover:-translate-y-[2px] transition-all duration-300 border border-[rgba(23,20,37,0.04)] flex flex-col">
+<div class="w-12 h-12 rounded-full bg-surface-nested flex items-center justify-center mb-md text-primary">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-ink mb-sm">Generative Responses</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Draft brand-aligned, contextual replies to both positive and negative reviews in seconds.</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-lg rounded-lg shadow-level-1 hover:shadow-level-2 hover:-translate-y-[2px] transition-all duration-300 border border-[rgba(23,20,37,0.04)] flex flex-col">
+<div class="w-12 h-12 rounded-full bg-surface-nested flex items-center justify-center mb-md text-primary">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-ink mb-sm">Trend Analytics</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Visualize emerging complaints or sudden spikes in praise with our interactive, real-time dashboard.</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-white p-lg rounded-lg shadow-level-1 hover:shadow-level-2 hover:-translate-y-[2px] transition-all duration-300 border border-[rgba(23,20,37,0.04)] flex flex-col">
+<div class="w-12 h-12 rounded-full bg-surface-nested flex items-center justify-center mb-md text-primary">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-ink mb-sm">Crisis Escalation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Automatically flag highly toxic or high-risk reviews directly to your PR or legal team's inbox.</p>
+</div>
+<!-- Card 5 -->
+<div class="bg-white p-lg rounded-lg shadow-level-1 hover:shadow-level-2 hover:-translate-y-[2px] transition-all duration-300 border border-[rgba(23,20,37,0.04)] flex flex-col md:col-span-2">
+<div class="flex items-start justify-between">
+<div class="w-12 h-12 rounded-full bg-surface-nested flex items-center justify-center mb-md text-primary">
+<span class="material-symbols-outlined">api</span>
+</div>
+<span class="bg-surface-nested text-primary font-label-sm text-label-sm px-2 py-1 rounded-xs uppercase">Enterprise Ready</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-ink mb-sm">Seamless Integrations</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">Connect directly with Zendesk, Salesforce, Slack, and over 40+ other platforms to embed reputation management directly into your existing operational workflows seamlessly.</p>
+</div>
+</div>
+</section>
+<!-- Section 4: Book Walkthrough -->
+<section class="max-w-[1100px] mx-auto px-5 md:px-gutter py-section">
+<div class="bg-white rounded-xl shadow-level-2 overflow-hidden flex flex-col md:flex-row">
+<!-- Left: Value Props -->
+<div class="bg-surface-nested p-xl md:w-5/12 flex flex-col justify-center border-r border-[rgba(23,20,37,0.04)]">
+<h2 class="font-headline-md text-headline-md text-ink mb-lg">Book a personalized walkthrough</h2>
+<ul class="space-y-lg">
+<li class="flex items-start">
+<span class="material-symbols-outlined text-primary mr-md mt-1">check_circle</span>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-ink text-[16px]">Custom Data Assessment</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">We'll analyze a sample of your current reviews to show immediate ROI.</p>
+</div>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-primary mr-md mt-1">check_circle</span>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-ink text-[16px]">Workflow Mapping</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">See exactly how our tool fits into your existing support stack.</p>
+</div>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-primary mr-md mt-1">check_circle</span>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-ink text-[16px]">Pricing Breakdown</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Transparent, tier-based pricing discussion tailored to your volume.</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Right: Form -->
+<div class="p-xl md:w-7/12 bg-white">
+<form class="space-y-lg">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="space-y-sm">
+<label class="block font-label-sm text-label-sm text-tertiary uppercase" for="name">Full Name</label>
+<input class="w-full bg-white border border-[rgba(23,20,37,0.14)] rounded-sm px-4 py-2 text-on-surface font-body-md shadow-level-1 input-focus-ring outline-none transition-shadow placeholder-slate" id="name" placeholder="Jane Doe" type="text"/>
+</div>
+<div class="space-y-sm">
+<label class="block font-label-sm text-label-sm text-tertiary uppercase" for="email">Work Email</label>
+<input class="w-full bg-white border border-[rgba(23,20,37,0.14)] rounded-sm px-4 py-2 text-on-surface font-body-md shadow-level-1 input-focus-ring outline-none transition-shadow placeholder-slate" id="email" placeholder="jane@company.com" type="email"/>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="block font-label-sm text-label-sm text-tertiary uppercase" for="team-size">Team Size</label>
+<select class="w-full bg-white border border-[rgba(23,20,37,0.14)] rounded-sm px-4 py-2 text-on-surface font-body-md shadow-level-1 input-focus-ring outline-none transition-shadow" id="team-size">
+<option disabled="" selected="" value="">Select your team size</option>
+<option value="1-10">1-10 employees</option>
+<option value="11-50">11-50 employees</option>
+<option value="51-200">51-200 employees</option>
+<option value="201+">201+ employees</option>
+</select>
+</div>
+<div class="space-y-sm">
+<label class="block font-label-sm text-label-sm text-tertiary uppercase" for="goal">Primary Goal</label>
+<textarea class="w-full bg-white border border-[rgba(23,20,37,0.14)] rounded-sm px-4 py-2 text-on-surface font-body-md shadow-level-1 input-focus-ring outline-none transition-shadow placeholder-slate resize-none" id="goal" placeholder="What are you hoping to achieve with ReviewFlow AI?" rows="3"></textarea>
+</div>
+<button class="btn-primary w-full text-white px-lg py-3 rounded-DEFAULT hover:scale-[0.98] transition-transform duration-200 font-body-md text-body-md font-bold mt-md" type="button">
+                            Request Demo
+                        </button>
+</form>
+</div>
+</div>
+</section>
+<!-- Section 5: CTA Banner -->
+<section class="bg-ink text-surface-bright py-section">
+<div class="max-w-[1100px] mx-auto px-5 md:px-gutter text-center flex flex-col items-center">
+<h2 class="font-headline-lg text-headline-lg mb-md">Ready to take control?</h2>
+<p class="font-body-lg text-body-lg text-surface-variant max-w-xl mb-xl">Join the top brands using ReviewFlow AI to turn customer feedback into their strongest competitive advantage.</p>
+<div class="flex items-center space-x-md">
+<button class="btn-primary text-white px-xl py-3 rounded-DEFAULT hover:scale-95 transition-transform duration-200 font-body-md text-body-md font-bold shadow-brand">
+                        Start Free Trial
+                    </button>
+<button class="bg-transparent border border-surface-variant text-surface-bright px-xl py-3 rounded-DEFAULT hover:bg-white/10 transition-colors duration-200 font-body-md text-body-md">
+                        View Pricing
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-ink dark:bg-ink full-width flat no shadows">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-lg max-w-[1100px] mx-auto px-md md:px-lg py-section">
+<!-- Brand Column -->
+<div class="col-span-2 md:col-span-1 flex flex-col space-y-md">
+<span class="font-headline-sm text-headline-sm text-surface-bright font-black">
+                    ReviewFlow AI
+                </span>
+<p class="font-body-md text-body-md text-surface-variant">
+                    © 2024 ReviewFlow AI. Global-Ready
+                </p>
+</div>
+<!-- Links Column 1 -->
+<div class="flex flex-col space-y-md">
+<a class="font-body-md text-body-md text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">
+                    Platform
+                </a>
+<a class="font-body-md text-body-md text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">
+                    Support
+                </a>
+<a class="font-body-md text-body-md text-surface-variant hover:text-primary-fixed-dim transition-colors duration-200" href="#">
+                    Enterprise
+                </a>
+</div>
+</div>
+</footer>
+</body></html>

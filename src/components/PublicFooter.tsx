@@ -20,10 +20,7 @@ const PublicFooter = () => {
           <p className="text-lg leading-relaxed max-w-sm text-white/70 font-medium">
             Next-gen reputation management for local businesses and growing brands across Africa. Automate your reviews, protect your rating.
           </p>
-          <div className="flex items-center gap-3 text-sm font-bold text-accent-yellow bg-white/5 py-2 px-4 rounded-full w-fit border border-white/10">
-            <Shield className="w-4 h-4" />
-            <span>GDPR Compliant · 256-bit Encryption</span>
-          </div>
+
         </div>
 
         {/* Product links */}

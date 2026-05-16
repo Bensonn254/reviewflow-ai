@@ -20,6 +20,7 @@ import DashboardPreview from "@/components/DashboardPreview";
 import HowItWorksTimeline from "@/components/HowItWorksTimeline";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const INTEGRATIONS = [
   { name: "Google", svg: <svg viewBox="0 0 24 24" className="w-10 h-10 fill-current"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" /></svg>, color: "hover:text-blue-500" },
@@ -48,9 +49,9 @@ const FEATURES = [
 ];
 
 const PRICING = [
-  { tier: "Free", price: "$0", billing: "Forever", features: ["1 Location", "Google Tracking", "Manual Responses"], popular: false },
-  { tier: "Pro", price: "$29", billing: "per month", features: ["Up to 3 Locations", "AI Auto-Responses", "All Platforms", "Sentiment Analysis"], popular: true },
-  { tier: "Business", price: "$79", billing: "per month", features: ["Unlimited Locations", "Custom Branding", "Priority Support", "Advanced Analytics"], popular: false },
+  { tier: "Free", price: "KES 0", billing: "Forever", features: ["1 Location", "Google Tracking", "Manual Responses"], popular: false },
+  { tier: "Pro", price: "KES 3,500", billing: "per month", features: ["Up to 3 Locations", "AI Auto-Responses", "All Platforms", "Sentiment Analysis"], popular: true },
+  { tier: "Business", price: "KES 7,000", billing: "per month", features: ["Unlimited Locations", "Custom Branding", "Priority Support", "Advanced Analytics"], popular: false },
 ];
 
 const FAQS = [
@@ -76,7 +77,7 @@ export default function LandingPage() {
       <PublicNav />
 
       {/* ─── 1. HERO SECTION ─── */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden flex items-center min-h-[90vh]">
+      <section className="relative pt-24 pb-12 md:pt-32 md:pb-16 overflow-hidden flex items-center min-h-[80vh]">
         {/* Full-Cover Hero Image Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <img src="/images/hero-img.jpg" alt="Hero background" className="w-full h-full object-cover" />
@@ -116,31 +117,57 @@ export default function LandingPage() {
       </section>
 
       {/* ─── 2. TRUSTED BY ─── */}
-      <section className="py-12 bg-white border-y border-slate-100">
+      <section className="py-12 md:py-14 bg-[#0A0F1C] border-y border-white/5 relative z-10 shadow-2xl">
         <motion.div 
           initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}
           className="max-w-screen-xl mx-auto px-6 text-center"
         >
-          <motion.p variants={fadeInUp} className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-10">
-            Works With Your Favorite Platforms
+          <motion.p variants={fadeInUp} className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-12">
+            Seamlessly integrated with top platforms
           </motion.p>
-          <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16">
-            {INTEGRATIONS.map((app, i) => (
-              <motion.div 
-                key={app.name} 
-                variants={fadeInUp}
-                whileHover={{ scale: 1.1 }}
-                className={`text-slate-300 transition-colors duration-300 ${app.color} cursor-default grayscale hover:grayscale-0`}
-              >
-                {app.svg}
-              </motion.div>
-            ))}
+          
+          <div className="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-16">
+            
+            {/* Live Platforms (Left) */}
+            <div className="flex justify-center items-center gap-10 md:gap-16 relative">
+              <span className="absolute -top-7 left-1/2 -translate-x-1/2 text-[11px] font-black uppercase tracking-[0.2em] text-blue-400 whitespace-nowrap">Live Now</span>
+              {INTEGRATIONS.slice(0, 2).map((app) => (
+                <motion.div 
+                  key={app.name} 
+                  variants={fadeInUp}
+                  whileHover={{ scale: 1.05 }}
+                  className="text-white/60 hover:text-white transition-all duration-300 cursor-default drop-shadow-lg"
+                >
+                  {app.svg}
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Divider */}
+            <div className="hidden md:block w-[1px] h-12 bg-white/10" />
+            <div className="block md:hidden h-[1px] w-24 bg-white/10" />
+
+            {/* Coming Soon Platforms (Right) */}
+            <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16 relative">
+              <span className="absolute -top-7 left-1/2 -translate-x-1/2 text-[11px] font-black uppercase tracking-[0.2em] text-slate-500 whitespace-nowrap">Coming Phase 2</span>
+              {INTEGRATIONS.slice(2).map((app) => (
+                <motion.div 
+                  key={app.name} 
+                  variants={fadeInUp}
+                  whileHover={{ scale: 1.05 }}
+                  className="text-white/30 hover:text-white/80 transition-all duration-300 cursor-default drop-shadow-md"
+                >
+                  {app.svg}
+                </motion.div>
+              ))}
+            </div>
+
           </div>
         </motion.div>
       </section>
 
       {/* ─── 3. HOW IT WORKS ─── */}
-      <section id="how-it-works" className="py-16 md:py-24 bg-[#FAFAFA]">
+      <section id="how-it-works" className="py-12 md:py-16 bg-[#FAFAFA]">
         <motion.div 
            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}
         >
@@ -149,9 +176,9 @@ export default function LandingPage() {
       </section>
 
       {/* ─── 4. COMPARISON TABLE ─── */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-12 md:py-16 bg-white">
         <div className="max-w-screen-md mx-auto px-6">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="text-center mb-16">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="text-center mb-10">
             <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold tracking-tight mb-6">See How We Compare</motion.h2>
             <motion.p variants={fadeInUp} className="text-lg text-muted-foreground">The competitive advantage is clear when you put us side-by-side.</motion.p>
           </motion.div>
@@ -193,10 +220,10 @@ export default function LandingPage() {
       </div>
 
       {/* ─── 5. FEATURES GRID ─── */}
-      <section className="py-16 md:py-24 bg-[#0A0F1C] text-white overflow-hidden relative">
+      <section className="py-12 md:py-16 bg-[#0A0F1C] text-white overflow-hidden relative">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
         <div className="max-w-screen-xl mx-auto px-6 relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="text-center mb-16">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="text-center mb-12">
             <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Everything You Need to Grow</motion.h2>
             <motion.p variants={fadeInUp} className="text-lg text-slate-400">Powerful tools designed to automate your reputation management.</motion.p>
           </motion.div>
@@ -233,45 +260,71 @@ export default function LandingPage() {
       </div>
 
       {/* ─── 6. PRICING ─── */}
-      <section className="py-16 md:py-24 bg-[#FAFAFA]">
+      <section className="py-12 md:py-16 bg-[#FAFAFA]">
         <div className="max-w-screen-xl mx-auto px-6">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="text-center mb-16">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="text-center mb-12">
             <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Simple, Transparent Pricing</motion.h2>
             <motion.p variants={fadeInUp} className="text-lg text-muted-foreground">Start for free, scale when you grow.</motion.p>
           </motion.div>
 
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer}
-            className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto"
+            className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch"
           >
-            {PRICING.map((plan, i) => (
+            {PRICING.map((plan, i) => {
+              const isPopular = plan.popular;
+              return (
               <motion.div 
                 key={i} 
                 variants={fadeInUp}
-                whileHover={{ y: -5 }}
-                className={`relative bg-white rounded-3xl p-8 border ${plan.popular ? 'border-blue-500 shadow-xl shadow-blue-500/10' : 'border-slate-200 shadow-md'} transition-all`}
+                whileHover={{ y: -8 }}
+                className={cn(
+                  "relative p-8 flex flex-col transition-all duration-500 border border-slate-200/60 shadow-md transform-gpu",
+                  isPopular 
+                    ? "bg-[#0F1724] text-white rounded-[2rem] rounded-tl-[5rem] shadow-2xl scale-[1.05] z-10" 
+                    : "bg-white text-slate-900 rounded-[2rem] rounded-tl-[5rem] hover:shadow-xl"
+                )}
               >
-                {plan.popular && <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full">Most Popular</div>}
-                <div className="mb-8">
-                  <h3 className="text-xl font-bold text-slate-700 mb-2">{plan.tier}</h3>
+                {isPopular && (
+                   <div className="absolute top-0 right-0 overflow-hidden w-24 h-24 rounded-tr-[1.5rem] pointer-events-none">
+                     <div className="absolute top-4 -right-10 w-32 bg-accent-yellow text-brand text-[10px] font-black py-1 px-10 rotate-45 text-center shadow-lg">
+                        BEST VALUE
+                     </div>
+                  </div>
+                )}
+                
+                <div className="mb-8 overflow-hidden">
+                  <h3 className={cn("text-xl font-bold mb-4", isPopular ? "text-slate-400" : "text-slate-500")}>{plan.tier}</h3>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-5xl font-black">{plan.price}</span>
-                    <span className="text-slate-500 font-medium tracking-tight">/{plan.billing}</span>
+                    <span className="text-5xl font-black tracking-tighter">{plan.price}</span>
+                    <span className={cn("text-xs font-bold uppercase tracking-widest", isPopular ? "text-slate-500" : "text-slate-400")}>/{plan.billing}</span>
                   </div>
                 </div>
-                <ul className="space-y-4 mb-8">
+
+                <ul className="space-y-4 mb-10 flex-1">
                   {plan.features.map((f, j) => (
-                    <li key={j} className="flex items-center gap-3 text-slate-600">
-                      <CheckCircle2 className="w-5 h-5 text-blue-500 shrink-0" />
-                      <span>{f}</span>
+                    <li key={j} className="flex items-center gap-3 text-sm font-bold">
+                      <div className={cn(
+                        "h-5 w-5 rounded-full flex items-center justify-center shrink-0",
+                        isPopular ? "bg-green-500 text-[#0F1724]" : "bg-green-100 text-green-600"
+                      )}>
+                        <CheckCircle2 className="w-3 h-3" />
+                      </div>
+                      <span className="opacity-80">{f}</span>
                     </li>
                   ))}
                 </ul>
-                <Button asChild className={`w-full h-12 rounded-xl text-lg ${plan.popular ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:scale-[1.02]' : 'bg-slate-100 text-slate-900 hover:bg-slate-200'} transition-all`}>
+
+                <Button asChild className={cn(
+                  "w-full h-14 rounded-full text-lg font-black transition-all",
+                  isPopular 
+                    ? "bg-white text-[#0F1724] hover:bg-accent-yellow shadow-xl" 
+                    : "bg-slate-50 text-slate-900 border border-slate-200 hover:bg-brand hover:text-white"
+                )}>
                   <Link to="/signup">Get Started</Link>
                 </Button>
               </motion.div>
-            ))}
+            )})}
           </motion.div>
         </div>
       </section>

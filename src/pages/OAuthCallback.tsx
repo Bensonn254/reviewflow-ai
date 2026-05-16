@@ -80,47 +80,38 @@ export default function OAuthCallback() {
   }, [loading, user, code, oauthError, handleExchange]);
 
   return (
-    <div className="min-h-screen bg-surface flex flex-col font-sans">
-      <div className="flex flex-1 items-center justify-center px-4 py-12">
-        <div className="w-full max-w-md rounded-2xl border border-border bg-white p-8 sm:p-10 text-center shadow-2xl shadow-brand/5 relative overflow-hidden">
-          {/* Subtle gradient bar at the top instead of old teal */}
-          <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-brand via-accent-yellow to-brand"></div>
+    <div className="min-h-screen bg-gradient-to-br from-[#042f2e] to-[#012423] text-[#F0FFF9]">
+      <div className="flex items-center justify-center py-28 px-4">
+        <div className="w-full max-w-sm rounded-3xl border border-white/10 bg-[#072726] p-8 text-center shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#06b6a4] via-[#c4f59e] to-[#06b6a4]"></div>
 
-          <div className="flex justify-center mb-6">
-            <div className="h-14 w-14 rounded-xl bg-brand/5 flex items-center justify-center border border-brand/10">
-              <RFLogo className="scale-75 invert-0" />
-            </div>
-          </div>
-          
-          {status === STATUS.EXCHANGING && (
-            <Loader2 className="w-10 h-10 text-brand animate-spin mx-auto mb-6" />
-          )}
-          {status === STATUS.SUCCESS && (
-            <CheckCircle2 className="w-10 h-10 text-brand mx-auto mb-6" />
-          )}
-          {status === STATUS.ERROR && (
-            <XCircle className="w-10 h-10 text-destructive mx-auto mb-6" />
-          )}
+        <div className="flex justify-center mb-5">
+          <RFLogo className="scale-90" />
+        </div>
+        
+        {status === STATUS.EXCHANGING && (
+          <Loader2 className="w-12 h-12 text-[#06b6a4] animate-spin mx-auto mb-5" />
+        )}
+        {status === STATUS.SUCCESS && (
+          <CheckCircle2 className="w-12 h-12 text-[#06b6a4] mx-auto mb-5" />
+        )}
+        {status === STATUS.ERROR && (
+          <XCircle className="w-12 h-12 text-rose-400 mx-auto mb-5" />
+        )}
 
-          <h2 className="text-xl font-black text-foreground tracking-tight mb-3">
-            {status === STATUS.EXCHANGING && "Connecting"}
-            {status === STATUS.SUCCESS && "Connected Successfully"}
-            {status === STATUS.ERROR && "Connection Failed"}
-          </h2>
+        <h2 className="text-lg font-semibold text-[#F0FFF9] mb-2">
+          {status === STATUS.EXCHANGING && "Connecting"}
+          {status === STATUS.SUCCESS && "Connected"}
+          {status === STATUS.ERROR && "Connection Failed"}
+        </h2>
 
-          <p className="text-sm font-medium leading-relaxed mb-8 text-muted-foreground">
-            {message}
-          </p>
+        <p className="text-sm leading-relaxed mb-6 text-emerald-100/80">{message}</p>
 
-          {status === STATUS.ERROR && (
-            <Button 
-              onClick={() => navigate("/dashboard")} 
-              className="w-full h-11 rounded-xl bg-surface-2 hover:bg-border text-foreground font-bold border-border shadow-sm transition-all" 
-              variant="outline"
-            >
-              Back to Dashboard
-            </Button>
-          )}
+        {status === STATUS.ERROR && (
+          <Button onClick={() => navigate("/dashboard")} className="w-full border-white/10 text-[#F0FFF9] hover:bg-white/5" variant="outline">
+            Back to Dashboard
+          </Button>
+        )}
         </div>
       </div>
       <ChatWidget />
